@@ -2,6 +2,13 @@
 
 > **Assistant de Triage IA Avancé | Advanced AI Triage Assistant**
 
+![Dernier commit](https://img.shields.io/github/last-commit/Adam-Blf/Projet-IA-Generative-Doctis-AI-mo)
+![Langage principal](https://img.shields.io/github/languages/top/Adam-Blf/Projet-IA-Generative-Doctis-AI-mo)
+![Nombre de langages](https://img.shields.io/github/languages/count/Adam-Blf/Projet-IA-Generative-Doctis-AI-mo)
+
+**Construit avec les outils et technologies :**
+![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)
+
 <div align="center">
 
 [**🇫🇷 Français**](#-français) | [**🇬🇧 English**](#-english) | [**🇪🇸 Español**](#-español) | [**🇮🇹 Italiano**](#-italiano) | [**🇵🇹 Português**](#-português) | [**🇷🇺 Русский**](#-русский) | [**🇩🇪 Deutsch**](#-deutsch) | [**🇹🇷 Türkçe**](#-türkçe)
