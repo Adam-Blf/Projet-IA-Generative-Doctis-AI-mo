@@ -1,6 +1,6 @@
 # ==============================================================================
 # DOCTIS-AI-MO: APPLICATION PRINCIPALE (STREAMLIT DASHBOARD)
-# Version: v15.2-Optimized (Premium UI)
+# Version: v15.3-Optimized (Premium UI)
 # Auteurs: Adam Beloucif & Amina Medjdoub
 # ==============================================================================
 
