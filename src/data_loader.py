@@ -1,3 +1,9 @@
+# ==============================================================================
+# DOCTIS-AI-MO: DATA LOADER (ETL KAGGLE)
+# Version: 5.0-RAG
+# Auteurs: Adam Beloucif & Amina Medjdoub
+# ==============================================================================
+
 import os
 import pandas as pd
 from kaggle.api.kaggle_api_extended import KaggleApi
