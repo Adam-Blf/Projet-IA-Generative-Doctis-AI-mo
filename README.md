@@ -1,6 +1,8 @@
 # 🏥 DoctisAImo (v5.0-RAG)
 
 > **Assistant de Triage IA Avancé | Advanced AI Triage Assistant**
+>
+> *Authors: Adam Beloucif & Amina Medjdoub*
 
 ![Dernier commit](https://img.shields.io/github/last-commit/Adam-Blf/Projet-IA-Generative-Doctis-AI-mo)
 ![Langage principal](https://img.shields.io/github/languages/top/Adam-Blf/Projet-IA-Generative-Doctis-AI-mo)
