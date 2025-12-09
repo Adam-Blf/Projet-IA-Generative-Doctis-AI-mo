@@ -1,6 +1,6 @@
 # ==============================================================================
 # DOCTIS-AI-MO: AGENT INTELLIGENT (BACKEND LOGIC)
-# Version: 12.0-RAG
+# Version: 13.0-Optimized
 # Auteurs: Adam Beloucif & Amina Medjdoub
 # ==============================================================================
 
@@ -9,16 +9,13 @@ Ce module définit la classe `DoctisAgent`, le cerveau de l'application.
 
 Responsabilités :
 1. Charger la configuration dynamique depuis `config/prompts.json`.
-2. Fournir une interface simple pour récupérer les "System Prompts" (la personnalité de l'IA).
-3. Abstraire la complexité de la gestion des fichiers de configuration pour l'application principale.
-
-Pourquoi séparer l'agent ?
-- Pour maintenir le code propre (Separation of Concerns).
-- Pour pouvoir réutiliser cet agent dans d'autres interfaces (ex: API REST, CLI, Chatbot Discord) sans modifier la logique métier.
+2. Fournir une interface simple pour récupérer les "System Prompts".
+3. Abstraire la complexité de la gestion des fichiers de configuration.
 """
 
 import json
 import os
+from typing import Optional, Dict, Any
 
 class DoctisAgent:
     """
@@ -26,29 +23,22 @@ class DoctisAgent:
     Elle charge les instructions de tâches (Prompts) au démarrage.
     """
     
-    def __init__(self, config_path=None):
+    def __init__(self, config_path: Optional[str] = None) -> None:
         """
         Initialise l'agent.
         
         Args:
-            config_path (str, optional): Chemin vers le fichier JSON de config.
+            config_path (Optional[str]): Chemin vers le fichier JSON de config.
                                          Si None, cherche automatiquement '../config/prompts.json'.
         """
-        # Si aucun chemin n'est fourni, on calcule le chemin relatif par défaut
         if config_path is None:
-            # __file__ est le chemin de ce script (src/agent.py)
             base_dir = os.path.dirname(os.path.abspath(__file__))
-            # On remonte d'un dossier (..) pour aller chercher config/prompts.json
             config_path = os.path.join(base_dir, '..', 'config', 'prompts.json')
         
-        # Chargement de la configuration en mémoire
-        self.config = self._load_config(config_path)
+        self.config: Dict[str, Any] = self._load_config(config_path)
 
-    def _load_config(self, path):
-        """
-        Méthode interne (privée) pour lire le fichier JSON.
-        Gère les erreurs de fichier manquant ou de JSON invalide.
-        """
+    def _load_config(self, path: str) -> Dict[str, Any]:
+        """Méthode interne pour lire le fichier JSON de configuration."""
         try:
             with open(path, 'r', encoding='utf-8') as f:
                 return json.load(f)
@@ -57,7 +47,7 @@ class DoctisAgent:
         except json.JSONDecodeError:
             raise ValueError(f"❌ JSON invalide dans le fichier : {path}")
 
-    def get_system_prompt(self, task_name):
+    def get_system_prompt(self, task_name: str) -> Optional[str]:
         """
         Récupère l'instruction système (System Prompt) pour une tâche donnée.
         
@@ -65,7 +55,7 @@ class DoctisAgent:
             task_name (str): Le nom de la tâche (ex: 'triage_urgency').
             
         Returns:
-            str ou None: Le prompt textuel ou None si la tâche n'existe pas.
+            Optional[str]: Le prompt textuel ou None si la tâche n'existe pas.
         """
         tasks = self.config.get('tasks', {})
         task = tasks.get(task_name)
@@ -73,26 +63,18 @@ class DoctisAgent:
             return None
         return task.get('system_prompt')
 
-    def get_agent_metadata(self):
-        """
-        Renvoie les métadonnées de l'agent (Nom, Version, Modèle par défaut).
-        Utile pour l'affichage dans l'interface utilisateur.
-        """
+    def get_agent_metadata(self) -> Dict[str, Any]:
+        """Renvoie les métadonnées de l'agent (Nom, Version, Modèle)."""
         return self.config.get('agent_metadata', {})
 
-# ------------------------------------------------------------------------------
-# BLOC DE TEST (MAIN)
-# ------------------------------------------------------------------------------
 if __name__ == "__main__":
-    # Ce bloc ne s'exécute que si le script est lancé directement (pour débogage).
-    # Il ne s'exécute pas si le fichier est importé par app.py.
+    # Test Block
     try:
         print("🔍 Test de chargement de l'agent...")
         agent = DoctisAgent()
         metadata = agent.get_agent_metadata()
         print(f"✅ Agent Chargé : {metadata.get('name')} v{metadata.get('version')}")
         
-        # Vérification des tâches critiques
         triage_prompt = agent.get_system_prompt('triage_urgency')
         if triage_prompt:
             print(f"✅ Tâche 'Triage' trouvée ({len(triage_prompt)} caractères).")

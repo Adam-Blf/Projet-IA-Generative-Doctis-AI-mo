@@ -1,17 +1,18 @@
 # ==============================================================================
 # DOCTIS-AI-MO: MONITORING & KEEP-ALIVE
-# Version: 12.0-RAG
+# Version: 13.0-Optimized
 # Auteurs: Adam Beloucif & Amina Medjdoub
 # ==============================================================================
 
 import os
 import time
 import threading
-import requests
+import requests # type: ignore
 import streamlit as st
 from datetime import datetime
 from pymongo import MongoClient
 from pymongo.errors import ConnectionFailure
+from typing import Optional, Tuple
 
 class HealthMonitor:
     """
@@ -19,22 +20,22 @@ class HealthMonitor:
     S'assure que le serveur Render ne s'endort pas et log les états dans MongoDB.
     """
 
-    def __init__(self, app_url, mongo_uri=None):
+    def __init__(self, app_url: str, mongo_uri: Optional[str] = None) -> None:
         """
         Initialise le moniteur.
         
         Args:
             app_url (str): L'URL publique de l'application (pour le ping).
-            mongo_uri (str): Chaîne de connexion MongoDB.
+            mongo_uri (Optional[str]): Chaîne de connexion MongoDB.
         """
         self.app_url = app_url
         self.interval_seconds = 14 * 60  # 14 minutes
         self.mongo_uri = mongo_uri
-        self.db_client = None
+        self.db_client: Optional[MongoClient] = None
         self.collection = None
         self._setup_db()
 
-    def _setup_db(self):
+    def _setup_db(self) -> None:
         """Configure la connexion MongoDB si une URI est fournie."""
         if self.mongo_uri:
             try:
@@ -45,16 +46,13 @@ class HealthMonitor:
             except Exception as e:
                 print(f"⚠️ [MONITOR] Erreur connexion MongoDB: {e}")
 
-    def log_status(self, success, details=""):
+    def log_status(self, success: bool, details: str = "") -> None:
         """
         Met à jour l'état du ping dans MongoDB (Overwrite).
-        Utilise un ID fixe pour ne pas accumuler d'historique.
         """
         if self.collection is not None:
             try:
-                # On utilise un _id fixe pour écraser toujours le même document
                 filter_query = {"_id": "health_monitor_status"}
-                
                 update_data = {
                     "$set": {
                         "last_check": datetime.utcnow(),
@@ -64,13 +62,11 @@ class HealthMonitor:
                         "app_url": self.app_url
                     }
                 }
-                
-                # upsert=True : Crée le document s'il n'existe pas, sinon le met à jour
                 self.collection.update_one(filter_query, update_data, upsert=True)
             except Exception as e:
                 print(f"⚠️ [MONITOR] Impossible de logger dans Mongo: {e}")
 
-    def check_health(self):
+    def check_health(self) -> Tuple[bool, str]:
         """Effectue une requête GET sur l'application elle-même."""
         try:
             print(f"Ping {self.app_url} ...")
@@ -82,13 +78,13 @@ class HealthMonitor:
         except Exception as e:
             return False, str(e)
 
-    def start_background_loop(self):
+    def start_background_loop(self) -> None:
         """Lance la boucle infinie dans un thread séparé (Non-bloquant)."""
         thread = threading.Thread(target=self._loop, daemon=True)
         thread.start()
         print("🚀 [MONITOR] Boucle de maintenance démarrée (14 min).")
 
-    def _loop(self):
+    def _loop(self) -> None:
         """La boucle interne qui tourne indéfiniment."""
         while True:
             success, msg = self.check_health()
@@ -100,15 +96,12 @@ class HealthMonitor:
             self.log_status(success, msg)
             time.sleep(self.interval_seconds)
 
-# Fonction helper pour démarrer le moniteur depuis app.py
-def init_monitor():
+def init_monitor() -> None:
     """
     Initialise le monitoring uniquement si ce n'est pas déjà fait.
-    Utilise le cache de Streamlit pour éviter la duplication des threads à chaque rerun.
     """
     if 'monitor_started' not in st.session_state:
-        # Récupération des secrets
-        # Récupération sécurisée des secrets (Env Var > Streamlit Secrets > Fallback)
+        # Secure Secret Retrieval (Env > TOML > Fallback)
         MONGO_URI = os.environ.get("MONGO_URI")
         if not MONGO_URI:
             try:
@@ -118,6 +111,7 @@ def init_monitor():
         
         if not MONGO_URI:
             MONGO_URI = "mongodb+srv://Users:123@cluster0d.3freyyr.mongodb.net/" # Fallback temporaire
+            
         APP_URL = "https://doctis-aimo.onrender.com"
         
         monitor = HealthMonitor(APP_URL, MONGO_URI)

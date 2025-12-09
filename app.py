@@ -1,6 +1,6 @@
 # ==============================================================================
 # DOCTIS-AI-MO: APPLICATION PRINCIPALE (STREAMLIT DASHBOARD)
-# Version: v12.0-RAG (Premium UI)
+# Version: 13.0-Optimized (Premium UI)
 # Auteurs: Adam Beloucif & Amina Medjdoub
 # ==============================================================================
 
@@ -9,72 +9,77 @@ import google.generativeai as genai
 import json
 import os
 import pandas as pd
+from typing import Optional, Dict, Any, List
 from src.agent import DoctisAgent
 from src.data_loader import load_knowledge_base
 from src.monitoring import init_monitor
 
 # ==============================================================================
-# 0. INIT & CONFIG
+# 0. CONFIGURATION & STYLES
 # ==============================================================================
+
+def _inject_custom_css() -> None:
+    """Injecte le CSS personnalisé pour l'interface Premium."""
+    st.markdown("""
+    <style>
+        /* Main Background & Fonts */
+        .stApp {
+            background-color: #f8f9fa;
+            font-family: 'Inter', sans-serif;
+        }
+        
+        /* Custom Header */
+        h1, h2, h3 {
+            color: #0f172a;
+            font-weight: 700;
+        }
+        
+        /* Card-like containers for Input and Results */
+        div[data-testid="stVerticalBlock"] > div[style*="flex-direction: column;"] > div[data-testid="stVerticalBlock"] {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+
+        /* Primary Button Style */
+        div.stButton > button {
+            background-color: #2563eb;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 0.75rem 1.5rem;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+        div.stButton > button:hover {
+            background-color: #1d4ed8;
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
+        }
+        
+        /* Sidebar styling */
+        section[data-testid="stSidebar"] {
+            background-color: #ffffff;
+            border-right: 1px solid #e5e7eb;
+        }
+    </style>
+    """, unsafe_allow_html=True)
+
 st.set_page_config(
-    page_title="DoctisAImo V12 - Intelligent Triage",
+    page_title="DoctisAImo V13 - Intelligent Triage",
     page_icon="🏥",
     layout="wide",
     initial_sidebar_state="expanded"
 )
 
-# Custom CSS for "Premium Medical" Content
-st.markdown("""
-<style>
-    /* Main Background & Fonts */
-    .stApp {
-        background-color: #f8f9fa;
-        font-family: 'Inter', sans-serif;
-    }
-    
-    /* Custom Header */
-    h1, h2, h3 {
-        color: #0f172a;
-        font-weight: 700;
-    }
-    
-    /* Card-like containers for Input and Results */
-    div[data-testid="stVerticalBlock"] > div[style*="flex-direction: column;"] > div[data-testid="stVerticalBlock"] {
-        background-color: white;
-        padding: 2rem;
-        border-radius: 12px;
-        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-    }
-
-    /* Primary Button Style */
-    div.stButton > button {
-        background-color: #2563eb;
-        color: white;
-        border: none;
-        border-radius: 8px;
-        padding: 0.75rem 1.5rem;
-        font-weight: 600;
-        transition: all 0.2s;
-    }
-    div.stButton > button:hover {
-        background-color: #1d4ed8;
-        box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
-    }
-    
-    /* Sidebar styling */
-    section[data-testid="stSidebar"] {
-        background-color: #ffffff;
-        border-right: 1px solid #e5e7eb;
-    }
-</style>
-""", unsafe_allow_html=True)
-
+_inject_custom_css()
 init_monitor()
 
 # ------------------------------------------------------------------------------
 # 1. LOGIC HELPERS
 # ------------------------------------------------------------------------------
-def configure_gemini():
+def configure_gemini() -> None:
+    """Configure l'API Google Gemini avec gestion d'erreurs."""
     try:
         api_key = os.environ.get("GOOGLE_API_KEY")
         if not api_key:
@@ -92,12 +97,12 @@ def configure_gemini():
     genai.configure(api_key=api_key)
 
 @st.cache_resource
-def load_agent():
+def load_agent() -> DoctisAgent:
     return DoctisAgent()
 
 @st.cache_data
-def get_kaggle_data():
-    with st.spinner("🔄 Chargement de la Base de Connaissances V7..."):
+def get_kaggle_data() -> Optional[pd.DataFrame]:
+    with st.spinner("🔄 Chargement de la Base de Connaissances V13..."):
         return load_knowledge_base()
 
 # Init Resources
@@ -112,7 +117,7 @@ metadata = agent.get_agent_metadata()
 with st.sidebar:
     st.image("https://img.icons8.com/color/96/doctor-male.png", width=80)
     st.title("DoctisAImo")
-    st.caption(f"v{metadata.get('version')} • RAG-Enhanced")
+    st.caption(f"v13.0 • RAG-Enhanced")
     
     st.markdown("---")
     
@@ -146,7 +151,7 @@ if mode == "ℹ️ À propos":
     st.markdown("""
     ### 🌟 Le Futur du Triage Médical
     
-    **DoctisAImo V7** repousse les limites de l'assistance médicale par IA en combinant :
+    **DoctisAImo V13 (Optimized)** repousse les limites de l'assistance médicale par IA en combinant :
     1.  **Google Gemini 2.0 (Flash)** : Pour le raisonnement clinique rapide et empathique.
     2.  **RAG Dynamique** : Une base de connaissances fusionnée de 4 datasets Kaggle (Symptômes, Précautions, Descriptions, Sévérité).
     3.  **UX Premium** : Une interface pensée pour les praticiens.
@@ -184,21 +189,21 @@ else:
         if submitted and symptoms:
             # --- RAG SEARCH LOGIC ---
             kaggle_context = ""
-            matches_found = []
+            matches_found: List[str] = []
             
             if df_medical is not None:
-                # Recherche V7 (Optimisée sur 'all_symptoms')
+                # Recherche Optimisée (sur 'all_symptoms')
                 keywords = [w.lower() for w in symptoms.split() if len(w) > 3]
                 if not keywords: keywords = [symptoms.lower()]
                 
                 try:
-                    mask = df_medical['all_symptoms'].str.lower().apply(lambda x: any(k in str(x) for k in keywords))
+                    # Type checking safe
+                    mask = df_medical['all_symptoms'].astype(str).str.lower().apply(lambda x: any(k in x for k in keywords))
                     match_df = df_medical[mask]
                     
                     if not match_df.empty:
                         # Top 3 Matches
                         for _, row in match_df.head(3).iterrows():
-                            # Gestion safe des colonnes
                             desc = row.get('description', 'N/A')
                             prec = row.get('precautions', 'N/A')
                             matches_found.append(f"• **{row['disease']}** : {desc}")
@@ -209,7 +214,7 @@ else:
                                 f"  Précautions: {prec}\n"
                                 f"  Description: {desc}\n"
                             )
-                        kaggle_context = f"SOURCES MÉDICALES (RAG V7):\n{kaggle_context}"
+                        kaggle_context = f"SOURCES MÉDICALES (RAG V13):\n{kaggle_context}"
                     else:
                         kaggle_context = "Aucune correspondance exacte dans la base de connaissances (Analyse LLM pure)."
                 except Exception as e:
@@ -236,11 +241,11 @@ else:
                     st.error(f"Erreur IA: {e}")
                     st.stop()
 
-            # --- DISPLAY V7 (TABS & CARDS) ---
+            # --- DISPLAY (TABS & CARDS) ---
             st.subheader("💡 Résultats de l'Analyse")
             
             # Parsing JSON si c'est le mode Triage
-            data = {}
+            data: Dict[str, Any] = {}
             is_json = False
             if current_task == "triage_urgency":
                 try:
@@ -289,7 +294,7 @@ else:
                         st.write(kaggle_context)
             
         elif not submitted:
-            # Empty State (Premium Placeholder)
+            # Empty State
             st.info("👈 Remplissez le formulaire à gauche pour commencer.")
             st.markdown(
                 """

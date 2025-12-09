@@ -8,6 +8,15 @@ All notable changes to the **DoctisAImo** project will be documented in this fil
 - **Data**: Integrated 3 new datasets (Symptom2Disease, DiseaseAndSymptoms, Disease precaution).
 - **RAG**: Enhanced "Evidence" tab showing exact matches from Kaggle DB.
 
+## [V13.0] - 2025-12-09
+
+### Optimized
+
+- **Strict Typing**: Ajout de Type Hints (Python) sur l'ensemble du Codebase (`src/data_loader.py`, `src/agent.py`, `app.py`).
+- **ETL Modulaire**: Refactoring complet de `data_loader.py` en 5 sous-fonctions indépendantes.
+- **Clean Code**: Extraction du CSS dans `inject_custom_css()` pour alléger `app.py`.
+- **Robustesse**: Gestion d'erreur renforcée pour l'authentification Kaggle (Fallback Env/Secrets/Token).
+
 ## [V11.0] - 2025-12-09
 
 - **Versioning**: Applied strict protocol (1 Mod = 1 Version Bump).
