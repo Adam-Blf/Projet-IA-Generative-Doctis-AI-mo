@@ -8,7 +8,7 @@
 
 🇫🇷 Français | 🇬🇧 Anglais | 🇪🇸 Espagnol | 🇮🇹 Italien | 🇵🇹 Portugais | 🇷🇺 Russe | 🇩🇪 Allemand | 🇹🇷 Turc
 
-# 🏥 DoctisAImo (v15.0-Optimized)
+# 🏥 DoctisAImo (v15.1-Optimized)
 
 > **Assistant de Triage IA Avancé | Advanced AI Triage Assistant**
 >
@@ -169,7 +169,7 @@ Pour vérifier que l'environnement est correctement configuré (API connectées,
 python src/agent.py
 ```
 
-*Si tout fonctionne, vous verrez : `✅ Agent Chargé : DoctisAImo v15.0-Optimized`.*
+*Si tout fonctionne, vous verrez : `✅ Agent Chargé : DoctisAImo v15.1-Optimized`.*
 
 ---
 
