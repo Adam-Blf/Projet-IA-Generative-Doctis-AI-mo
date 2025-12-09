@@ -45,16 +45,27 @@ class HealthMonitor:
                 print(f"⚠️ [MONITOR] Erreur connexion MongoDB: {e}")
 
     def log_status(self, success, details=""):
-        """Enregistre l'état du ping dans MongoDB."""
+        """
+        Met à jour l'état du ping dans MongoDB (Overwrite).
+        Utilise un ID fixe pour ne pas accumuler d'historique.
+        """
         if self.collection is not None:
             try:
-                log_entry = {
-                    "timestamp": datetime.utcnow(),
-                    "status": "UP" if success else "DOWN",
-                    "details": details,
-                    "module": "HealthMonitor"
+                # On utilise un _id fixe pour écraser toujours le même document
+                filter_query = {"_id": "health_monitor_status"}
+                
+                update_data = {
+                    "$set": {
+                        "last_check": datetime.utcnow(),
+                        "status": "UP" if success else "DOWN",
+                        "details": details,
+                        "module": "HealthMonitor",
+                        "app_url": self.app_url
+                    }
                 }
-                self.collection.insert_one(log_entry)
+                
+                # upsert=True : Crée le document s'il n'existe pas, sinon le met à jour
+                self.collection.update_one(filter_query, update_data, upsert=True)
             except Exception as e:
                 print(f"⚠️ [MONITOR] Impossible de logger dans Mongo: {e}")
 
