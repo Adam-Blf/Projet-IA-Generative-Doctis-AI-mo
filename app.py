@@ -1,22 +1,8 @@
 # ==============================================================================
 # DOCTIS-AI-MO: APPLICATION PRINCIPALE (STREAMLIT DASHBOARD)
-# Version: v7.0-RAG
+# Version: v7.0-RAG (Premium UI)
 # Auteurs: Adam Beloucif & Amina Medjdoub
 # ==============================================================================
-
-"""
-Ce fichier est le point d'entrée de l'application Web.
-Il utilise la bibliothèque Streamlit pour générer une interface utilisateur interactive.
-
-Responsabilités du fichier :
-1. Configuration de la page et de l'authentification API (Gemini).
-2. Initialisation de l'agent IA (DoctisAgent) et connexion à Kaggle (DataLoader).
-3. Gestion de l'interface utilisateur (Sidebar, Formulaires, Colonnes).
-4. Logique de "RAG-lite" (Retrieval Augmented Generation) :
-   - Recherche de symptômes dans le dataset réel Kaggle.
-   - Injection des données trouvées dans le prompt de l'IA.
-5. Affichage des résultats avec des alertes visuelles et des options d'export.
-"""
 
 import streamlit as st
 import google.generativeai as genai
@@ -28,309 +14,284 @@ from src.data_loader import load_knowledge_base
 from src.monitoring import init_monitor
 
 # ==============================================================================
-# 0. INITIALISATION DU MONITORING (Keep-Alive)
+# 0. INIT & CONFIG
 # ==============================================================================
-init_monitor()
-
-# ------------------------------------------------------------------------------
-# 1. CONFIGURATION DE LA PAGE
-# ------------------------------------------------------------------------------
-# Configuration globale de la fenêtre du navigateur (Titre, Icône, Layout Large)
 st.set_page_config(
-    page_title="DoctisAImo V7 - Medical Dashboard",
+    page_title="DoctisAImo V7 - Intelligent Triage",
     page_icon="🏥",
     layout="wide",
     initial_sidebar_state="expanded"
 )
 
-# ------------------------------------------------------------------------------
-# 2. FONCTIONS UTILITAIRES (BACKEND)
-# ------------------------------------------------------------------------------
+# Custom CSS for "Premium Medical" Content
+st.markdown("""
+<style>
+    /* Main Background & Fonts */
+    .stApp {
+        background-color: #f8f9fa;
+        font-family: 'Inter', sans-serif;
+    }
+    
+    /* Custom Header */
+    h1, h2, h3 {
+        color: #0f172a;
+        font-weight: 700;
+    }
+    
+    /* Card-like containers for Input and Results */
+    div[data-testid="stVerticalBlock"] > div[style*="flex-direction: column;"] > div[data-testid="stVerticalBlock"] {
+        background-color: white;
+        padding: 2rem;
+        border-radius: 12px;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    }
 
+    /* Primary Button Style */
+    div.stButton > button {
+        background-color: #2563eb;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        padding: 0.75rem 1.5rem;
+        font-weight: 600;
+        transition: all 0.2s;
+    }
+    div.stButton > button:hover {
+        background-color: #1d4ed8;
+        box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
+    }
+    
+    /* Sidebar styling */
+    section[data-testid="stSidebar"] {
+        background-color: #ffffff;
+        border-right: 1px solid #e5e7eb;
+    }
+</style>
+""", unsafe_allow_html=True)
+
+init_monitor()
+
+# ------------------------------------------------------------------------------
+# 1. LOGIC HELPERS
+# ------------------------------------------------------------------------------
 def configure_gemini():
-    """
-    Configure le client API Google Gemini.
-    Récupère la clé API 'GOOGLE_API_KEY' depuis les secrets Streamlit ou les variables d'environnement.
-    Arrête l'exécution si la clé est manquante.
-    """
     try:
-        api_key = st.secrets.get("GOOGLE_API_KEY")
-    except (FileNotFoundError, KeyError):
+        api_key = st.secrets.get("GOOGLE_API_KEY") or os.environ.get("GOOGLE_API_KEY")
+    except:
         api_key = os.environ.get("GOOGLE_API_KEY")
 
     if not api_key:
-        st.error("❌ CLÉ API MANQUANTE. Veuillez définir GOOGLE_API_KEY dans .streamlit/secrets.toml ou .env")
-        st.stop() # Arrêt critique
+        st.error("❌ CLÉ API MANQUANTE (GOOGLE_API_KEY).")
+        st.stop()
     
     genai.configure(api_key=api_key)
 
 @st.cache_resource
 def load_agent():
-    """
-    Instancie et met en cache l'agent Doctis.
-    Le décorateur @st.cache_resource évite de recharger l'agent à chaque interaction utilisateur,
-    ce qui optimise les performances.
-    """
     return DoctisAgent()
 
 @st.cache_data
 def get_kaggle_data():
-    """
-    Gère le cycle de vie des données Kaggle (ETL Complet).
-    Retourne la BDD optimisée.
-    """
-    with st.spinner("🔄 Construction de la BDD Médicale Optimisée (ETL)..."):
-        df = load_knowledge_base()
-        if df is None:
-             st.warning("⚠️ Mode Hors-Ligne (Données indisponibles).")
-        return df
+    with st.spinner("🔄 Chargement de la Base de Connaissances V7..."):
+        return load_knowledge_base()
 
-# ------------------------------------------------------------------------------
-# 3. INITIALISATION (SETUP)
-# ------------------------------------------------------------------------------
-# Exécution au démarrage du script
+# Init Resources
 configure_gemini()
 agent = load_agent()
+df_medical = get_kaggle_data()
 metadata = agent.get_agent_metadata()
 
-# Chargement des données médicales réelles
-df_medical = get_kaggle_data()
-
 # ------------------------------------------------------------------------------
-# 4. INTERFACE UTILISATEUR : BARRE LATÉRALE (SIDEBAR)
+# 2. SIDEBAR NAVIGATION
 # ------------------------------------------------------------------------------
-st.sidebar.title(f"🏥 {metadata.get('name')}")
-st.sidebar.caption(f"Version: {metadata.get('version')}")
-
-# Menu de navigation
-mode = st.sidebar.radio(
-    "Mode de Triage / Triage Mode",
-    [
-        "🚑 Urgence & Triage",
-        "🧠 Seconde Opinion",
-        "📋 Plan d'Action",
-        "ℹ️ À propos"
-    ]
-)
-
-st.sidebar.markdown("---")
-
-# Disclaimer légal (Indispensable pour une app médicale)
-with st.sidebar.expander("⚠️ Disclaimer / Avertissement", expanded=True):
-    st.error(
-        """
-        **DO NOT USE FOR LIFE-THREATENING EMERGENCIES.**
-        
-        This AI tool is for informational purposes only.
-        Always call 112/911 in case of emergency.
-        
-        *Ce système est une IA d'aide à la décision.
-        En cas d'urgence vitale, appelez le 15 ou le 112.*
-        """
+with st.sidebar:
+    st.image("https://img.icons8.com/color/96/doctor-male.png", width=80)
+    st.title("DoctisAImo")
+    st.caption(f"v{metadata.get('version')} • RAG-Enhanced")
+    
+    st.markdown("---")
+    
+    mode = st.radio(
+        "Module Clinique",
+        ["🚑 Triage Urgence", "🧠 Seconde Opinion", "ℹ️ À propos"],
+        captions=["Code Vert/Orange/Rouge", "Analyse différentielle", "Crédits & Tech"]
+    )
+    
+    st.markdown("---")
+    
+    # Kpi rapides
+    c1, c2 = st.columns(2)
+    c1.metric("Dataset", f"{len(df_medical) if df_medical is not None else 0}", "Maladies")
+    c2.metric("Status", "Online", delta_color="normal")
+    
+    st.warning(
+        "**AVERTISSEMENT**\n\nCeci est une IA. En cas d'urgence vitale, appelez le 15 ou le 112.",
+        icon="⚠️"
     )
 
 # ------------------------------------------------------------------------------
-# 5. LOGIQUE PRINCIPALE (MAIN AREA)
+# 3. MAIN INTERFACE
 # ------------------------------------------------------------------------------
 
-# CASE 1 : PAGE "À PROPOS"
+# HEADER
+st.title(f"{mode}")
+st.markdown("---")
+
 if mode == "ℹ️ À propos":
-    st.title("ℹ️ À propos de DoctisAImo")
     st.markdown("""
-    ### Assistant de Triage Médical Avancé (V7 - RAG Integrated)
+    ### 🌟 Le Futur du Triage Médical
     
-    **DoctisAImo** est un systéme expert piloté par l'IA générative (Gemini 2.0 Flash) et enrichi par des données réelles.
-    
-    #### Architecture Technique :
-    - **Frontend** : Streamlit (Python)
-    - **Cerveau** : Google Gemini 2.0 via API
-    - **Mémoire** : Dataset Kaggle 'Disease Symptom Description'
-    - **Pattern** : RAG-lite (Retrieval, Augmentation, Generation)
+    **DoctisAImo V7** repousse les limites de l'assistance médicale par IA en combinant :
+    1.  **Google Gemini 2.0 (Flash)** : Pour le raisonnement clinique rapide et empathique.
+    2.  **RAG Dynamique** : Une base de connaissances fusionnée de 4 datasets Kaggle (Symptômes, Précautions, Descriptions, Sévérité).
+    3.  **UX Premium** : Une interface pensée pour les praticiens.
     
     ---
-    *Développé par Adam Beloucif & Amina Medjdoub - Projet Open Source*
+    **Auteurs** : Adam Beloucif & Amina Medjdoub  
+    *Projet Open Source à but éducatif et de recherche.*
     """)
 
-# CASE 2 : MODES MÉDICAUX (TRIAGE, SECONDE OPINION, PLAN)
 else:
-    # Mapping entre le nom du bouton et la clé de configuration dans prompts.json
-    task_map = {
-        "🚑 Urgence & Triage": "triage_urgency",
-        "🧠 Seconde Opinion": "second_opinion",
-        "📋 Plan d'Action": "action_plan"
-    }
-    current_task = task_map[mode]
+    # --- MEDICAL MODULES ---
     
-    st.title(mode)
+    # 1. INPUT PANEL
+    col_left, col_right = st.columns([1, 1.2], gap="large")
     
-    # --- LAYOUT EN DEUX COLONNES ---
-    col_input, col_result = st.columns([1, 1], gap="large")
-    
-    # COLONNE GAUCHE : SAISIE
-    with col_input:
-        st.subheader("📝 Données Patient / Patient Data")
-        with st.container(border=True):
-            c1, c2 = st.columns(2)
-            with c1:
-                age = st.number_input("Âge", 0, 120, 30)
-            with c2:
-                gender = st.selectbox("Genre", ["H/M", "F/F", "Autre/Other"])
-            
-            symptoms = st.text_area("Symptômes & Histoire / Symptoms & History", height=150, placeholder="Ex: Douleur thoracique irradiant dans le bras gauche...")
-            
-            analyze_btn = st.button("🚀 Analyser / Analyze", use_container_width=True, type="primary")
-
-    # COLONNE DROITE : RÉSULTATS
-    with col_result:
-        st.subheader("📊 Résultats & IA / Results & AI")
+    with col_left:
+        st.subheader("📝 Dossier Patient")
+        st.caption("Remplissez les informations cliniques pour lancer l'analyse IA.")
         
-        if analyze_btn and symptoms:
-            with st.spinner("🧠 Analyse Data-Driven en cours..."):
-                try:
-                    # A. RÉCUPÉRATION DU TEMPLATE DE PROMPT
-                    task_config = agent.config['tasks'][current_task]
-                    system_instruction = task_config['system_prompt']
-                    user_template = task_config['user_template']
-                    
-                    # B. LOGIQUE RAG (Retrieval Augmented Generation) SIMPLIFIÉE
-                    # On cherche des correspondances dans le dataset Kaggle chargé
-                    kaggle_context = "Aucune donnée spécifique trouvée dans la base."
-                    
-                    if df_medical is not None:
-                        # Recherche sémantique simplifiée dans la colonne 'all_symptoms'
-                        try:
-                            # 1. On cherche les lignes où les symptômes du patient apparaissent dans la liste
-                            # On découpe les symptômes saisis par mot pour augmenter le recall
-                            keywords = [w.lower() for w in symptoms.split() if len(w) > 3]
-                            if not keywords: keywords = [symptoms.lower()]
-                            
-                            # Filtre : au moins un mot clé correspond
-                            mask = df_medical['all_symptoms'].str.lower().apply(lambda x: any(k in str(x) for k in keywords))
-                            matches = df_medical[mask]
-                            
-                            if not matches.empty:
-                                # On prend les 3 maladies les plus pertinentes
-                                top_matches = matches.head(3)
-                                context_parts = []
-                                for _, row in top_matches.iterrows():
-                                    context_parts.append(
-                                        f"- Maladie: {row['disease']}\n"
-                                        f"  Symptômes: {row['all_symptoms']}\n"
-                                        f"  Description: {row['description']}\n"
-                                        f"  Précautions: {row['precautions']}"
-                                    )
-                                
-                                formatted_matches = "\n".join(context_parts)
-                                kaggle_context = f"BASE DE CONNAISSANCES EXPERTE (Sources Kaggle):\n{formatted_matches}"
-                            else:
-                                kaggle_context = "RAG System : Aucun antécédent exact trouvé dans la base vectorielle."
-                        except Exception as e:
-                            kaggle_context = f"Erreur RAG : {e}"
+        with st.form("triage_form"):
+            c1, c2 = st.columns(2)
+            age = c1.number_input("Âge", 0, 120, 35)
+            gender = c2.selectbox("Genre", ["Homme", "Femme", "Autre"])
+            
+            symptoms = st.text_area(
+                "Tableau Clinique (Symptômes & Histoire)",
+                height=200,
+                placeholder="Ex: Patient de 35 ans se plaignant de céphalées intenses, photophobie et raideur de la nuque depuis 4h..."
+            )
+            
+            submitted = st.form_submit_button("Lancer l'Analyse ⚡", use_container_width=True)
 
-                    # C. CONSTRUCTION DU PROMPT FINAL
-                    # On injecte les données Kaggle dans le champ 'nlp_matches_str' du template
-                    prompt = user_template.format(
-                        first_name="Patient", last_name="", 
-                        age=age, gender=gender, 
-                        symptoms=symptoms, 
-                        nlp_matches_str=kaggle_context, # <--- L'injection magie opérée ici
-                        nlp_matches_json="{}" 
-                    )
+    # 2. ANALYSIS RESULTS
+    with col_right:
+        if submitted and symptoms:
+            # --- RAG SEARCH LOGIC ---
+            kaggle_context = ""
+            matches_found = []
+            
+            if df_medical is not None:
+                # Recherche V7 (Optimisée sur 'all_symptoms')
+                keywords = [w.lower() for w in symptoms.split() if len(w) > 3]
+                if not keywords: keywords = [symptoms.lower()]
+                
+                try:
+                    mask = df_medical['all_symptoms'].str.lower().apply(lambda x: any(k in str(x) for k in keywords))
+                    match_df = df_medical[mask]
                     
-                    # D. APPEL API (GÉNÉRATION)
-                    # On utilise le modèle défini dans la config
+                    if not match_df.empty:
+                        # Top 3 Matches
+                        for _, row in match_df.head(3).iterrows():
+                            # Gestion safe des colonnes
+                            desc = row.get('description', 'N/A')
+                            prec = row.get('precautions', 'N/A')
+                            matches_found.append(f"• **{row['disease']}** : {desc}")
+                            
+                            kaggle_context += (
+                                f"- Maladie: {row['disease']}\n"
+                                f"  Symptômes: {row.get('all_symptoms', '')}\n"
+                                f"  Précautions: {prec}\n"
+                                f"  Description: {desc}\n"
+                            )
+                        kaggle_context = f"SOURCES MÉDICALES (RAG V7):\n{kaggle_context}"
+                    else:
+                        kaggle_context = "Aucune correspondance exacte dans la base de connaissances (Analyse LLM pure)."
+                except Exception as e:
+                    kaggle_context = f"Erreur RAG: {str(e)}"
+
+            # --- AI GENERATION ---
+            current_task = "triage_urgency" if "Urgence" in mode else "second_opinion"
+            task_config = agent.config['tasks'].get(current_task, agent.config['tasks']['triage_urgency']) 
+            
+            prompt = task_config['user_template'].format(
+                first_name="Patient", last_name="", age=age, gender=gender,
+                symptoms=symptoms, nlp_matches_str=kaggle_context, nlp_matches_json="{}"
+            )
+            
+            with st.spinner("🤖 Le Dr. IA analyse le cas..."):
+                try:
                     model = genai.GenerativeModel(
                         metadata.get('default_model', 'gemini-2.0-flash'),
-                        system_instruction=system_instruction
+                        system_instruction=task_config['system_prompt']
                     )
-                    
                     response = model.generate_content(prompt)
-                    clean_resp = response.text.replace("```json", "").replace("```", "").strip()
-                    
-                    # E. AFFICHAGE INTELLIGENT
-                    
-                    # Si c'est du JSON (Triage)
-                    if current_task == "triage_urgency" or (clean_resp.startswith("{") and clean_resp.endswith("}")):
-                        try:
-                            data = json.loads(clean_resp)
-                            
-                            # 1. Badge d'Urgence (Code Couleur)
-                            urgency = data.get("urgency_level", "Unknown")
-                            if "Green" in urgency:
-                                st.success(f"### 🟢 {urgency}")
-                            elif "Orange" in urgency:
-                                st.warning(f"### 🟠 {urgency}")
-                            elif "Red" in urgency:
-                                st.error(f"### 🔴 {urgency} - ALERTE")
-                            else:
-                                st.info(f"### {urgency}")
-                            
-                            # 2. Cartes d'Analyse
-                            with st.container(border=True):
-                                st.markdown("#### 🩺 Analyse Clinique")
-                                st.write(data.get("analysis", "No analysis provided."))
-                            
-                            with st.container(border=True):
-                                st.markdown("#### 🛡️ Recommandation")
-                                st.write(data.get("recommendation", "No recommendation provided."))
-                                
-                            with st.expander("📈 Raisonnement Statistique & Sources"):
-                                st.info(data.get("reasoning", "No reasoning provided."))
-                                st.caption("Source des données : Kaggle Disease Symptom Description Dataset")
-                                st.text(kaggle_context) # Affiche les données brutes injectées pour transparence
-
-                            # 3. Export
-                            st.divider()
-                            st.subheader("💾 Exporter le Rapport / Export Report")
-                            
-                            c_down1, c_down2 = st.columns(2)
-                            
-                            # JSON Download
-                            json_str = json.dumps(data, indent=2, ensure_ascii=False)
-                            c_down1.download_button(
-                                label="📥 Télécharger JSON",
-                                data=json_str,
-                                file_name="doctis_report.json",
-                                mime="application/json"
-                            )
-                            
-                            # Text Download
-                            text_report = f"""DOCTIS-AI-MO REPORT (V4)
----------------------------
-Date: {pd.Timestamp.now()}
-Patient: {age} ans, {gender}
-Symptômes: {symptoms}
-
-URGENCY: {urgency}
-SOURCE DATA: {kaggle_context if len(kaggle_context) < 100 else 'Kaggle Dataset Integrated'}
----------------------------
-ANALYSIS:
-{data.get('analysis')}
-
-RECOMMENDATION:
-{data.get('recommendation')}
----------------------------
-"""
-                            c_down2.download_button(
-                                label="📥 Télécharger Texte",
-                                data=text_report,
-                                file_name="doctis_report.txt",
-                                mime="text/plain"
-                            )
-                                
-                        except json.JSONDecodeError:
-                            st.warning("⚠️ L'IA a répondu en texte brut (JSON malformé).")
-                            st.write(response.text)
-                            
-                    # Si c'est du Texte libre (Seconde Opinion / Action Plan)
-                    else:
-                        with st.container(border=True):
-                            st.markdown(response.text)
-                            
+                    ai_text = response.text.replace("```json", "").replace("```", "").strip()
                 except Exception as e:
-                    st.error(f"Erreur Système : {str(e)}")
-                    
-        elif analyze_btn:
-            st.warning("⚠️ Veuillez décrire les symptômes.")
-        else:
-            st.info("👈 Remplissez le formulaire pour démarrer l'analyse.")
+                    st.error(f"Erreur IA: {e}")
+                    st.stop()
+
+            # --- DISPLAY V7 (TABS & CARDS) ---
+            st.subheader("💡 Résultats de l'Analyse")
+            
+            # Parsing JSON si c'est le mode Triage
+            data = {}
+            is_json = False
+            if current_task == "triage_urgency":
+                try:
+                    data = json.loads(ai_text)
+                    is_json = True
+                except:
+                    pass
+
+            if is_json:
+                # 1. STATUS BADGE
+                urgency = data.get('urgency_level', 'Unknown')
+                color_map = {"Green": "success", "Orange": "warning", "Red": "error"}
+                alert_type = "info"
+                for k, v in color_map.items():
+                    if k in urgency: alert_type = v
+                
+                if alert_type == "success": st.success(f"### {urgency}")
+                elif alert_type == "warning": st.warning(f"### {urgency}")
+                else: st.error(f"### {urgency}")
+
+                # 2. TABS RESULTS
+                tab1, tab2, tab3 = st.tabs(["🩺 Diagnostic & Analyse", "💊 Actions & Soins", "📚 Preuves (RAG)"])
+                
+                with tab1:
+                    st.markdown("#### Analyse Clinique")
+                    st.info(data.get('analysis', 'Aucune analyse.'))
+                    st.markdown(f"**Raisonnement :**\n{data.get('reasoning', '')}")
+                
+                with tab2:
+                    st.markdown("#### Recommandations")
+                    st.write(data.get('recommendation', 'Aucune reco.'))
+                
+                with tab3:
+                    if matches_found:
+                        st.success("✅ **Données vérifiées trouvées dans la Base Kaggle**")
+                        for m in matches_found:
+                            st.markdown(m)
+                    else:
+                        st.warning("⚠️ Aucune donnée similaire trouvée dans la base RAG (Analyse générative pure).")
+                        
+            else:
+                # Mode Texte (Second Opinion)
+                st.chat_message("assistant", avatar="🧑‍⚕️").markdown(ai_text)
+                if matches_found:
+                    with st.expander("📚 Sources & Contexte (RAG)"):
+                        st.write(kaggle_context)
+            
+        elif not submitted:
+            # Empty State (Premium Placeholder)
+            st.info("👈 Remplissez le formulaire à gauche pour commencer.")
+            st.markdown(
+                """
+                <div style="text-align: center; color: #64748b; padding: 2rem;">
+                    <h3 style="color: #cbd5e1;">En attente de données patient...</h3>
+                    <p>Le système analysera les symptômes en croisant 4 bases de données médicales.</p>
+                </div>
+                """, 
+                unsafe_allow_html=True
+            )

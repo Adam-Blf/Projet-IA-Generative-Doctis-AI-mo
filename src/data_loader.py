@@ -71,56 +71,81 @@ def download_medical_dataset():
 
 def process_and_optimize_data():
     """
-    ETL: Fusionne les CSVs bruts en une BDD optimisée.
+    ETL: Fusionne les CSVs bruts (Kaggle + Extra) en une BDD optimisée.
     Crée 'medical_knowledge_base.csv'.
     """
     try:
-        print("⚙️ Démarrage de l'optimisation ETL...")
+        print("⚙️ Démarrage de l'optimisation ETL (V7)...")
         
-        # 1. LOAD raw files
-        df_symp = pd.read_csv(os.path.join(DATA_DIR, "dataset.csv"))
-        df_desc = pd.read_csv(os.path.join(DATA_DIR, "symptom_Description.csv"))
-        df_prec = pd.read_csv(os.path.join(DATA_DIR, "symptom_precaution.csv"))
-        df_sev = pd.read_csv(os.path.join(DATA_DIR, "Symptom-severity.csv"))
+        # 1. LOAD raw files (Main Kaggle Set)
+        # On utilise safe read pour éviter les crashs si un fichier manque
+        def safe_read(fname):
+            p = os.path.join(DATA_DIR, fname)
+            return pd.read_csv(p) if os.path.exists(p) else pd.DataFrame()
+            
+        df_symp = safe_read("dataset.csv")
+        df_desc = safe_read("symptom_Description.csv")
+        df_prec = safe_read("symptom_precaution.csv")
+        
+        # New Datasets (User provided)
+        df_extra_s2d = safe_read("Symptom2Disease.csv") #Cols: label, text
+        df_extra_das = safe_read("DiseaseAndSymptoms.csv")
         
         # 2. CLEAN & NORMALIZE
-        # Nettoyage des noms de colonnes et espaces
-        for df in [df_symp, df_desc, df_prec, df_sev]:
-            df.columns = [c.strip().lower().replace(" ", "_") for c in df.columns]
+        dfs = [df_symp, df_desc, df_prec, df_extra_s2d, df_extra_das]
+        for df in dfs:
+            if not df.empty:
+                df.columns = [c.strip().lower().replace(" ", "_") for c in df.columns]
+
+        # 3. MASTER DATAFRAME CONSTRUCTION
+        # Base: dataset.csv (Disease -> Symptoms_list)
+        if not df_symp.empty:
+            df_symp['all_symptoms'] = df_symp.apply(
+                lambda x: ', '.join([str(s).strip() for s in x.values[1:] if str(s) != 'nan']), axis=1
+            )
+            df_master = df_symp[['disease', 'all_symptoms']].copy()
+        else:
+            df_master = pd.DataFrame(columns=['disease', 'all_symptoms'])
+
+        # Merge Extra: Symptom2Disease (label=disease, text=symptom_description)
+        if not df_extra_s2d.empty:
+            # On considère 'text' comme des symptômes additionnels
+            # Renaming columns to match master
+            df_extra_s2d = df_extra_s2d.rename(columns={'label': 'disease', 'text': 'symptoms_extra'})
+            # On agrège par maladie car il y a plusieurs lignes par maladie
+            df_grouped = df_extra_s2d.groupby('disease')['symptoms_extra'].apply(lambda x: ', '.join(x)).reset_index()
             
-        # 3. TRANSFORM (Melt des symptômes)
-        # dataset.csv est "Wide" (Symptom_1, Symptom_2...), on le passe en "Long" pour avoir une liste
-        df_symp['all_symptoms'] = df_symp.apply(
-            lambda x: ', '.join([str(s).strip() for s in x.values[1:] if str(s) != 'nan']), axis=1
-        )
-        # On ne garde que Disease et la liste agrégée
-        df_master = df_symp[['disease', 'all_symptoms']].copy()
-        
-        # 4. MERGE (Description)
-        # Attention aux noms de maladie qui peuvent différer par des espaces
-        df_master['disease'] = df_master['disease'].str.strip()
-        df_desc['disease'] = df_desc['disease'].str.strip()
-        
-        df_master = pd.merge(df_master, df_desc, on='disease', how='left')
-        
-        # 5. MERGE (Precautions)
-        df_prec['disease'] = df_prec['disease'].str.strip()
-        # Concaténer les 4 précautions en une phrase
-        df_prec['precautions'] = df_prec.apply(
-            lambda x: ', '.join([str(p).strip().title() for p in x[['precaution_1', 'precaution_2', 'precaution_3', 'precaution_4']] if str(p) != 'nan']), 
-            axis=1
-        )
-        df_master = pd.merge(df_master, df_prec[['disease', 'precautions']], on='disease', how='left')
-        
-        # 6. ENRICH (Severity Score - Experimental)
-        # On pourrait calculer un score moyen basé sur les symptômes présents
-        # Pour l'instant on garde ça simple.
-        
+            # Merge with master
+            df_master = pd.merge(df_master, df_grouped, on='disease', how='outer')
+            # Combine symptoms
+            df_master['all_symptoms'] = df_master['all_symptoms'].fillna('') + ", " + df_master['symptoms_extra'].fillna('')
+            df_master.drop(columns=['symptoms_extra'], inplace=True)
+
+        # 4. MERGE METADATA (Description & Precautions)
+        if not df_master.empty:
+            df_master['disease'] = df_master['disease'].astype(str).str.strip()
+            
+            if not df_desc.empty:
+                df_desc['disease'] = df_desc['disease'].astype(str).str.strip()
+                df_master = pd.merge(df_master, df_desc, on='disease', how='left')
+                
+            if not df_prec.empty:
+                df_prec['disease'] = df_prec['disease'].astype(str).str.strip()
+                df_prec['precautions'] = df_prec.apply(
+                    lambda x: ', '.join([str(p).strip().title() for p in x if str(p) != 'nan' and p != x['disease']]), 
+                    axis=1
+                )
+                if 'precautions' in df_prec.columns:
+                    df_master = pd.merge(df_master, df_prec[['disease', 'precautions']], on='disease', how='left')
+
         # 7. SAVE
-        df_master.fillna("Information non disponible", inplace=True)
+        df_master.fillna("Non spécifié", inplace=True)
+        # Clean up commas
+        df_master['all_symptoms'] = df_master['all_symptoms'].str.strip(', ')
+        
         df_master.to_csv(OPTIMIZED_DB_PATH, index=False)
-        print(f"✅ BDD Optimisée générée : {OPTIMIZED_DB_PATH} ({len(df_master)} maladies)")
-        return True, "Base de connaissances optimisée."
+        print(f"✅ BDD Optimisée générée (V7) : {len(df_master)} entrées.")
+        return True, "Base V7 complétée."
         
     except Exception as e:
         print(f"❌ Erreur ETL : {e}")
