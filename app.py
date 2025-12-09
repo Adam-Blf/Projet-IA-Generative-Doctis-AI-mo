@@ -1,6 +1,6 @@
 # ==============================================================================
 # DOCTIS-AI-MO: APPLICATION PRINCIPALE (STREAMLIT DASHBOARD)
-# Version: 5.0-RAG
+# Version: v7.0-RAG
 # Auteurs: Adam Beloucif & Amina Medjdoub
 # ==============================================================================
 
@@ -37,7 +37,7 @@ init_monitor()
 # ------------------------------------------------------------------------------
 # Configuration globale de la fenêtre du navigateur (Titre, Icône, Layout Large)
 st.set_page_config(
-    page_title="DoctisAImo V5 - Medical Dashboard",
+    page_title="DoctisAImo V7 - Medical Dashboard",
     page_icon="🏥",
     layout="wide",
     initial_sidebar_state="expanded"
@@ -137,7 +137,7 @@ with st.sidebar.expander("⚠️ Disclaimer / Avertissement", expanded=True):
 if mode == "ℹ️ À propos":
     st.title("ℹ️ À propos de DoctisAImo")
     st.markdown("""
-    ### Assistant de Triage Médical Avancé (V5 - RAG Integrated)
+    ### Assistant de Triage Médical Avancé (V7 - RAG Integrated)
     
     **DoctisAImo** est un systéme expert piloté par l'IA générative (Gemini 2.0 Flash) et enrichi par des données réelles.
     
