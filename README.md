@@ -81,7 +81,7 @@ graph TD
         ETL --> KB[(📚 Base Optimisée)];
     end
 
-    subgraph App [💻 DoctisApp V15]
+    subgraph App [☁️ DoctisApp V15 (Render Cloud)]
         UI[🖥️ Premium UI] <-->|Chat & Tabs| A{🤖 Agent};
         A <-->|Raisonnement| G[☁️ Gemini 2.0];
         A <-->|RAG Query| KB;
@@ -89,7 +89,7 @@ graph TD
         M -.->|Logs| DB[(🍃 MongoDB)];
     end
     
-    DevOps -.->|Deploy| App
+    DevOps -.->|Deploy to Render| App
     
     style Data fill:#2e7d32,stroke:#4caf50,stroke-width:2px,color:#fff
     style App fill:#1565c0,stroke:#42a5f5,stroke-width:2px,color:#fff
