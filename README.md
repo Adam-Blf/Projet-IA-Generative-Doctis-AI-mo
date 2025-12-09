@@ -73,38 +73,6 @@ Conçue pour assister les professionnels de santé et les services d'urgence, ce
 4. **💾 Interface Premium** : Dashboard moderne avec onglets (Diagnostic, Soins, Sources).
 5. **🛡️ Monitoring & DevOps** : Système "Keep-Alive" autonome et Pipeline CI/CD automatisé (Tests + Auto-Versioning).
 
-### 📐 Architecture & Workflow (V15.0)
-
-```mermaid
-graph TD
-    subgraph DevOps [⚙️ CI/CD Pipeline]
-        GIT[Developer Push] -->|Trigger| ACT[🤖 GitHub Actions];
-        ACT -->|1. Run Tests| TEST{🧪 Pytest};
-        TEST -->|Pass| BUMP[🚀 Smart Auto-Bump];
-        BUMP -->|Commit Tag| GIT;
-    end
-
-    subgraph Data [💾 Hub de Données]
-        D1[dataset.csv] & D2[symptom_Description.csv] & D3[symptom_precaution.csv] --> ETL(⚙️ ETL Fusion);
-        D4[Symptom-severity.csv] & D5[Symptom2Disease.csv] --> ETL;
-        ETL --> KB[(📚 Base Optimisée)];
-    end
-
-    subgraph App [☁️ DoctisApp V15 - Render Cloud]
-        UI[🖥️ Premium UI] <-->|Chat & Tabs| A{🤖 Agent};
-        A <-->|Raisonnement| G[☁️ Gemini 2.0];
-        A <-->|RAG Query| KB;
-        M[⏱️ Monitor] -.->|Ping| UI;
-        M -.->|Logs| DB[(🍃 MongoDB)];
-    end
-    
-    DevOps -.->|Deploy to Render| App
-    
-    style Data fill:#2e7d32,stroke:#4caf50,stroke-width:2px,color:#fff
-    style App fill:#1565c0,stroke:#42a5f5,stroke-width:2px,color:#fff
-    style DevOps fill:#6a1b9a,stroke:#8e24aa,stroke-width:2px,color:#fff
-```
-
 <a name="démarrage"></a>
 
 ### 🚀 Démarrage Rapide
@@ -196,26 +164,6 @@ python src/agent.py
 2. **🧠 Second Opinion**: Detailed risk assessment and "Red Flag" identification.
 3. **🛡️ Action Plan**: Immediate emergency checklist without jargon.
 4. **🔗 Input Enrichment**: Structured keyword generation for vector search.
-
-### 📐 Architecture & Workflow
-
-```mermaid
-graph LR
-    subgraph Client [💻 Streamlit UI]
-        A[🧑‍⚕️ User] -->|Input| B(📝 Form);
-        E[📊 Dashboard] -->|View| A;
-        E -->|📥 Export| F[📄 Report];
-    end
-    
-    subgraph Core [🧠 DoctisAImo Engine]
-        B -->|JSON| C{🤖 Agent};
-        C <-->|API| D[☁️ Gemini];
-        C -->|Analysis| E;
-    end
-    
-    style Client fill:#01579b,stroke:#81d4fa,stroke-width:2px,color:#fff
-    style Core fill:#ff6f00,stroke:#ffca28,stroke-width:2px,color:#fff
-```
 
 ### Installation
 
