@@ -181,7 +181,7 @@ python src/agent.py
 
 1. **🏥 Intelligent Triage**: Data-driven analysis for Green, Orange, or Red codes.
 2. **🧠 Second Opinion**: Detailed risk assessment and "Red Flag" identification.
-3. **🛡️ High Availability & Safety** : Automatic fallback to OpenAI (GPT-4) if Gemini fails, plus immediate emergency checklists.
+3. **🛡️ High Availability**: Automatic fallback to **OpenAI GPT-4o** if Gemini is unavailable (Quota/Error).
 4. **💾 Premium Adaptive UI**: Dark Mode, fully responsive design, and structured keyword generation.
 
 ### 📐 Workflow Diagram
@@ -233,8 +233,8 @@ streamlit run app.py
 
 1. **🏥 Triaje Inteligente**: Análisis basado en datos para códigos Verde, Naranja o Rojo.
 2. **🧠 Segunda Opinión**: Evaluación detallada de riesgos y detección de señales de alerta ("Red Flags").
-3. **🛡️ Plan de Acción**: Lista de verificación de emergencia inmediata.
-4. **🔗 Enriquecimiento de Entrada**: Generación de palabras clave para búsqueda vectorial.
+3. **🛡️ Alta Disponibilidad**: Cambio automático a **OpenAI GPT-4o** si Gemini falla.
+4. **💾 Interfaz Premium**: Modo Oscuro, diseño adaptable y generación estructurada de palabras clave.
 
 ### 📐 Diagrama de Flujo
 
@@ -285,8 +285,8 @@ streamlit run app.py
 
 1. **🏥 Triage Intelligente**: Analisi basata sui dati per codici Verde, Arancione o Rosso.
 2. **🧠 Seconda Opinione**: Valutazione dettagliata dei rischi e identificazione dei segnali di allarme ("Red Flags").
-3. **🛡️ Piano d'Azione**: Checklist di emergenza immediata senza gergo medico.
-4. **🔗 Arricchimento Input**: Generazione di parole chiave strutturate per la ricerca vettoriale.
+3. **🛡️ Alta Disponibilità**: Passaggio automatico a **OpenAI GPT-4o** se Gemini non è disponibile.
+4. **💾 Interfaccia Premium**: Dark Mode, design responsivo e generazione strutturata di keyword.
 
 ### 📐 Diagramma di Flusso
 
@@ -337,8 +337,8 @@ streamlit run app.py
 
 1. **🏥 Triagem Inteligente**: Análise baseada em dados para códigos Verde, Laranja ou Vermelho.
 2. **🧠 Segunda Opinião**: Avaliação detalhada de riscos e identificação de sinais de alerta ("Red Flags").
-3. **🛡️ Plano de Ação**: Checklist de emergência imediata sem jargão médico.
-4. **🔗 Enriquecimento de Entrada**: Geração de palavras-chave estruturada para busca vetorial.
+3. **🛡️ Alta Disponibilidade**: Alternância automática para **OpenAI GPT-4o** se o Gemini falhar.
+4. **💾 Interface Premium**: Modo Escuro, design responsivo e geração estruturada de palavras-chave.
 
 ### 📐 Diagrama de Fluxo
 
@@ -389,8 +389,8 @@ streamlit run app.py
 
 1. **🏥 Интеллектуальный триаж**: Анализ данных для присвоения Зеленого, Оранжевого или Красного кода.
 2. **🧠 Второе мнение**: Детальная оценка рисков и выявление критических сигналов ("Red Flags").
-3. **🛡️ План действий**: Чек-лист для экстренных ситуаций без сложной терминологии.
-4. **🔗 Обогащение ввода**: Генерация структурированных ключевых слов для векторного поиска.
+3. **🛡️ Высокая доступность**: Автоматическое переключ. на **OpenAI GPT-4o** при сбое Gemini.
+4. **💾 Премиум интерфейс**: Темная тема, адаптивный дизайн и генерация ключевых слов.
 
 ### 📐 Схема Работы
 
@@ -441,8 +441,8 @@ streamlit run app.py
 
 1. **🏥 Intelligente Triage**: Datenbasierte Analyse für die Codes Grün, Orange oder Rot.
 2. **🧠 Zweitmeinung**: Detaillierte Risikobewertung und Identifizierung von Warnsignalen ("Red Flags").
-3. **🛡️ Aktionsplan**: Sofortige Notfall-Checkliste ohne Fachjargon.
-4. **🔗 Eingabeanreicherung**: Generierung strukturierter Schlüsselwörter für die Vektorsuche.
+3. **🛡️ Hochverfügbarkeit**: Automatischer Fallback auf **OpenAI GPT-4o**, falls Gemini ausfällt.
+4. **💾 Premium-Interface**: Dark Mode, responsives Design und strukturierte Keyword-Generierung.
 
 ### 📐 Workflow-Diagramm
 
@@ -493,8 +493,8 @@ streamlit run app.py
 
 1. **🏥 Akıllı Triyaj**: Yeşil, Turuncu veya Kırmızı kodlar için veriye dayalı analiz.
 2. **🧠 İkinci Görüş**: Ayrıntılı risk değerlendirmesi ve tehlike işaretlerinin ("Red Flags") tespiti.
-3. **🛡️ Eylem Planı**: Tıbbi jargon içermeyen acil durum kontrol listesi.
-4. **🔗 Girdi Zenginleştirme**: Vektör araması için yapılandırılmış anahtar kelime üretimi.
+3. **🛡️ Yüksek Erişilebilirlik**: Gemini arızalanırsa otomatik olarak **OpenAI GPT-4o**'ya geçiş.
+4. **💾 Premium Arayüz**: Karanlık Mod, duyarlı tasarım ve yapılandırılmış anahtar kelime oluşturma.
 
 ### 📐 İş Akış Şeması
 
