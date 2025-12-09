@@ -1,14 +1,4 @@
-# Security
 .env
-
-# Python
+data/
 __pycache__/
-*.py[cod]
-*$py.class
-
-# Streamlit
-.streamlit/
-
-# OS
-.DS_Store
-Thumbs.db
+*.pyc
