@@ -6,3 +6,4 @@ pandas
 pymongo
 requests
 pytest
+openai

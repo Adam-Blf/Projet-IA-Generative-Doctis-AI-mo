@@ -267,7 +267,7 @@ else:
                 except Exception as e:
                     kaggle_context = f"Erreur RAG: {str(e)}"
 
-            # --- AI GENERATION ---
+            # --- AI GENERATION WITH FALLBACK ---
             current_task = "triage_urgency" if "Urgence" in mode else "second_opinion"
             task_config = agent.config['tasks'].get(current_task, agent.config['tasks']['triage_urgency']) 
             
@@ -276,17 +276,51 @@ else:
                 symptoms=symptoms, nlp_matches_str=kaggle_context, nlp_matches_json="{}"
             )
             
-            with st.spinner("🤖 Le Dr. IA analyse le cas..."):
+            ai_text = ""
+            provider_used = "Gemini"
+            
+            with st.spinner("🤖 Le Dr. IA analyse le cas (Tentative Gemini)..."):
                 try:
+                    # 1. Tentative Gemini
                     model = genai.GenerativeModel(
                         metadata.get('default_model', 'gemini-2.0-flash'),
                         system_instruction=task_config['system_prompt']
                     )
                     response = model.generate_content(prompt)
-                    ai_text = response.text.replace("```json", "").replace("```", "").strip()
-                except Exception as e:
-                    st.error(f"Erreur IA: {e}")
-                    st.stop()
+                    ai_text = response.text
+                except Exception as e_gemini:
+                    # 2. Fallback OpenAI
+                    print(f"⚠️ Gemini Error: {e_gemini}. Switching to OpenAI...")
+                    openai_key = os.environ.get("OPENAI_API_KEY") 
+                    if not openai_key:
+                        try: openai_key = st.secrets["OPENAI_API_KEY"]
+                        except: pass
+                        
+                    if openai_key:
+                        try:
+                            import openai
+                            client = openai.OpenAI(api_key=openai_key)
+                            with st.spinner("⚠️ Gemini indisponible. Relais OpenAI (GPT-4o) activé..."):
+                                completion = client.chat.completions.create(
+                                    model="gpt-4o",
+                                    messages=[
+                                        {"role": "system", "content": task_config['system_prompt']},
+                                        {"role": "user", "content": prompt}
+                                    ]
+                                )
+                                ai_text = completion.choices[0].message.content
+                                provider_used = "OpenAI (GPT-4o)"
+                        except Exception as e_openai:
+                            st.error(f"❌ Erreur critique (Gemini & OpenAI) : {e_openai}")
+                            st.stop()
+                    else:
+                        st.error(f"❌ Erreur Gemini : {e_gemini}. (Ajoutez OPENAI_API_KEY pour le fallback).")
+                        st.stop()
+
+            ai_text = ai_text.replace("```json", "").replace("```", "").strip()
+            
+            if provider_used != "Gemini":
+                st.toast(f"⚠️ Fallback activé : Réponse générée par {provider_used}", icon="🛟")
 
             # --- DISPLAY (TABS & CARDS) ---
             st.subheader("💡 Résultats de l'Analyse")
