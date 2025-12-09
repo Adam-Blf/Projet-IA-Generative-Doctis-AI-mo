@@ -43,7 +43,7 @@
 
 ### 📝 Présentation
 
-**DoctisAImo v13.0 (Optimized)** est une solution de **Triage Médical Intelligent** de nouvelle génération.
+**DoctisAImo v15.0 (Optimized)** est une solution de **Triage Médical Intelligent** de nouvelle génération.
 
 Conçue pour assister les professionnels de santé et les services d'urgence, cette plateforme fusionne la puissance de l'**IA Générative** (Gemini 2.0) avec la rigueur de **données médicales vérifiées** (Dataset Kaggle) via une architecture RAG (Retrieval-Augmented Generation).
 
@@ -56,15 +56,15 @@ Conçue pour assister les professionnels de santé et les services d'urgence, ce
 - **Précision** : Analyse croisée entre symptômes déclarés et statistiques cliniques réelles.
 - **Sécurité** : Détection proactive des signaux faibles ("Red Flags") et protocoles d'urgence.
 
-#### Fonctionnalités Principales (V13.0)
+#### Fonctionnalités Principales (V15.0)
 
 1. **🚑 Triage Automatisé** : Classification immédiate de l'urgence.
 2. **🧠 Seconde Opinion IA** : Analyse différentielle pour réduire le risque d'erreur.
 3. **📚 RAG avancé (5 sources)** : Fusion de datasets Kaggle (Symptômes, Précautions, Sévérité, etc.) pour des preuves factuelles.
 4. **💾 Interface Premium** : Dashboard moderne avec onglets (Diagnostic, Soins, Sources).
-5. **🛡️ Monitoring** : Système "Keep-Alive" autonome.
+5. **🛡️ Monitoring & DevOps** : Système "Keep-Alive" autonome et Pipeline CI/CD automatisé (Tests + Auto-Versioning).
 
-### 📐 Architecture & Workflow (V13.0)
+### 📐 Architecture & Workflow (V15.0)
 
 ```mermaid
 graph LR
@@ -74,7 +74,7 @@ graph LR
         ETL --> KB[(📚 Base Optimisée)];
     end
 
-    subgraph App [💻 DoctisApp V13]
+    subgraph App [💻 DoctisApp V15]
         UI[🖥️ Premium UI] <-->|Chat & Tabs| A{🤖 Agent};
         A <-->|Raisonnement| G[☁️ Gemini 2.0];
         A <-->|RAG Query| KB;
@@ -159,7 +159,7 @@ Pour vérifier que l'environnement est correctement configuré (API connectées,
 python src/agent.py
 ```
 
-*Si tout fonctionne, vous verrez : `✅ Agent Chargé : DoctisAImo v13.1-Optimized`.*
+*Si tout fonctionne, vous verrez : `✅ Agent Chargé : DoctisAImo v15.0-Optimized`.*
 
 ---
 
