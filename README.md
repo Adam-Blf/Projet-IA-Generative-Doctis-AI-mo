@@ -1,4 +1,4 @@
-# 🏥 DoctisAImo (v3.0-KAGGLE-MAPS)
+# 🏥 DoctisAImo (v4.0-DASHBOARD)
 
 > **Assistant de Triage IA Avancé | Advanced AI Triage Assistant**
 
@@ -120,7 +120,7 @@ streamlit run app.py
 
 ### Overview
 
-**DoctisAImo** is a state-of-the-art AI assistant designed for emergency medical triage. Version 3.0 leverages **Data-Driven Logic** (inspired by Kaggle medical datasets) to interpret symptoms with statistical rigor. It provides safety assessments, second opinions, and emergency action plans.
+**DoctisAImo** is a state-of-the-art AI assistant designed for emergency medical triage. Version 4.0 leverages **Data-Driven Logic** (inspired by Kaggle medical datasets) to interpret symptoms with statistical rigor. It provides safety assessments, second opinions, and emergency action plans.
 
 ### Features
 
@@ -171,7 +171,7 @@ streamlit run app.py
 
 ### Resumen
 
-**DoctisAImo** es un asistente avanzado de IA para el triaje médico de emergencia. La versión 3.0 utiliza **Lógica Basada en Datos** (estilo Kaggle) para evaluar síntomas con rigor estadístico y proporcionar evaluaciones de seguridad.
+**DoctisAImo** es un asistente avanzado de IA para el triaje médico de emergencia. La versión 4.0 utiliza **Lógica Basada en Datos** (estilo Kaggle) para evaluar síntomas con rigor estadístico y proporcionar evaluaciones de seguridad.
 
 ### Funcionalidades
 
@@ -204,7 +204,7 @@ streamlit run app.py
 
 ### Panoramica
 
-**DoctisAImo** è un assistente IA all'avanguardia progettato per il triage medico di emergenza. La versione 3.0 sfrutta una **Logica Basata sui Dati** (ispirata ai dataset medici di Kaggle) per interpretare i sintomi con rigore statistico.
+**DoctisAImo** è un assistente IA all'avanguardia progettato per il triage medico di emergenza. La versione 4.0 sfrutta una **Logica Basata sui Dati** (ispirata ai dataset medici di Kaggle) per interpretare i sintomi con rigore statistico.
 
 ### Funzionalità
 
@@ -237,7 +237,7 @@ streamlit run app.py
 
 ### Visão Geral
 
-**DoctisAImo** é um assistente de IA avançado projetado para triagem médica de emergência. A versão 3.0 aproveita a **Lógica Baseada em Dados** (inspirada em datasets médicos do Kaggle) para interpretar sintomas com rigor estatístico.
+**DoctisAImo** é um assistente de IA avançado projetado para triagem médica de emergência. A versão 4.0 aproveita a **Lógica Baseada em Dados** (inspirada em datasets médicos do Kaggle) para interpretar sintomas com rigor estatístico.
 
 ### Funcionalidades
 
@@ -270,7 +270,7 @@ streamlit run app.py
 
 ### Обзор
 
-**DoctisAImo** — это передовой ИИ-ассистент для экстренной медицинской сортировки (триажа). Версия 3.0 использует **логику, основанную на данных** (вдохновленную медицинскими датасетами Kaggle), для статистически точной интерпретации симптомов.
+**DoctisAImo** — это передовой ИИ-ассистент для экстренной медицинской сортировки (триажа). Версия 4.0 использует **логику, основанную на данных** (вдохновленную медицинскими датасетами Kaggle), для статистически точной интерпретации симптомов.
 
 ### Возможности
 
@@ -303,7 +303,7 @@ streamlit run app.py
 
 ### Überblick
 
-**DoctisAImo** ist ein fortschrittlicher KI-Assistent für die medizinische Notfalltriage. Version 3.0 nutzt **datengetriebene Logik** (inspiriert von Kaggle-Datensätzen), um Symptome mit statistischer Genauigkeit zu interpretieren.
+**DoctisAImo** ist ein fortschrittlicher KI-Assistent für die medizinische Notfalltriage. Version 4.0 nutzt **datengetriebene Logik** (inspiriert von Kaggle-Datensätzen), um Symptome mit statistischer Genauigkeit zu interpretieren.
 
 ### Funktionen
 
@@ -336,7 +336,7 @@ streamlit run app.py
 
 ### Genel Bakış
 
-**DoctisAImo**, acil tıbbi triyaj için tasarlanmış gelişmiş bir yapay zeka asistanıdır. Sürüm 3.0, semptomları istatistiksel titizlikle yorumlamak için **Veri Odaklı Mantık** (Kaggle veri setlerinden esinlenerek) kullanır.
+**DoctisAImo**, acil tıbbi triyaj için tasarlanmış gelişmiş bir yapay zeka asistanıdır. Sürüm 4.0, semptomları istatistiksel titizlikle yorumlamak için **Veri Odaklı Mantık** (Kaggle veri setlerinden esinlenerek) kullanır.
 
 ### Özellikler
 
