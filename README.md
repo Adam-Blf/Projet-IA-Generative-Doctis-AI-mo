@@ -47,19 +47,21 @@
 ### 📐 Architecture & Workflow
 
 ```mermaid
-graph TD
-    A[🧑‍⚕️ Patient / Utilisateur] -->|Symptômes & Données| B(💻 Interface Streamlit);
-    B -->|Configuration Triage| C{🤖 Agent DoctisAImo};
-    C -->|Prompt Engineering| D[🧠 Google Gemini API];
-    D -->|Analyse Statistique| C;
-    C -->|Résultat JSON| B;
-    B -->|Affichage Dashboard| E[📊 Visualisation & Alertes];
-    E -->|Export| F[📄 Rapport PDF/JSON];
+graph LR
+    subgraph Client [💻 Interface Streamlit]
+        A[🧑‍⚕️ Patient] -->|Saisie| B(📝 Formulaire);
+        E[📊 Dashboard] -->|Lecture| A;
+        E -->|📥 Export| F[📄 Rapport];
+    end
     
-    style A fill:#f9f,stroke:#333,stroke-width:2px
-    style C fill:#ccf,stroke:#333,stroke-width:2px
-    style D fill:#ff9,stroke:#333,stroke-width:2px
-    style E fill:#9f9,stroke:#333,stroke-width:2px
+    subgraph Core [🧠 Moteur DoctisAImo]
+        B -->|JSON| C{🤖 Agent};
+        C <-->|API| D[☁️ Gemini];
+        C -->|Analyse| E;
+    end
+    
+    style Client fill:#e1f5fe,stroke:#01579b,stroke-width:2px
+    style Core fill:#fff9c4,stroke:#fbc02d,stroke-width:2px
 ```
 
 <a name="démarrage"></a>
@@ -132,19 +134,21 @@ streamlit run app.py
 ### 📐 Architecture & Workflow
 
 ```mermaid
-graph TD
-    A[🧑‍⚕️ Patient / User] -->|Symptoms & Data| B(💻 Streamlit Interface);
-    B -->|Triage Config| C{🤖 DoctisAImo Agent};
-    C -->|Prompt Engineering| D[🧠 Google Gemini API];
-    D -->|Statistical Analysis| C;
-    C -->|JSON Result| B;
-    B -->|Dashboard Display| E[📊 Visualization & Alerts];
-    E -->|Export| F[📄 PDF/JSON Report];
+graph LR
+    subgraph Client [💻 Streamlit UI]
+        A[🧑‍⚕️ User] -->|Input| B(📝 Form);
+        E[📊 Dashboard] -->|View| A;
+        E -->|📥 Export| F[📄 Report];
+    end
     
-    style A fill:#f9f,stroke:#333,stroke-width:2px
-    style C fill:#ccf,stroke:#333,stroke-width:2px
-    style D fill:#ff9,stroke:#333,stroke-width:2px
-    style E fill:#9f9,stroke:#333,stroke-width:2px
+    subgraph Core [🧠 DoctisAImo Engine]
+        B -->|JSON| C{🤖 Agent};
+        C <-->|API| D[☁️ Gemini];
+        C -->|Analysis| E;
+    end
+    
+    style Client fill:#e1f5fe,stroke:#01579b,stroke-width:2px
+    style Core fill:#fff9c4,stroke:#fbc02d,stroke-width:2px
 ```
 
 ### Installation
@@ -244,14 +248,14 @@ streamlit run app.py
 1. **🏥 Triagem Inteligente**: Análise baseada em dados para códigos Verde, Laranja ou Vermelho.
 2. **🧠 Segunda Opinião**: Avaliação detalhada de riscos e identificação de sinais de alerta ("Red Flags").
 3. **🛡️ Plano de Ação**: Checklist de emergência imediata sem jargão médico.
-4. **🔗 Enriquecimento de Entrada**: Geração de palavras-chave estruturadas para busca vetorial.
+4. **🔗 Enriquecimento de Entrada**: Geração de palavras-chave estruturada para busca vetorial.
 
 ### Instalação
 
 **Pré-requisitos**: Python 3.8+, Chave API Gemini.
 
 ```bash
-git clone https://github.B-Blf/Projet-IA-Generative-Doctis-AI-mo.git
+git clone https://github.com/Adam-Blf/Projet-IA-Generative-Doctis-AI-mo.git
 cd Projet-IA-Generative-Doctis-AI-mo
 pip install -r requirements.txt
 ```
@@ -297,7 +301,7 @@ streamlit run app.py
 
 ---
 
-<a name="-deutsch"></a>
+<a name="-allemand"></a>
 
 ## 🇩🇪 Allemand
 
@@ -330,7 +334,7 @@ streamlit run app.py
 
 ---
 
-<a name="-türkçe"></a>
+<a name="-turc"></a>
 
 ## 🇹🇷 Turc
 
