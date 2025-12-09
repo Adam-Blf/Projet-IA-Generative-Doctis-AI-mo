@@ -73,6 +73,25 @@ Conçue pour assister les professionnels de santé et les services d'urgence, ce
 4. **💾 Interface Premium & Adaptative** : Mode Sombre (Dark Mode), Design Responsive (Mobile/Desktop) et Dashboard moderne.
 5. **🛡️ Haute Disponibilité & DevOps** : Fallback automatique sur OpenAI (GPT-4) en cas de surcharge Gemini, Monitoring "Keep-Alive" et CI/CD.
 
+### 📐 Architecture & Workflow (V16.0)
+
+```mermaid
+graph TD
+    User([👤 Patient/Medecin]) -->|Symptômes| UI[💻 Interface Web];
+    UI -->|Envoi| Agent{🤖 Agent IA};
+    
+    subgraph Core [🧠 Moteur DoctisAImo]
+        Agent <-->|Raisonnement| Gemini[☁️ Google Gemini 2.0];
+        Agent <-->|Recherche de Preuves| RAG[(📚 Base Médicale Kaggle)];
+        Agent -.->|Fallback| GPT[🛡️ OpenAI GPT-4o];
+    end
+    
+    Agent -->|Diagnostic & Conseils| UI;
+    
+    style Core fill:#e3f2fd,stroke:#2196f3,stroke-width:2px
+    style Agent fill:#ffecb3,stroke:#ffca28,stroke-width:2px
+```
+
 <a name="démarrage"></a>
 
 ### 🚀 Démarrage Rapide
@@ -165,6 +184,25 @@ python src/agent.py
 3. **🛡️ High Availability & Safety** : Automatic fallback to OpenAI (GPT-4) if Gemini fails, plus immediate emergency checklists.
 4. **💾 Premium Adaptive UI**: Dark Mode, fully responsive design, and structured keyword generation.
 
+### 📐 Workflow Diagram
+
+```mermaid
+graph TD
+    User([👤 Patient/Doctor]) -->|Symptoms| UI[💻 Web Interface];
+    UI -->|Submit| Agent{🤖 AI Agent};
+    
+    subgraph Core [🧠 DoctisAImo Engine]
+        Agent <-->|Reasoning| Gemini[☁️ Google Gemini 2.0];
+        Agent <-->|Evidence Search| RAG[(📚 Kaggle Medical DB)];
+        Agent -.->|Fallback| GPT[🛡️ OpenAI GPT-4o];
+    end
+    
+    Agent -->|Diagnosis & Advice| UI;
+    
+    style Core fill:#e3f2fd,stroke:#2196f3,stroke-width:2px
+    style Agent fill:#ffecb3,stroke:#ffca28,stroke-width:2px
+```
+
 ### Installation
 
 **Prerequisites**: Python 3.8+, Gemini API Key.
@@ -197,6 +235,25 @@ streamlit run app.py
 2. **🧠 Segunda Opinión**: Evaluación detallada de riesgos y detección de señales de alerta ("Red Flags").
 3. **🛡️ Plan de Acción**: Lista de verificación de emergencia inmediata.
 4. **🔗 Enriquecimiento de Entrada**: Generación de palabras clave para búsqueda vectorial.
+
+### 📐 Diagrama de Flujo
+
+```mermaid
+graph TD
+    User([👤 Paciente/Doctor]) -->|Síntomas| UI[💻 Interfaz Web];
+    UI -->|Enviar| Agent{🤖 Agente IA};
+    
+    subgraph Core [🧠 Motor DoctisAImo]
+        Agent <-->|Razonamiento| Gemini[☁️ Google Gemini 2.0];
+        Agent <-->|Búsqueda de Evidencia| RAG[(📚 Base Médica Kaggle)];
+        Agent -.->|Respaldo| GPT[🛡️ OpenAI GPT-4o];
+    end
+    
+    Agent -->|Diagnóstico y Consejos| UI;
+    
+    style Core fill:#e3f2fd,stroke:#2196f3,stroke-width:2px
+    style Agent fill:#ffecb3,stroke:#ffca28,stroke-width:2px
+```
 
 ### Instalación
 
@@ -231,6 +288,25 @@ streamlit run app.py
 3. **🛡️ Piano d'Azione**: Checklist di emergenza immediata senza gergo medico.
 4. **🔗 Arricchimento Input**: Generazione di parole chiave strutturate per la ricerca vettoriale.
 
+### 📐 Diagramma di Flusso
+
+```mermaid
+graph TD
+    User([👤 Paziente/Dottore]) -->|Sintomi| UI[💻 Interfaccia Web];
+    UI -->|Invia| Agent{🤖 Agente IA};
+    
+    subgraph Core [🧠 Motore DoctisAImo]
+        Agent <-->|Ragionamento| Gemini[☁️ Google Gemini 2.0];
+        Agent <-->|Ricerca Evidenze| RAG[(📚 Database Medico Kaggle)];
+        Agent -.->|Fallback| GPT[🛡️ OpenAI GPT-4o];
+    end
+    
+    Agent -->|Diagnosi & Consigli| UI;
+    
+    style Core fill:#e3f2fd,stroke:#2196f3,stroke-width:2px
+    style Agent fill:#ffecb3,stroke:#ffca28,stroke-width:2px
+```
+
 ### Installazione
 
 **Prerequisiti**: Python 3.8+, Chiave API Gemini.
@@ -263,6 +339,25 @@ streamlit run app.py
 2. **🧠 Segunda Opinião**: Avaliação detalhada de riscos e identificação de sinais de alerta ("Red Flags").
 3. **🛡️ Plano de Ação**: Checklist de emergência imediata sem jargão médico.
 4. **🔗 Enriquecimento de Entrada**: Geração de palavras-chave estruturada para busca vetorial.
+
+### 📐 Diagrama de Fluxo
+
+```mermaid
+graph TD
+    User([👤 Paciente/Médico]) -->|Sintomas| UI[💻 Interface Web];
+    UI -->|Enviar| Agent{🤖 Agente IA};
+    
+    subgraph Core [🧠 Motor DoctisAImo]
+        Agent <-->|Raciocínio| Gemini[☁️ Google Gemini 2.0];
+        Agent <-->|Busca de Evidências| RAG[(📚 Base Médica Kaggle)];
+        Agent -.->|Fallback| GPT[🛡️ OpenAI GPT-4o];
+    end
+    
+    Agent -->|Diagnóstico & Conselhos| UI;
+    
+    style Core fill:#e3f2fd,stroke:#2196f3,stroke-width:2px
+    style Agent fill:#ffecb3,stroke:#ffca28,stroke-width:2px
+```
 
 ### Instalação
 
@@ -297,6 +392,25 @@ streamlit run app.py
 3. **🛡️ План действий**: Чек-лист для экстренных ситуаций без сложной терминологии.
 4. **🔗 Обогащение ввода**: Генерация структурированных ключевых слов для векторного поиска.
 
+### 📐 Схема Работы
+
+```mermaid
+graph TD
+    User([👤 Пациент/Врач]) -->|Симптомы| UI[💻 Веб-интерфейс];
+    UI -->|Отправить| Agent{🤖 ИИ Агент};
+    
+    subgraph Core [🧠 Движок DoctisAImo]
+        Agent <-->|Рассуждение| Gemini[☁️ Google Gemini 2.0];
+        Agent <-->|Поиск Данных| RAG[(📚 Med-Base Kaggle)];
+        Agent -.->|Резерв| GPT[🛡️ OpenAI GPT-4o];
+    end
+    
+    Agent -->|Диагноз и Советы| UI;
+    
+    style Core fill:#e3f2fd,stroke:#2196f3,stroke-width:2px
+    style Agent fill:#ffecb3,stroke:#ffca28,stroke-width:2px
+```
+
 ### Установка
 
 **Требования**: Python 3.8+, Ключ API Gemini.
@@ -330,6 +444,25 @@ streamlit run app.py
 3. **🛡️ Aktionsplan**: Sofortige Notfall-Checkliste ohne Fachjargon.
 4. **🔗 Eingabeanreicherung**: Generierung strukturierter Schlüsselwörter für die Vektorsuche.
 
+### 📐 Workflow-Diagramm
+
+```mermaid
+graph TD
+    User([👤 Patient/Arzt]) -->|Symptome| UI[💻 Web-Interface];
+    UI -->|Senden| Agent{🤖 KI-Agent};
+    
+    subgraph Core [🧠 DoctisAImo Engine]
+        Agent <-->|Reasoning| Gemini[☁️ Google Gemini 2.0];
+        Agent <-->|Evidenzsuche| RAG[(📚 Kaggle Med-DB)];
+        Agent -.->|Fallback| GPT[🛡️ OpenAI GPT-4o];
+    end
+    
+    Agent -->|Diagnose & Rat| UI;
+    
+    style Core fill:#e3f2fd,stroke:#2196f3,stroke-width:2px
+    style Agent fill:#ffecb3,stroke:#ffca28,stroke-width:2px
+```
+
 ### Installation
 
 **Voraussetzungen**: Python 3.8+, Gemini API-Schlüssel.
@@ -362,6 +495,25 @@ streamlit run app.py
 2. **🧠 İkinci Görüş**: Ayrıntılı risk değerlendirmesi ve tehlike işaretlerinin ("Red Flags") tespiti.
 3. **🛡️ Eylem Planı**: Tıbbi jargon içermeyen acil durum kontrol listesi.
 4. **🔗 Girdi Zenginleştirme**: Vektör araması için yapılandırılmış anahtar kelime üretimi.
+
+### 📐 İş Akış Şeması
+
+```mermaid
+graph TD
+    User([👤 Hasta/Doktor]) -->|Semptomlar| UI[💻 Web Arayüzü];
+    UI -->|Gönder| Agent{🤖 YZ Ajanı};
+    
+    subgraph Core [🧠 DoctisAImo Motoru]
+        Agent <-->|Akıl Yürütme| Gemini[☁️ Google Gemini 2.0];
+        Agent <-->|Kanıt Arama| RAG[(📚 Kaggle Tıbbi Veri)];
+        Agent -.->|Yedek| GPT[🛡️ OpenAI GPT-4o];
+    end
+    
+    Agent -->|Teşhis & Tavsiye| UI;
+    
+    style Core fill:#e3f2fd,stroke:#2196f3,stroke-width:2px
+    style Agent fill:#ffecb3,stroke:#ffca28,stroke-width:2px
+```
 
 ### Kurulum
 
