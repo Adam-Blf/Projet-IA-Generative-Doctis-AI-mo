@@ -45,7 +45,7 @@
 
 ### Installation
 
-**Prérequis** : Python 3.8+, Clé API OpenAI.
+**Prérequis** : Python 3.8+, Clé API Gemini.
 
 ```bash
 # 1. Cloner le dépôt
@@ -108,7 +108,7 @@ python src/agent.py
 
 ### Installation
 
-**Prerequisites**: Python 3.8+, OpenAI API Key.
+**Prerequisites**: Python 3.8+, Gemini API Key.
 
 ```bash
 # 1. Clone the repository
