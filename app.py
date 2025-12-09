@@ -1,7 +1,7 @@
 # ==============================================================================
 # DOCTIS-AI-MO: APPLICATION PRINCIPALE (STREAMLIT DASHBOARD)
-# Version: 4.0-DASHBOARD
-# Auteur: Adam Beloucif
+# Version: 5.0-RAG
+# Auteurs: Adam Beloucif & Amina Medjdoub
 # ==============================================================================
 
 """
@@ -31,7 +31,7 @@ from src.data_loader import download_medical_dataset, load_symptom_data
 # ------------------------------------------------------------------------------
 # Configuration globale de la fenêtre du navigateur (Titre, Icône, Layout Large)
 st.set_page_config(
-    page_title="DoctisAImo V4 - Medical Dashboard",
+    page_title="DoctisAImo V5 - Medical Dashboard",
     page_icon="🏥",
     layout="wide",
     initial_sidebar_state="expanded"
@@ -135,7 +135,7 @@ with st.sidebar.expander("⚠️ Disclaimer / Avertissement", expanded=True):
 if mode == "ℹ️ À propos":
     st.title("ℹ️ À propos de DoctisAImo")
     st.markdown("""
-    ### Assistant de Triage Médical Avancé (V4)
+    ### Assistant de Triage Médical Avancé (V5 - RAG Integrated)
     
     **DoctisAImo** est un systéme expert piloté par l'IA générative (Gemini 2.0 Flash) et enrichi par des données réelles.
     
@@ -146,7 +146,7 @@ if mode == "ℹ️ À propos":
     - **Pattern** : RAG-lite (Retrieval, Augmentation, Generation)
     
     ---
-    *Développé par Adam Beloucif - Projet Open Source*
+    *Développé par Adam Beloucif & Amina Medjdoub - Projet Open Source*
     """)
 
 # CASE 2 : MODES MÉDICAUX (TRIAGE, SECONDE OPINION, PLAN)
