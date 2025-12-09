@@ -44,6 +44,24 @@
 4. **💾 Export de Rapports** : Téléchargement des analyses au format JSON ou Texte (Nouvelle fonctionnalité).
 5. **🖥️ Interface Pro** : Dashboard avec navigation latérale et visualisation des résultats en temps réel.
 
+### 📐 Architecture & Workflow
+
+```mermaid
+graph TD
+    A[🧑‍⚕️ Patient / Utilisateur] -->|Symptômes & Données| B(💻 Interface Streamlit);
+    B -->|Configuration Triage| C{🤖 Agent DoctisAImo};
+    C -->|Prompt Engineering| D[🧠 Google Gemini API];
+    D -->|Analyse Statistique| C;
+    C -->|Résultat JSON| B;
+    B -->|Affichage Dashboard| E[📊 Visualisation & Alertes];
+    E -->|Export| F[📄 Rapport PDF/JSON];
+    
+    style A fill:#f9f,stroke:#333,stroke-width:2px
+    style C fill:#ccf,stroke:#333,stroke-width:2px
+    style D fill:#ff9,stroke:#333,stroke-width:2px
+    style E fill:#9f9,stroke:#333,stroke-width:2px
+```
+
 <a name="démarrage"></a>
 
 ### 🚀 Démarrage
