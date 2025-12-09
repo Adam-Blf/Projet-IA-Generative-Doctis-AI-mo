@@ -16,7 +16,7 @@ Projet d'IA Générative pour Doctis.
 
 🇫🇷 Français | 🇬🇧 Anglais | 🇪🇸 Espagnol | 🇮🇹 Italien | 🇵🇹 Portugais | 🇷🇺 Russe | 🇩🇪 Allemand | 🇹🇷 Turc
 
-# 🏥 DoctisAImo (v15.3-Optimized)
+# 🏥 DoctisAImo (v15.4-Optimized)
 
 > **Assistant de Triage IA Avancé | Advanced AI Triage Assistant**
 >
@@ -177,7 +177,7 @@ Pour vérifier que l'environnement est correctement configuré (API connectées,
 python src/agent.py
 ```
 
-*Si tout fonctionne, vous verrez : `✅ Agent Chargé : DoctisAImo v15.3-Optimized`.*
+*Si tout fonctionne, vous verrez : `✅ Agent Chargé : DoctisAImo v15.4-Optimized`.*
 
 ---
 
