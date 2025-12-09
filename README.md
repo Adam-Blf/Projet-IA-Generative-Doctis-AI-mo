@@ -8,7 +8,7 @@
 
 🇫🇷 Français | 🇬🇧 Anglais | 🇪🇸 Espagnol | 🇮🇹 Italien | 🇵🇹 Portugais | 🇷🇺 Russe | 🇩🇪 Allemand | 🇹🇷 Turc
 
-# 🏥 DoctisAImo (v13.0-Optimized)
+# 🏥 DoctisAImo (v15.0-Optimized)
 
 > **Assistant de Triage IA Avancé | Advanced AI Triage Assistant**
 >
