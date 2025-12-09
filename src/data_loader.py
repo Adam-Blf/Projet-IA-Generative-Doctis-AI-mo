@@ -1,6 +1,6 @@
 # ==============================================================================
 # DOCTIS-AI-MO: DATA LOADER (ETL KAGGLE)
-# Version: v15.4-Optimized
+# Version: v16.0-Optimized
 # Auteurs: Adam Beloucif & Amina Medjdoub
 # ==============================================================================
 
