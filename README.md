@@ -36,31 +36,42 @@
 
 ### 📝 Présentation
 
-**DoctisAImo (v5.0-RAG)** est une plateforme de triage médical intelligent propulsée par l'IA. Elle transforme les protocoles d'urgence complexes en une interface web intuitive pour assister la prise de décision.
+**DoctisAImo v5.0 (RAG-Integrated)** est une solution de **Triage Médical Intelligent** de nouvelle génération.
 
-#### Fonctionnalités Clés (V5)
+Conçue pour assister les professionnels de santé et les services d'urgence, cette plateforme fusionne la puissance de l'**IA Générative** (Gemini 2.0) avec la rigueur de **données médicales vérifiées** (Dataset Kaggle) via une architecture RAG (Retrieval-Augmented Generation).
 
-1. **🚑 Triage & Urgence** : Analyse des symptômes et classification automatique (Vert/Orange/Rouge) basée sur des logiques statistiques (Kaggle Datasets).
-2. **🧠 Seconde Opinion** : Détection avancée de signaux faibles et "Red Flags".
-3. **📋 Plan d'Action** : Génération instantanée de checklists d'intervention.
-4. **💾 Export de Rapports** : Téléchargement des analyses au format JSON ou Texte.
-5. **🖥️ Interface Pro** : Dashboard avec navigation latérale et visualisation des résultats en temps réel.
-6. **📊 RAG-lite** : Intégration de données réelles (Kaggle) pour enrichir le contexte de l'IA.
+**Auteurs :** Adam Beloucif & Amina Medjdoub
+
+#### Pourquoi DoctisAImo ?
+
+* **Rapidité** : Triage instantané des patients (Code Vert/Orange/Rouge).
+- **Précision** : Analyse croisée entre symptômes déclarés et statistiques cliniques réelles.
+- **Sécurité** : Détection proactive des signaux faibles ("Red Flags") et protocoles d'urgence.
+
+#### Fonctionnalités Principales
+
+1. **🚑 Triage Automatisé** : Classification immédiate de l'urgence.
+2. **🧠 Seconde Opinion IA** : Analyse différentielle pour réduire le risque d'erreur.
+3. **📚 RAG (Retrieval-Augmented Generation)** : L'IA ne "hallucine" pas, elle consulte une base de connaissances médicale (Kaggle) en temps réel.
+4. **💾 Rapports Exportables** : Génération de comptes-rendus PDF/JSON pour le dossier patient.
+5. **🖥️ Dashboard Professionnel** : Interface ergonomique (Streamlit) adaptée à un usage clinique.
 
 ### 📐 Architecture & Workflow
 
 ```mermaid
 graph LR
-    subgraph Client [💻 Interface Streamlit]
-        A[🧑‍⚕️ Patient] -->|Saisie| B(📝 Formulaire);
-        E[📊 Dashboard] -->|Lecture| A;
-        E -->|📥 Export| F[📄 Rapport];
+    subgraph Client [💻 Interface Médecin]
+        A[🧑‍⚕️ Praticien/Patient] -->|Symptômes| B(📝 Formulaire Web);
+        E[📊 Dashboard V5] -->|Visualisation| A;
+        E -->|📥 Export| F[📄 Rapport Médical];
     end
     
-    subgraph Core [🧠 Moteur DoctisAImo]
-        B -->|JSON| C{🤖 Agent};
-        C <-->|API| D[☁️ Gemini];
-        C -->|Analyse| E;
+    subgraph Core [🧠 Moteur Intelligence]
+        B -->|Requête| C{🤖 Agent Doctis};
+        C <-->|Raisonnement| D[☁️ Google Gemini 2.0];
+        C <-->|Recherche de Preuves| K[(📚 Base Kaggle)];
+        K -->|Contexte RAG| C;
+        C -->|Diagnostic Assisté| E;
     end
     
     style Client fill:#01579b,stroke:#81d4fa,stroke-width:2px,color:#fff
@@ -69,53 +80,73 @@ graph LR
 
 <a name="démarrage"></a>
 
-### 🚀 Démarrage
+### 🚀 Démarrage Rapide
+
+Suivez ces étapes pour déployer l'assistant de triage sur votre poste local.
 
 <a name="prérequis"></a>
 
-#### 📋 Prérequis
+#### 📋 Prérequis Techniques
 
-- **Python 3.8+**
-- **Clé API Gemini** (Google AI Studio)
+* **Python 3.8** ou version supérieure.
+- Une **Clé API Google Gemini** (gratuite via Google AI Studio).
+- Un compte **Kaggle** (pour le téléchargement automatique des datasets).
 
 <a name="installation"></a>
 
 #### 💾 Installation
 
-```bash
-git clone https://github.com/Adam-Blf/Projet-IA-Generative-Doctis-AI-mo.git
-cd Projet-IA-Generative-Doctis-AI-mo
-pip install -r requirements.txt
-```
+1. **Cloner le projet**
+
+    ```bash
+    git clone https://github.com/Adam-Blf/Projet-IA-Generative-Doctis-AI-mo.git
+    cd Projet-IA-Generative-Doctis-AI-mo
+    ```
+
+2. **Installer les dépendances**
+
+    ```bash
+    pip install -r requirements.txt
+    ```
+
+3. **Configuration (Variables d'environnement)**
+    Créez un fichier `.env` à la racine et ajoutez vos clés :
+
+    ```ini
+    GOOGLE_API_KEY="votre_clé_gemini_ici"
+    KAGGLE_USERNAME="votre_user_kaggle"
+    KAGGLE_KEY="votre_clé_kaggle"
+    ```
 
 <a name="utilisation"></a>
 
 ### 🎮 Utilisation
 
-Lancez le tableau de bord web :
+Lancez l'interface de contrôle via la commande suivante :
 
 ```bash
 streamlit run app.py
 ```
 
-**Navigation :**
+L'application s'ouvrira automatiquement dans votre navigateur (**<http://localhost:8501>**).
 
-- Utilisez la **Barre Latérale** pour basculer entre les modes (Triage, Seconde Opinion, etc.).
-- Remplissez les données patient à **Gauche**.
-- Visualisez l'analyse IA à **Droit**.
-- **Téléchargez** le rapport via les boutons dédiés.
+**Guide de l'interface :**
+- **Menu Latéral** : Naviguez entre "Urgence & Triage", "Seconde Opinion" et "À propos".
+- **Formulaire** : Saisissez l'âge, le genre et les symptômes (ex: *"Douleur thoracique irradiant bras gauche"*).
+- **Résultats** : Observez l'analyse en temps réel, les alertes de sécurité et les preuves issues du dataset.
 
 <a name="tests"></a>
 
-### 🧪 Tests
+### 🧪 Tests & Vérification
 
-Pour vérifier l'installation et lancer l'application en mode local :
+Pour vérifier que l'environnement est correctement configuré (API connectées, librairies chargées) :
 
 ```bash
-streamlit run app.py
+# Lancer le script de test unitaire de l'agent
+python src/agent.py
 ```
 
-*(Le navigateur s'ouvrira automatiquement)*
+*Si tout fonctionne, vous verrez : `✅ Agent Chargé : DoctisAImo v5.0-RAG`.*
 
 ---
 
