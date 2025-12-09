@@ -1,9 +1,8 @@
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/adambeloucif/) ![Visitor Badge](https://visitor-badge.laobi.icu/badge?page_id=Adam-Blf.Projet-IA-Generative-Doctis-AI-mo)
-
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/adambeloucif/) [![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://doctis-aimo.onrender.com) ![Visitor Badge](https://visitor-badge.laobi.icu/badge?page_id=Adam-Blf.Projet-IA-Generative-Doctis-AI-mo)
 
 ![Dernier commit](https://img.shields.io/github/last-commit/Adam-Blf/Projet-IA-Generative-Doctis-AI-mo?style=flat&logo=git&logoColor=white&color=0080ff&label=Dernier%20commit) ![Langage principal](https://img.shields.io/github/languages/top/Adam-Blf/Projet-IA-Generative-Doctis-AI-mo?style=flat&logo=git&logoColor=white&color=0080ff&label=Langage%20principal) ![Nombre de langages](https://img.shields.io/github/languages/count/Adam-Blf/Projet-IA-Generative-Doctis-AI-mo?style=flat&logo=git&logoColor=white&color=0080ff&label=Nombre%20de%20langages)
 
-### Construit avec les outils et technologies : 
+### Construit avec les outils et technologies
 
 ![Python](https://img.shields.io/badge/-Python-0080ff?style=flat)
 
@@ -52,7 +51,8 @@ Conçue pour assister les professionnels de santé et les services d'urgence, ce
 
 #### Pourquoi DoctisAImo ?
 
-* **Rapidité** : Triage instantané des patients (Code Vert/Orange/Rouge).
+- **Rapidité** : Triage instantané des patients (Code Vert/Orange/Rouge).
+
 - **Précision** : Analyse croisée entre symptômes déclarés et statistiques cliniques réelles.
 - **Sécurité** : Détection proactive des signaux faibles ("Red Flags") et protocoles d'urgence.
 
@@ -96,7 +96,8 @@ Suivez ces étapes pour déployer l'assistant de triage sur votre poste local.
 
 #### 📋 Prérequis Techniques
 
-* **Python 3.8** ou version supérieure.
+- **Python 3.8** ou version supérieure.
+
 - Une **Clé API Google Gemini** (gratuite via Google AI Studio).
 - Un compte **Kaggle** (pour le téléchargement automatique des datasets).
 
@@ -130,7 +131,10 @@ Suivez ces étapes pour déployer l'assistant de triage sur votre poste local.
 
 ### 🎮 Utilisation
 
-Lancez l'interface de contrôle via la commande suivante :
+**Accès Direct (Live Demo) :**
+👉 **[https://doctis-aimo.onrender.com](https://doctis-aimo.onrender.com)**
+
+Ou lancez le tableau de bord web en local :contrôle via la commande suivante :
 
 ```bash
 streamlit run app.py
@@ -139,6 +143,7 @@ streamlit run app.py
 L'application s'ouvrira automatiquement dans votre navigateur (**<http://localhost:8501>**).
 
 **Guide de l'interface :**
+
 - **Menu Latéral** : Naviguez entre "Urgence & Triage", "Seconde Opinion" et "À propos".
 - **Formulaire** : Saisissez l'âge, le genre et les symptômes (ex: *"Douleur thoracique irradiant bras gauche"*).
 - **Résultats** : Observez l'analyse en temps réel, les alertes de sécurité et les preuves issues du dataset.
