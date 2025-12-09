@@ -24,7 +24,7 @@ import json
 import os
 import pandas as pd
 from src.agent import DoctisAgent
-from src.data_loader import download_medical_dataset, load_symptom_data
+from src.data_loader import load_knowledge_base
 from src.monitoring import init_monitor
 
 # ==============================================================================
@@ -76,17 +76,13 @@ def load_agent():
 @st.cache_data
 def get_kaggle_data():
     """
-    Gère le cycle de vie des données Kaggle :
-    1. Télécharge le dataset si nécessaire (mise en cache).
-    2. Charge le CSV en mémoire (Pandas DataFrame).
+    Gère le cycle de vie des données Kaggle (ETL Complet).
+    Retourne la BDD optimisée.
     """
-    with st.spinner("🔄 Initialisation de la Base de Connaissances Kaggle..."):
-        success, msg = download_medical_dataset()
-        if not success:
-            st.warning(f"⚠️ Mode Hors-Ligne (Kaggle indisponible) : {msg}")
-            return None
-        
-        df = load_symptom_data()
+    with st.spinner("🔄 Construction de la BDD Médicale Optimisée (ETL)..."):
+        df = load_knowledge_base()
+        if df is None:
+             st.warning("⚠️ Mode Hors-Ligne (Données indisponibles).")
         return df
 
 # ------------------------------------------------------------------------------
@@ -201,21 +197,35 @@ else:
                     kaggle_context = "Aucune donnée spécifique trouvée dans la base."
                     
                     if df_medical is not None:
-                        # Recherche naïve de mots-clés dans la première colonne du CSV
-                        # (Supposons que la col 1 contient les maladies ou symptômes)
-                        # On cherche si les symptômes saisis correspondent à des entrées
+                        # Recherche sémantique simplifiée dans la colonne 'all_symptoms'
                         try:
-                            # On convertit tout en string pour la recherche
-                            matches = df_medical[df_medical.apply(lambda row: row.astype(str).str.contains(symptoms, case=False).any(), axis=1)]
+                            # 1. On cherche les lignes où les symptômes du patient apparaissent dans la liste
+                            # On découpe les symptômes saisis par mot pour augmenter le recall
+                            keywords = [w.lower() for w in symptoms.split() if len(w) > 3]
+                            if not keywords: keywords = [symptoms.lower()]
+                            
+                            # Filtre : au moins un mot clé correspond
+                            mask = df_medical['all_symptoms'].str.lower().apply(lambda x: any(k in str(x) for k in keywords))
+                            matches = df_medical[mask]
                             
                             if not matches.empty:
-                                # On prend les 3 meilleures correspondances pour ne pas saturer le prompt
-                                top_matches = matches.head(3).to_string(index=False)
-                                kaggle_context = f"DATASET KAGGLE (Preuves Statistiques) :\n{top_matches}"
+                                # On prend les 3 maladies les plus pertinentes
+                                top_matches = matches.head(3)
+                                context_parts = []
+                                for _, row in top_matches.iterrows():
+                                    context_parts.append(
+                                        f"- Maladie: {row['disease']}\n"
+                                        f"  Symptômes: {row['all_symptoms']}\n"
+                                        f"  Description: {row['description']}\n"
+                                        f"  Précautions: {row['precautions']}"
+                                    )
+                                
+                                formatted_matches = "\n".join(context_parts)
+                                kaggle_context = f"BASE DE CONNAISSANCES EXPERTE (Sources Kaggle):\n{formatted_matches}"
                             else:
-                                kaggle_context = "Recherche dataset effectuée : Aucune correspondance directe."
+                                kaggle_context = "RAG System : Aucun antécédent exact trouvé dans la base vectorielle."
                         except Exception as e:
-                            kaggle_context = f"Erreur lecture dataset: {e}"
+                            kaggle_context = f"Erreur RAG : {e}"
 
                     # C. CONSTRUCTION DU PROMPT FINAL
                     # On injecte les données Kaggle dans le champ 'nlp_matches_str' du template
