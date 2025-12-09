@@ -20,7 +20,6 @@ from src.monitoring import init_monitor
 
 def _inject_custom_css() -> None:
     """Injecte le CSS personnalisé pour l'interface Premium."""
-    st.markdown("""
     <style>
         /* Main Background & Fonts */
         .stApp {
@@ -29,8 +28,13 @@ def _inject_custom_css() -> None:
         }
         
         /* Custom Header */
-        h1, h2, h3 {
+        h1 {
             color: #0f172a;
+            font-weight: 800;
+            font-size: 2.2rem;
+        }
+        h2, h3 {
+            color: #1e293b;
             font-weight: 700;
         }
         
@@ -40,6 +44,7 @@ def _inject_custom_css() -> None:
             padding: 2rem;
             border-radius: 12px;
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            border: 1px solid #e2e8f0;
         }
 
         /* Primary Button Style */
@@ -51,16 +56,49 @@ def _inject_custom_css() -> None:
             padding: 0.75rem 1.5rem;
             font-weight: 600;
             transition: all 0.2s;
+            width: auto;
         }
         div.stButton > button:hover {
             background-color: #1d4ed8;
             box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
+            transform: translateY(-1px);
         }
         
         /* Sidebar styling */
         section[data-testid="stSidebar"] {
             background-color: #ffffff;
             border-right: 1px solid #e5e7eb;
+        }
+
+        /* --- RESPONSIVE DESIGN (Mobile < 768px) --- */
+        @media (max-width: 768px) {
+            .stApp {
+                background-color: #ffffff; /* White background on mobile for simpler look */
+            }
+            
+            /* Smaller headers */
+            h1 { font-size: 1.8rem !important; }
+            h2 { font-size: 1.5rem !important; }
+            h3 { font-size: 1.25rem !important; }
+            
+            /* Compact cards */
+            div[data-testid="stVerticalBlock"] > div[style*="flex-direction: column;"] > div[data-testid="stVerticalBlock"] {
+                padding: 1rem !important;
+                border-radius: 8px;
+                box-shadow: none; /* Flatter look on mobile */
+                border: 1px solid #f1f5f9;
+            }
+            
+            /* Full width buttons/inputs */
+            div.stButton > button {
+                width: 100% !important;
+                padding: 0.8rem 1rem !important;
+            }
+            
+            /* Adjust gaps */
+            .st-emotion-cache-16idsys p {
+                font-size: 1rem;
+            }
         }
     </style>
     """, unsafe_allow_html=True)
