@@ -21,35 +21,51 @@ from src.monitoring import init_monitor
 def _inject_custom_css() -> None:
     """Injecte le CSS personnalisé pour l'interface Premium."""
     <style>
+        /* --- DARK MODE THEME --- */
+        
         /* Main Background & Fonts */
         .stApp {
-            background-color: #f8f9fa;
+            background-color: #0e1117; /* Streamlit Dark BG */
             font-family: 'Inter', sans-serif;
+            color: #fafafa;
         }
         
         /* Custom Header */
         h1 {
-            color: #0f172a;
+            color: #f8fafc; /* Slate-50 */
             font-weight: 800;
             font-size: 2.2rem;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
         }
         h2, h3 {
-            color: #1e293b;
+            color: #e2e8f0; /* Slate-200 */
             font-weight: 700;
         }
         
         /* Card-like containers for Input and Results */
         div[data-testid="stVerticalBlock"] > div[style*="flex-direction: column;"] > div[data-testid="stVerticalBlock"] {
-            background-color: white;
+            background-color: #1e293b; /* Slate-800 */
             padding: 2rem;
             border-radius: 12px;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-            border: 1px solid #e2e8f0;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+            border: 1px solid #334155; /* Slate-700 */
         }
 
+        /* Inputs (Text Area, Number Input) */
+        .stTextInput input, .stNumberInput input, .stTextArea textarea, .stSelectbox div[data-baseweb="select"] {
+            background-color: #0f172a !important; /* Slate-900 */
+            color: white !important;
+            border: 1px solid #475569 !important;
+        }
+        
+        /* Metrics values */
+        div[data-testid="stMetricValue"] {
+            color: #38bdf8 !important; /* Sky-400 */
+        }
+        
         /* Primary Button Style */
         div.stButton > button {
-            background-color: #2563eb;
+            background-color: #3b82f6; /* Blue-500 */
             color: white;
             border: none;
             border-radius: 8px;
@@ -59,45 +75,38 @@ def _inject_custom_css() -> None:
             width: auto;
         }
         div.stButton > button:hover {
-            background-color: #1d4ed8;
-            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
+            background-color: #2563eb; /* Blue-600 */
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
             transform: translateY(-1px);
         }
         
         /* Sidebar styling */
         section[data-testid="stSidebar"] {
-            background-color: #ffffff;
-            border-right: 1px solid #e5e7eb;
+            background-color: #171923; /* Darker Sidebar */
+            border-right: 1px solid #2d3748;
+        }
+        
+        /* Sidebar Text */
+        section[data-testid="stSidebar"] h1, section[data-testid="stSidebar"] span, section[data-testid="stSidebar"] p {
+            color: #e2e8f0 !important;
         }
 
-        /* --- RESPONSIVE DESIGN (Mobile < 768px) --- */
+        /* --- RESPONSIVE DESIGN --- */
         @media (max-width: 768px) {
             .stApp {
-                background-color: #ffffff; /* White background on mobile for simpler look */
+                background-color: #0e1117;
             }
-            
-            /* Smaller headers */
             h1 { font-size: 1.8rem !important; }
             h2 { font-size: 1.5rem !important; }
-            h3 { font-size: 1.25rem !important; }
             
-            /* Compact cards */
             div[data-testid="stVerticalBlock"] > div[style*="flex-direction: column;"] > div[data-testid="stVerticalBlock"] {
                 padding: 1rem !important;
-                border-radius: 8px;
-                box-shadow: none; /* Flatter look on mobile */
-                border: 1px solid #f1f5f9;
+                background-color: #1a202c; /* Slightly Lighter Mobile Card */
+                border: none;
             }
             
-            /* Full width buttons/inputs */
             div.stButton > button {
                 width: 100% !important;
-                padding: 0.8rem 1rem !important;
-            }
-            
-            /* Adjust gaps */
-            .st-emotion-cache-16idsys p {
-                font-size: 1rem;
             }
         }
     </style>
