@@ -129,6 +129,24 @@ streamlit run app.py
 3. **🛡️ Action Plan**: Immediate emergency checklist without jargon.
 4. **🔗 Input Enrichment**: Structured keyword generation for vector search.
 
+### 📐 Architecture & Workflow
+
+```mermaid
+graph TD
+    A[🧑‍⚕️ Patient / User] -->|Symptoms & Data| B(💻 Streamlit Interface);
+    B -->|Triage Config| C{🤖 DoctisAImo Agent};
+    C -->|Prompt Engineering| D[🧠 Google Gemini API];
+    D -->|Statistical Analysis| C;
+    C -->|JSON Result| B;
+    B -->|Dashboard Display| E[📊 Visualization & Alerts];
+    E -->|Export| F[📄 PDF/JSON Report];
+    
+    style A fill:#f9f,stroke:#333,stroke-width:2px
+    style C fill:#ccf,stroke:#333,stroke-width:2px
+    style D fill:#ff9,stroke:#333,stroke-width:2px
+    style E fill:#9f9,stroke:#333,stroke-width:2px
+```
+
 ### Installation
 
 **Prerequisites**: Python 3.8+, Gemini API Key.
