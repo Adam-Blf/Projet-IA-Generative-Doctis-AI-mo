@@ -46,7 +46,7 @@ Projet d'IA Générative pour Doctis.
 
 ### 📝 Présentation
 
-**DoctisAImo v16.2 (Optimized)** est une solution de **Triage Médical Intelligent** de nouvelle génération.
+**DoctisAImo** est une solution de **Triage Médical Intelligent** de nouvelle génération.
 
 Conçue pour assister les professionnels de santé et les services d'urgence, cette plateforme fusionne la puissance de l'**IA Générative** (Gemini 2.0) avec la rigueur de **données médicales vérifiées** (Dataset Kaggle) via une architecture RAG (Retrieval-Augmented Generation).
 
@@ -59,7 +59,7 @@ Conçue pour assister les professionnels de santé et les services d'urgence, ce
 - **Précision** : Analyse croisée entre symptômes déclarés et statistiques cliniques réelles.
 - **Sécurité** : Détection proactive des signaux faibles ("Red Flags") et protocoles d'urgence.
 
-#### Fonctionnalités Principales (V16.2)
+#### Fonctionnalités Principales
 
 1. **🚑 Triage Automatisé** : Classification immédiate de l'urgence.
 2. **🧠 Seconde Opinion IA** : Analyse différentielle pour réduire le risque d'erreur.
@@ -67,7 +67,7 @@ Conçue pour assister les professionnels de santé et les services d'urgence, ce
 4. **💾 Interface Premium & Adaptative** : Mode Sombre (Dark Mode), Design Responsive (Mobile/Desktop) et Dashboard moderne.
 5. **🛡️ Haute Disponibilité & DevOps** : Fallback automatique sur OpenAI (GPT-4) en cas de surcharge Gemini, Monitoring "Keep-Alive" et CI/CD.
 
-### 📐 Architecture & Workflow (V16.2)
+### 📐 Architecture & Workflow
 
 ```mermaid
 graph TD
@@ -173,7 +173,7 @@ python src/agent.py
 
 ### Overview
 
-**DoctisAImo** is a state-of-the-art AI assistant designed for emergency medical triage. Version 16.2 leverages **Real-world Medical Data** (RAG via Kaggle) to interpret symptoms with statistical rigor. It provides safety assessments, second opinions, and emergency action plans.
+**DoctisAImo** is a state-of-the-art AI assistant designed for emergency medical triage. It leverages **Real-world Medical Data** (RAG via Kaggle) to interpret symptoms with statistical rigor. It provides safety assessments, second opinions, and emergency action plans.
 
 ### Features
 
@@ -229,7 +229,7 @@ streamlit run app.py
 
 ### Resumen
 
-**DoctisAImo** es un asistente avanzado de IA para el triaje médico de emergencia. La versión 16.2 utiliza **Datos Médicos Reales** (RAG vía Kaggle) para evaluar síntomas con rigor estadístico y proporcionar evaluaciones de seguridad.
+**DoctisAImo** es un asistente avanzado de IA para el triaje médico de emergencia. Utiliza **Datos Médicos Reales** (RAG vía Kaggle) para evaluar síntomas con rigor estadístico y proporcionar evaluaciones de seguridad.
 
 ### Funcionalidades
 
@@ -285,7 +285,7 @@ streamlit run app.py
 
 ### Panoramica
 
-**DoctisAImo** è un assistente IA all'avanguardia progettato per il triage medico di emergenza. La versione 16.2 sfrutta **Dati Medici Reali** (RAG via Kaggle) per interpretare i sintomi con rigore statistico.
+**DoctisAImo** è un assistente IA all'avanguardia progettato per il triage medico di emergenza. Sfrutta **Dati Medici Reali** (RAG via Kaggle) per interpretare i sintomi con rigore statistico.
 
 ### Funzionalità
 
@@ -341,7 +341,7 @@ streamlit run app.py
 
 ### Visão Geral
 
-**DoctisAImo** é um assistente de IA avançado projetado para triagem médica de emergência. A versão 16.2 aproveita **Dados Médicos Reais** (RAG via Kaggle) para interpretar sintomas com rigor estatístico.
+**DoctisAImo** é um assistente de IA avançado projetado para triagem médica de emergência. Aproveita **Dados Médicos Reais** (RAG via Kaggle) para interpretar sintomas com rigor estatístico.
 
 ### Funcionalidades
 
@@ -397,7 +397,7 @@ streamlit run app.py
 
 ### Обзор
 
-**DoctisAImo** — это передовой ИИ-ассистент для экстренной медицинской сортировки (триажа). Версия 16.2 использует **реальные медицинские данные** (RAG через Kaggle), для статистически точной интерпретации симптомов.
+**DoctisAImo** — это передовой ИИ-ассистент для экстренной медицинской сортировки (триажа). Использует **реальные медицинские данные** (RAG через Kaggle), для статистически точной интерпретации симптомов.
 
 ### Возможности
 
@@ -453,7 +453,7 @@ streamlit run app.py
 
 ### Überblick
 
-**DoctisAImo** ist ein fortschrittlicher KI-Assistent für die medizinische Notfalltriage. Version 16.2 nutzt **echte medizinische Daten** (RAG via Kaggle), um Symptome mit statistischer Genauigkeit zu interpretieren.
+**DoctisAImo** ist ein fortschrittlicher KI-Assistent für die medizinische Notfalltriage. Nutzt **echte medizinische Daten** (RAG via Kaggle), um Symptome mit statistischer Genauigkeit zu interpretieren.
 
 ### Funktionen
 
@@ -509,7 +509,7 @@ streamlit run app.py
 
 ### Genel Bakış
 
-**DoctisAImo**, acil tıbbi triyaj için tasarlanmış gelişmiş bir yapay zeka asistanıdır. Sürüm 16.2, semptomları istatistiksel titizlikle yorumlamak için **Gerçek Tıbbi Veriler** (Kaggle aracılığıyla RAG) kullanır.
+**DoctisAImo**, acil tıbbi triyaj için tasarlanmış gelişmiş bir yapay zeka asistanıdır. Semptomları istatistiksel titizlikle yorumlamak için **Gerçek Tıbbi Veriler** (Kaggle aracılığıyla RAG) kullanır.
 
 ### Özellikler
 
