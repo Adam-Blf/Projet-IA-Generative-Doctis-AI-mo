@@ -3,3 +3,5 @@ python-dotenv
 streamlit
 kaggle
 pandas
+pymongo
+requests

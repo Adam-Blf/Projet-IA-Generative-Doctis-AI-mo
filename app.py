@@ -25,6 +25,12 @@ import os
 import pandas as pd
 from src.agent import DoctisAgent
 from src.data_loader import download_medical_dataset, load_symptom_data
+from src.monitoring import init_monitor
+
+# ==============================================================================
+# 0. INITIALISATION DU MONITORING (Keep-Alive)
+# ==============================================================================
+init_monitor()
 
 # ------------------------------------------------------------------------------
 # 1. CONFIGURATION DE LA PAGE
