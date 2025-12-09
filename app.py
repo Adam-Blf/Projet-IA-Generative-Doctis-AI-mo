@@ -1,6 +1,6 @@
 # ==============================================================================
 # DOCTIS-AI-MO: APPLICATION PRINCIPALE (STREAMLIT DASHBOARD)
-# Version: v8.0-RAG (Premium UI)
+# Version: v12.0-RAG (Premium UI)
 # Auteurs: Adam Beloucif & Amina Medjdoub
 # ==============================================================================
 
@@ -17,7 +17,7 @@ from src.monitoring import init_monitor
 # 0. INIT & CONFIG
 # ==============================================================================
 st.set_page_config(
-    page_title="DoctisAImo V8 - Intelligent Triage",
+    page_title="DoctisAImo V12 - Intelligent Triage",
     page_icon="🏥",
     layout="wide",
     initial_sidebar_state="expanded"
