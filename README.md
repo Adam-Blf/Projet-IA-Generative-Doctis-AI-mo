@@ -70,8 +70,8 @@ Conçue pour assister les professionnels de santé et les services d'urgence, ce
 1. **🚑 Triage Automatisé** : Classification immédiate de l'urgence.
 2. **🧠 Seconde Opinion IA** : Analyse différentielle pour réduire le risque d'erreur.
 3. **📚 RAG avancé (5 sources)** : Fusion de datasets Kaggle (Symptômes, Précautions, Sévérité, etc.) pour des preuves factuelles.
-4. **💾 Interface Premium** : Dashboard moderne avec onglets (Diagnostic, Soins, Sources).
-5. **🛡️ Monitoring & DevOps** : Système "Keep-Alive" autonome et Pipeline CI/CD automatisé (Tests + Auto-Versioning).
+4. **💾 Interface Premium & Adaptative** : Mode Sombre (Dark Mode), Design Responsive (Mobile/Desktop) et Dashboard moderne.
+5. **🛡️ Haute Disponibilité & DevOps** : Fallback automatique sur OpenAI (GPT-4) en cas de surcharge Gemini, Monitoring "Keep-Alive" et CI/CD.
 
 <a name="démarrage"></a>
 
@@ -162,8 +162,8 @@ python src/agent.py
 
 1. **🏥 Intelligent Triage**: Data-driven analysis for Green, Orange, or Red codes.
 2. **🧠 Second Opinion**: Detailed risk assessment and "Red Flag" identification.
-3. **🛡️ Action Plan**: Immediate emergency checklist without jargon.
-4. **🔗 Input Enrichment**: Structured keyword generation for vector search.
+3. **🛡️ High Availability & Safety** : Automatic fallback to OpenAI (GPT-4) if Gemini fails, plus immediate emergency checklists.
+4. **💾 Premium Adaptive UI**: Dark Mode, fully responsive design, and structured keyword generation.
 
 ### Installation
 
