@@ -1,7 +1,7 @@
 {
   "agent_metadata": {
     "name": "DoctisAImo",
-    "version": "3.0-KAGGLE-MAPS",
+    "version": "4.0-DASHBOARD",
     "default_model": "gemini-2.0-flash"
   },
   "tasks": {
