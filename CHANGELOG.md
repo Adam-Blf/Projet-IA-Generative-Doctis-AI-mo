@@ -8,6 +8,15 @@ All notable changes to the **DoctisAImo** project will be documented in this fil
 - **Data**: Integrated 3 new datasets (Symptom2Disease, DiseaseAndSymptoms, Disease precaution).
 - **RAG**: Enhanced "Evidence" tab showing exact matches from Kaggle DB.
 
+## [V14.0] - 2025-12-09
+
+### Workflow & DevOps
+
+- **Test Coverage**: Ajout d'une suite de tests unitaires complète (`tests/`) couvrant l'Agent, l'ETL et le Monitoring.
+- **CI/CD**: Mise en place d'un pipeline GitHub Actions pour automatiser les tests à chaque push.
+- **Dependencies**: Ajout de `pytest` les prérequis.
+- **Quality**: Le projet est désormais testé et intégré automatiquement.
+
 ## [V13.0] - 2025-12-09
 
 ### Optimized

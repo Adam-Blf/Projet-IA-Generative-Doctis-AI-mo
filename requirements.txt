@@ -5,3 +5,4 @@ kaggle
 pandas
 pymongo
 requests
+pytest
