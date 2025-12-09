@@ -4,7 +4,7 @@
 
 <div align="center">
 
-[**🇫🇷 Français**](#-français) | [**🇬🇧 English**](#-english) | [**🇪🇸 Español**](#-español) | [**🇵🇹 Português**](#-português) | [**🇷🇺 Русский**](#-русский) | [**🇩🇪 Deutsch**](#-deutsch) | [**🇹🇷 Türkçe**](#-türkçe)
+[**🇫🇷 Français**](#-français) | [**🇬🇧 English**](#-english) | [**🇪🇸 Español**](#-español) | [**🇮🇹 Italiano**](#-italiano) | [**🇵🇹 Português**](#-português) | [**🇷🇺 Русский**](#-русский) | [**🇩🇪 Deutsch**](#-deutsch) | [**🇹🇷 Türkçe**](#-türkçe)
 
 </div>
 
@@ -102,6 +102,39 @@ pip install -r requirements.txt
 ```
 
 ### Verificación
+
+```bash
+python src/agent.py
+```
+
+---
+
+<a name="-italiano"></a>
+
+## 🇮🇹 Italiano
+
+### Panoramica
+
+**DoctisAImo** è un assistente IA all'avanguardia progettato per il triage medico di emergenza. La versione 3.0 sfrutta una **Logica Basata sui Dati** (ispirata ai dataset medici di Kaggle) per interpretare i sintomi con rigore statistico.
+
+### Funzionalità
+
+1. **🏥 Triage Intelligente**: Analisi basata sui dati per codici Verde, Arancione o Rosso.
+2. **🧠 Seconda Opinione**: Valutazione dettagliata dei rischi e identificazione dei segnali di allarme ("Red Flags").
+3. **🛡️ Piano d'Azione**: Checklist di emergenza immediata senza gergo medico.
+4. **🔗 Arricchimento Input**: Generazione di parole chiave strutturate per la ricerca vettoriale.
+
+### Installazione
+
+**Prerequisiti**: Python 3.8+, Chiave API Gemini.
+
+```bash
+git clone https://github.com/Adam-Blf/Projet-IA-Generative-Doctis-AI-mo.git
+cd Projet-IA-Generative-Doctis-AI-mo
+pip install -r requirements.txt
+```
+
+### Verifica
 
 ```bash
 python src/agent.py
