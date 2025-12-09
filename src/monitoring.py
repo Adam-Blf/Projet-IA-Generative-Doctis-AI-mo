@@ -4,6 +4,7 @@
 # Auteurs: Adam Beloucif & Amina Medjdoub
 # ==============================================================================
 
+import os
 import time
 import threading
 import requests
