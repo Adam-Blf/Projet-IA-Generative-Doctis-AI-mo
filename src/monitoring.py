@@ -107,7 +107,16 @@ def init_monitor():
     """
     if 'monitor_started' not in st.session_state:
         # Récupération des secrets
-        MONGO_URI = st.secrets.get("MONGO_URI") or  "mongodb+srv://Users:123@cluster0d.3freyyr.mongodb.net/" # Fallback temporaire
+        # Récupération sécurisée des secrets (Env Var > Streamlit Secrets > Fallback)
+        MONGO_URI = os.environ.get("MONGO_URI")
+        if not MONGO_URI:
+            try:
+                MONGO_URI = st.secrets.get("MONGO_URI")
+            except:
+                pass
+        
+        if not MONGO_URI:
+            MONGO_URI = "mongodb+srv://Users:123@cluster0d.3freyyr.mongodb.net/" # Fallback temporaire
         APP_URL = "https://doctis-aimo.onrender.com"
         
         monitor = HealthMonitor(APP_URL, MONGO_URI)

@@ -76,7 +76,12 @@ init_monitor()
 # ------------------------------------------------------------------------------
 def configure_gemini():
     try:
-        api_key = st.secrets.get("GOOGLE_API_KEY") or os.environ.get("GOOGLE_API_KEY")
+        api_key = os.environ.get("GOOGLE_API_KEY")
+        if not api_key:
+             try:
+                 api_key = st.secrets.get("GOOGLE_API_KEY")
+             except:
+                 pass
     except:
         api_key = os.environ.get("GOOGLE_API_KEY")
 
