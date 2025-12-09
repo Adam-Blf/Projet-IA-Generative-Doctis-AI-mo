@@ -36,12 +36,19 @@ if __name__ == "__main__":
         metadata = agent.get_agent_metadata()
         print(f"Agent Loaded: {metadata.get('name')} v{metadata.get('version')}")
         
+        # Verify Triage Prompt Update
         triage_prompt = agent.get_system_prompt('triage_urgency')
-        if triage_prompt:
-            print("\n[SUCCESS] Triage System Prompt loaded successfully.")
-            print(f"Snippet: {triage_prompt[:100]}...")
+        if triage_prompt and "Kaggle Medical Datasets" in triage_prompt:
+            print("\n[SUCCESS] Triage System Prompt loaded and verified (Kaggle Logic detected).")
         else:
-            print("\n[ERROR] Triage task not found.")
+            print("\n[ERROR] Triage task not found or Kaggle logic missing.")
+
+        # Verify Input Enrichment
+        enrich_prompt = agent.get_system_prompt('input_enrichment')
+        if enrich_prompt:
+             print("\n[SUCCESS] Input Enrichment task loaded successfully.")
+        else:
+             print("\n[ERROR] Input Enrichment task not found.")
             
     except Exception as e:
         print(f"\n[CRITICAL ERROR] Failed to load agent: {e}")
