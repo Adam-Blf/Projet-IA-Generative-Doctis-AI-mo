@@ -34,14 +34,15 @@
 
 ### 📝 Présentation
 
-**DoctisAImo** est un assistant IA de pointe conçu pour le triage médical d'urgence. La version 3.0 utilise une **logique orientée données** (inspirée des datasets médicaux Kaggle) pour interpréter les symptômes avec une rigueur statistique.
+**DoctisAImo (v4.0-DASHBOARD)** est une plateforme de triage médical intelligent propulsée par l'IA. Elle transforme les protocoles d'urgence complexes en une interface web intuitive pour assister la prise de décision.
 
-#### Fonctionnalités
+#### Fonctionnalités Clés (V4)
 
-1. **🏥 Triage Intelligent (Urgences)** : Analyse basée sur les données pour déterminer les codes Vert, Orange ou Rouge.
-2. **🧠 Seconde Opinion** : Évaluation détaillée des risques et identification des signaux d'alarme ("Red Flags").
-3. **🛡️ Plan d'Action** : Checklist d'urgence immédiate sans jargon médical.
-4. **🔗 Enrichissement d'Entrée** : Génération de mots-clés structurés pour la recherche vectorielle.
+1. **🚑 Triage & Urgence** : Analyse des symptômes et classification automatique (Vert/Orange/Rouge) basée sur des logiques statistiques (Kaggle Datasets).
+2. **🧠 Seconde Opinion** : Détection avancée de signaux faibles et "Red Flags".
+3. **📋 Plan d'Action** : Génération instantanée de checklists d'intervention.
+4. **💾 Export de Rapports** : Téléchargement des analyses au format JSON ou Texte (Nouvelle fonctionnalité).
+5. **🖥️ Interface Pro** : Dashboard avec navigation latérale et visualisation des résultats en temps réel.
 
 <a name="démarrage"></a>
 
@@ -51,7 +52,8 @@
 
 #### 📋 Prérequis
 
-Python 3.8+, Clé API Gemini.
+- **Python 3.8+**
+- **Clé API Gemini** (Google AI Studio)
 
 <a name="installation"></a>
 
@@ -67,17 +69,30 @@ pip install -r requirements.txt
 
 ### 🎮 Utilisation
 
-Le cerveau de DoctisAImo réside dans `config/prompts.json`. Vous pouvez personnaliser les invites système (System Prompts) et les métadonnées de l'agent pour adapter son comportement.
+Lancez le tableau de bord web :
+
+```bash
+streamlit run app.py
+```
+
+**Navigation :**
+
+- Utilisez la **Barre Latérale** pour basculer entre les modes (Triage, Seconde Opinion, etc.).
+- Remplissez les données patient à **Gauche**.
+- Visualisez l'analyse IA à **Droit**.
+- **Téléchargez** le rapport via les boutons dédiés.
 
 <a name="tests"></a>
 
 ### 🧪 Tests
 
-Pour vérifier que l'agent est correctement configuré et opérationnel :
+Pour vérifier l'installation et lancer l'application en mode local :
 
 ```bash
 streamlit run app.py
 ```
+
+*(Le navigateur s'ouvrira automatiquement)*
 
 ---
 

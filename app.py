@@ -166,10 +166,53 @@ else:
                                 
                             with st.expander("📈 Raisonnement Statistique"):
                                 st.info(data.get("reasoning", "No reasoning provided."))
+
+                            # --- NEW FEATURE: EXPORT ---
+                            st.divider()
+                            st.subheader("💾 Exporter le Rapport / Export Report")
+                            
+                            c_down1, c_down2 = st.columns(2)
+                            
+                            # JSON Download
+                            json_str = json.dumps(data, indent=2, ensure_ascii=False)
+                            c_down1.download_button(
+                                label="📥 Télécharger JSON",
+                                data=json_str,
+                                file_name="doctis_report.json",
+                                mime="application/json"
+                            )
+                            
+                            # Text Download
+                            text_report = f"""DOCTIS-AI-MO REPORT (V4)
+---------------------------
+Date: {pd.Timestamp.now() if 'pd' in locals() else 'N/A'}
+Patient: {age} ans, {gender}
+Symptômes: {symptoms}
+
+URGENCY: {urgency}
+---------------------------
+ANALYSIS:
+{data.get('analysis')}
+
+RECOMMENDATION:
+{data.get('recommendation')}
+
+REASONING:
+{data.get('reasoning')}
+---------------------------
+Disclaimer: Not a medical diagnosis. Call emergency services if needed.
+"""
+                            c_down2.download_button(
+                                label="📥 Télécharger Texte",
+                                data=text_report,
+                                file_name="doctis_report.txt",
+                                mime="text/plain"
+                            )
                                 
                         except json.JSONDecodeError:
                             st.warning("⚠️ L'IA a répondu en texte brut (JSON malformé).")
                             st.write(response.text)
+
                             
                     # CASE B: Text Output (Second Opinion / Action Plan)
                     else:
