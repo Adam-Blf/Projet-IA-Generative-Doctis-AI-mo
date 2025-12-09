@@ -1,7 +1,7 @@
 {
   "agent_metadata": {
     "name": "DoctisAImo",
-    "version": "7.0-RAG",
+    "version": "8.0-RAG",
     "default_model": "gemini-2.0-flash"
   },
   "tasks": {

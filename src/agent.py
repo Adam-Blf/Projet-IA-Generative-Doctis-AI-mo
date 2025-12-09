@@ -1,6 +1,6 @@
 # ==============================================================================
 # DOCTIS-AI-MO: AGENT INTELLIGENT (BACKEND LOGIC)
-# Version: 5.0-RAG
+# Version: 8.0-RAG
 # Auteurs: Adam Beloucif & Amina Medjdoub
 # ==============================================================================
 
