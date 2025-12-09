@@ -4,7 +4,7 @@
 
 <div align="center">
 
-[**🇫🇷 Français**](#-français) | [**🇬🇧 English**](#-english) | [**🇪🇸 Español**](#-español)
+[**🇫🇷 Français**](#-français) | [**🇬🇧 English**](#-english) | [**🇪🇸 Español**](#-español) | [**🇵🇹 Português**](#-português) | [**🇷🇺 Русский**](#-русский) | [**🇩🇪 Deutsch**](#-deutsch) | [**🇹🇷 Türkçe**](#-türkçe)
 
 </div>
 
@@ -16,62 +16,30 @@
 
 ### Vue d'ensemble
 
-**DoctisAImo** est un assistant IA de pointe conçu pour le triage médical d'urgence. Contrairement aux chatbots standards, la version 3.0 utilise une **logique orientée données** (inspirée des datasets médicaux Kaggle) pour interpréter les symptômes avec une rigueur statistique. Il fournit des évaluations de sécurité, des secondes opinions et des plans d'action d'urgence.
+**DoctisAImo** est un assistant IA de pointe conçu pour le triage médical d'urgence. La version 3.0 utilise une **logique orientée données** (inspirée des datasets médicaux Kaggle) pour interpréter les symptômes avec une rigueur statistique. Il fournit des évaluations de sécurité, des secondes opinions et des plans d'action d'urgence.
 
 ### Fonctionnalités
 
-#### 1. 🏥 Triage Intelligent (Urgences)
-
-- **Analyse Data-Driven** : Croise les symptômes signalés avec des clusters de maladies probabilistes.
-- **Niveaux d'Urgence** :
-  - 🟢 **Code Vert** : Sûr / Faible risque.
-  - 🟠 **Code Orange** : Risque modéré / Consultation nécessaire.
-  - 🔴 **Code Rouge** : Critique / Interaction d'urgence immédiate.
-- **Détection de Langue** : Répond automatiquement dans la langue du patient.
-
-#### 2. 🧠 Seconde Opinion
-
-- **Analyse Approfondie** : Fournit une évaluation des risques détaillée (échelle 1-10).
-- **Signaux d'Alarme ("Red Flags")** : Met en évidence les signes critiques.
-
-#### 3. 🛡️ Plan d'Action
-
-- **Checklist d'Urgence** : Étapes immédiates et actionnables générées en temps réel.
-- **Instructions Claires** : Pas de jargon médical complexe, juste des actions vitales.
-
-#### 4. 🔗 Enrichissement d'Entrée (Nouveau en v3.0)
-
-- **Prêt pour la Recherche Vectorielle** : Transforme les descriptions brutes en mots-clés médicaux structurés.
+1. **🏥 Triage Intelligent (Urgences)** : Analyse basée sur les données pour déterminer les codes Vert, Orange ou Rouge.
+2. **🧠 Seconde Opinion** : Évaluation détaillée des risques et identification des signaux d'alarme ("Red Flags").
+3. **🛡️ Plan d'Action** : Checklist d'urgence immédiate sans jargon médical.
+4. **🔗 Enrichissement d'Entrée** : Génération de mots-clés structurés pour la recherche vectorielle.
 
 ### Installation
 
 **Prérequis** : Python 3.8+, Clé API Gemini.
 
 ```bash
-# 1. Cloner le dépôt
 git clone https://github.com/Adam-Blf/Projet-IA-Generative-Doctis-AI-mo.git
 cd Projet-IA-Generative-Doctis-AI-mo
-
-# 2. Installer les dépendances
 pip install -r requirements.txt
 ```
 
-### Configuration
-
-Le cerveau de DoctisAImo réside dans `config/prompts.json`. Vous pouvez personnaliser les invites système (System Prompts) et les métadonnées de l'agent.
-
 ### Vérification
-
-Pour tester si l'agent est correctement configuré :
 
 ```bash
 python src/agent.py
 ```
-
-### ⚠️ Avertissement
-
-**DoctisAImo est un projet de recherche en IA.** Ce n'est pas un professionnel de santé agréé.  
-*Appelez toujours les urgences (112/15) en cas de danger vital.*
 
 ---
 
@@ -85,56 +53,26 @@ python src/agent.py
 
 ### Features
 
-#### 1. 🏥 Intelligent Triage
-
-- **Data-Driven Analysis**: Cross-references reported symptoms with probabilistic disease clusters.
-- **Urgency Levels**:
-  - 🟢 **Code Green**: Safe / Low risk.
-  - 🟠 **Code Orange**: Moderate risk.
-  - 🔴 **Code Red**: Critical / Immediate emergency.
-
-#### 2. 🧠 Second Opinion
-
-- **Deep Analysis**: Provides a detailed risk assessment (1-10 scale).
-- **Red Flags**: Highlights critical warning signs.
-
-#### 3. 🛡️ Action Plan
-
-- **Emergency Checklist**: Immediate, actionable steps generated in real-time.
-
-#### 4. 🔗 Input Enrichment (New in v3.0)
-
-- **Vector Search Ready**: Transforms raw symptom descriptions into structured medical keywords.
+1. **🏥 Intelligent Triage**: Data-driven analysis for Green, Orange, or Red codes.
+2. **🧠 Second Opinion**: Detailed risk assessment and "Red Flag" identification.
+3. **🛡️ Action Plan**: Immediate emergency checklist without jargon.
+4. **🔗 Input Enrichment**: Structured keyword generation for vector search.
 
 ### Installation
 
 **Prerequisites**: Python 3.8+, Gemini API Key.
 
 ```bash
-# 1. Clone the repository
 git clone https://github.com/Adam-Blf/Projet-IA-Generative-Doctis-AI-mo.git
 cd Projet-IA-Generative-Doctis-AI-mo
-
-# 2. Install dependencies
 pip install -r requirements.txt
 ```
 
-### Configuration
-
-DoctisAImo's configuration is in `config/prompts.json`. You can customize system prompts and agent metadata here.
-
 ### Verification
-
-To test if the agent is correctly configured:
 
 ```bash
 python src/agent.py
 ```
-
-### ⚠️ Disclaimer
-
-**DoctisAImo is an AI research project.** It is not a licensed medical professional.  
-*Always call emergency services (112/911) in life-threatening situations.*
 
 ---
 
@@ -144,16 +82,167 @@ python src/agent.py
 
 ### Resumen
 
-**DoctisAImo** es un asistente avanzado de IA para el triaje médico de emergencia. La versión 3.0 utiliza **Lógica Basada en Datos** (estilo Kaggle) para evaluar síntomas con rigor estadístico.
+**DoctisAImo** es un asistente avanzado de IA para el triaje médico de emergencia. La versión 3.0 utiliza **Lógica Basada en Datos** (estilo Kaggle) para evaluar síntomas con rigor estadístico y proporcionar evaluaciones de seguridad.
 
-### Funcionalidades Principales
+### Funcionalidades
 
-1. **🏥 Triaje Inteligente**: Análisis de seguridad rápido (Verde/Naranja/Rojo).
-2. **🧠 Segunda Opinión**: Evaluación detallada de riesgos y "Red Flags".
-3. **🛡️ Plan de Acción**: Lista de verificación inmediata para emergencias.
-4. **🔗 Enriquecimiento de Entrada**: Generación de palabras clave para bases de datos vectoriales.
+1. **🏥 Triaje Inteligente**: Análisis basado en datos para códigos Verde, Naranja o Rojo.
+2. **🧠 Segunda Opinión**: Evaluación detallada de riesgos y detección de señales de alerta ("Red Flags").
+3. **🛡️ Plan de Acción**: Lista de verificación de emergencia inmediata.
+4. **🔗 Enriquecimiento de Entrada**: Generación de palabras clave para búsqueda vectorial.
 
-### ⚠️ Aviso
+### Instalación
 
-**DoctisAImo es un proyecto de investigación.** No sustituye a un médico profesional.  
-*Llame siempre a emergencias (112) en situaciones de peligro vital.*
+**Requisitos**: Python 3.8+, Clave API Gemini.
+
+```bash
+git clone https://github.com/Adam-Blf/Projet-IA-Generative-Doctis-AI-mo.git
+cd Projet-IA-Generative-Doctis-AI-mo
+pip install -r requirements.txt
+```
+
+### Verificación
+
+```bash
+python src/agent.py
+```
+
+---
+
+<a name="-português"></a>
+
+## 🇵🇹 Português
+
+### Visão Geral
+
+**DoctisAImo** é um assistente de IA avançado projetado para triagem médica de emergência. A versão 3.0 aproveita a **Lógica Baseada em Dados** (inspirada em datasets médicos do Kaggle) para interpretar sintomas com rigor estatístico.
+
+### Funcionalidades
+
+1. **🏥 Triagem Inteligente**: Análise baseada em dados para códigos Verde, Laranja ou Vermelho.
+2. **🧠 Segunda Opinião**: Avaliação detalhada de riscos e identificação de sinais de alerta ("Red Flags").
+3. **🛡️ Plano de Ação**: Checklist de emergência imediata sem jargão médico.
+4. **🔗 Enriquecimento de Entrada**: Geração de palavras-chave estruturadas para busca vetorial.
+
+### Instalação
+
+**Pré-requisitos**: Python 3.8+, Chave API Gemini.
+
+```bash
+git clone https://github.com/Adam-Blf/Projet-IA-Generative-Doctis-AI-mo.git
+cd Projet-IA-Generative-Doctis-AI-mo
+pip install -r requirements.txt
+```
+
+### Verificação
+
+```bash
+python src/agent.py
+```
+
+---
+
+<a name="-русский"></a>
+
+## 🇷🇺 Русский
+
+### Обзор
+
+**DoctisAImo** — это передовой ИИ-ассистент для экстренной медицинской сортировки (триажа). Версия 3.0 использует **логику, основанную на данных** (вдохновленную медицинскими датасетами Kaggle), для статистически точной интерпретации симптомов.
+
+### Возможности
+
+1. **🏥 Интеллектуальный триаж**: Анализ данных для присвоения Зеленого, Оранжевого или Красного кода.
+2. **🧠 Второе мнение**: Детальная оценка рисков и выявление критических сигналов ("Red Flags").
+3. **🛡️ План действий**: Чек-лист для экстренных ситуаций без сложной терминологии.
+4. **🔗 Обогащение ввода**: Генерация структурированных ключевых слов для векторного поиска.
+
+### Установка
+
+**Требования**: Python 3.8+, Ключ API Gemini.
+
+```bash
+git clone https://github.com/Adam-Blf/Projet-IA-Generative-Doctis-AI-mo.git
+cd Projet-IA-Generative-Doctis-AI-mo
+pip install -r requirements.txt
+```
+
+### Проверка
+
+```bash
+python src/agent.py
+```
+
+---
+
+<a name="-deutsch"></a>
+
+## 🇩🇪 Deutsch
+
+### Überblick
+
+**DoctisAImo** ist ein fortschrittlicher KI-Assistent für die medizinische Notfalltriage. Version 3.0 nutzt **datengetriebene Logik** (inspiriert von Kaggle-Datensätzen), um Symptome mit statistischer Genauigkeit zu interpretieren.
+
+### Funktionen
+
+1. **🏥 Intelligente Triage**: Datenbasierte Analyse für die Codes Grün, Orange oder Rot.
+2. **🧠 Zweitmeinung**: Detaillierte Risikobewertung und Identifizierung von Warnsignalen ("Red Flags").
+3. **🛡️ Aktionsplan**: Sofortige Notfall-Checkliste ohne Fachjargon.
+4. **🔗 Eingabeanreicherung**: Generierung strukturierter Schlüsselwörter für die Vektorsuche.
+
+### Installation
+
+**Voraussetzungen**: Python 3.8+, Gemini API-Schlüssel.
+
+```bash
+git clone https://github.com/Adam-Blf/Projet-IA-Generative-Doctis-AI-mo.git
+cd Projet-IA-Generative-Doctis-AI-mo
+pip install -r requirements.txt
+```
+
+### Überprüfung
+
+```bash
+python src/agent.py
+```
+
+---
+
+<a name="-türkçe"></a>
+
+## 🇹🇷 Türkçe
+
+### Genel Bakış
+
+**DoctisAImo**, acil tıbbi triyaj için tasarlanmış gelişmiş bir yapay zeka asistanıdır. Sürüm 3.0, semptomları istatistiksel titizlikle yorumlamak için **Veri Odaklı Mantık** (Kaggle veri setlerinden esinlenerek) kullanır.
+
+### Özellikler
+
+1. **🏥 Akıllı Triyaj**: Yeşil, Turuncu veya Kırmızı kodlar için veriye dayalı analiz.
+2. **🧠 İkinci Görüş**: Ayrıntılı risk değerlendirmesi ve tehlike işaretlerinin ("Red Flags") tespiti.
+3. **🛡️ Eylem Planı**: Tıbbi jargon içermeyen acil durum kontrol listesi.
+4. **🔗 Girdi Zenginleştirme**: Vektör araması için yapılandırılmış anahtar kelime üretimi.
+
+### Kurulum
+
+**Gereksinimler**: Python 3.8+, Gemini API Anahtarı.
+
+```bash
+git clone https://github.com/Adam-Blf/Projet-IA-Generative-Doctis-AI-mo.git
+cd Projet-IA-Generative-Doctis-AI-mo
+pip install -r requirements.txt
+```
+
+### Doğrulama
+
+```bash
+python src/agent.py
+```
+
+---
+
+### ⚠️ Disclaimer / Avertissement
+
+**DoctisAImo is an AI research project.** It is not a licensed medical professional. Always call emergency services (112/911) in life-threatening situations.
+
+*DoctisAImo est un projet de recherche en IA. Ce n'est pas un professionnel de santé agréé. Appelez toujours les urgences en cas de danger vital.*
