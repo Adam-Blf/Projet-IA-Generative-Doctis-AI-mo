@@ -1,4 +1,4 @@
-# 🏥 DoctisAImo (v3.0-KAGGLE-MAPS)
+# 🏥 DoctisAImo
 
 > **Assistant de Triage IA Avancé | Advanced AI Triage Assistant**
 
