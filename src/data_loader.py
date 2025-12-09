@@ -5,35 +5,44 @@
 # ==============================================================================
 
 import os
+import json
 import pandas as pd
 from kaggle.api.kaggle_api_extended import KaggleApi
 import streamlit as st
+from dotenv import load_dotenv
+
+# Charge les variables d'environnement locales (.env)
+load_dotenv()
 
 def download_medical_dataset():
     """
     Télécharge un dataset médical depuis Kaggle s'il n'existe pas déjà.
-    
-    Dataset cible : 'itachi9604/disease-symptom-description-dataset'
-    Ce dataset contient des liens entre maladies, symptômes et précautions.
-    
-    Returns:
-        tuple: (bool success, str message)
     """
     # -----------------------------------------------------------
     # 1. AUTHENTIFICATION SÉCURISÉE
     # -----------------------------------------------------------
-    # On essaie de récupérer les identifiants depuis les secrets Streamlit (Cloud)
-    # ou les variables d'environnement (Local via .env).
     try:
+        # 1.a Tentative de chargement depuis st.secrets (Cloud)
         os.environ['KAGGLE_USERNAME'] = st.secrets.get("KAGGLE_USERNAME", os.environ.get("KAGGLE_USERNAME"))
         os.environ['KAGGLE_KEY'] = st.secrets.get("KAGGLE_KEY", os.environ.get("KAGGLE_KEY"))
+        
+        # 1.b Fallback : Si on a KAGGLE_API_TOKEN (JSON String) dans .env
+        token_str = os.environ.get("KAGGLE_API_TOKEN")
+        if token_str and (not os.environ.get('KAGGLE_USERNAME')):
+            try:
+                # On essaie de parser le JSON si l'utilisateur a collé tout le contenu de kaggle.json
+                creds = json.loads(token_str)
+                os.environ['KAGGLE_USERNAME'] = creds.get('username')
+                os.environ['KAGGLE_KEY'] = creds.get('key')
+            except json.JSONDecodeError:
+                pass # Ce n'était pas du JSON valide
+                
     except Exception:
-        # En local sans st.secrets, os.environ est déjà géré par python-dotenv si chargé
         pass
 
-    # Vérification que les clés sont bien présentes pour éviter un crash
+    # Vérification
     if not os.environ.get('KAGGLE_USERNAME') or not os.environ.get('KAGGLE_KEY'):
-        return False, "Identifiants Kaggle manquants (KAGGLE_USERNAME/KEY)."
+        return False, "Identifiants Kaggle manquants (Vérifiez .env ou st.secrets). Besoin de KAGGLE_USERNAME/KEY ou KAGGLE_API_TOKEN."
 
     # Instanciation de l'API Kaggle
     api = KaggleApi()
