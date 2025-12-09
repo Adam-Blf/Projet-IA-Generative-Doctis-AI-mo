@@ -3,12 +3,13 @@
 ![Dernier commit](https://img.shields.io/github/last-commit/Adam-Blf/Projet-IA-Generative-Doctis-AI-mo?style=flat&logo=git&logoColor=white&color=0080ff&label=Dernier%20commit) ![Langage principal](https://img.shields.io/github/languages/top/Adam-Blf/Projet-IA-Generative-Doctis-AI-mo?style=flat&logo=git&logoColor=white&color=0080ff&label=Langage%20principal) ![Nombre de langages](https://img.shields.io/github/languages/count/Adam-Blf/Projet-IA-Generative-Doctis-AI-mo?style=flat&logo=git&logoColor=white&color=0080ff&label=Nombre%20de%20langages)
 
 ## 📝 Description
+
 Projet d'IA Générative pour Doctis.
 
 ## ⚡ Fonctionnalités
+
 - IA Générative
 - Traitement de données médicales/texte
-
 
 ### Construit avec les outils et technologies
 
@@ -89,7 +90,7 @@ graph TD
         ETL --> KB[(📚 Base Optimisée)];
     end
 
-    subgraph App [☁️ DoctisApp V15 (Render Cloud)]
+    subgraph App [☁️ DoctisApp V15 - Render Cloud]
         UI[🖥️ Premium UI] <-->|Chat & Tabs| A{🤖 Agent};
         A <-->|Raisonnement| G[☁️ Gemini 2.0];
         A <-->|RAG Query| KB;
