@@ -22,9 +22,20 @@ OPTIMIZED_DB_PATH = os.path.join(DATA_DIR, "medical_knowledge_base.csv")
 def authenticate_kaggle():
     """Authentification robuste (Secrets > .env > JSON Token)."""
     try:
-        # 1. Secrets / Env Vars
-        os.environ['KAGGLE_USERNAME'] = st.secrets.get("KAGGLE_USERNAME", os.environ.get("KAGGLE_USERNAME", ""))
-        os.environ['KAGGLE_KEY'] = st.secrets.get("KAGGLE_KEY", os.environ.get("KAGGLE_KEY", ""))
+        # 1. Secrets / Env Vars handling (Flexible)
+        # Prioritize existing Env Vars (Render), then Secrets (Local), then default to empty
+        username = os.environ.get('KAGGLE_USERNAME')
+        key = os.environ.get('KAGGLE_KEY')
+
+        if not username or not key:
+            try:
+                username = st.secrets.get("KAGGLE_USERNAME")
+                key = st.secrets.get("KAGGLE_KEY")
+            except:
+                pass
+        
+        if username: os.environ['KAGGLE_USERNAME'] = username
+        if key: os.environ['KAGGLE_KEY'] = key
         
         # 2. Token Fallback
         token_str = os.environ.get("KAGGLE_API_TOKEN")
