@@ -11,11 +11,7 @@ Projet d'IA Générative pour Doctis.
 - IA Générative
 - Traitement de données médicales/texte
 
-### Construit avec les outils et technologies
-
-![Python](https://img.shields.io/badge/-Python-0080ff?style=flat)
-
-🇫🇷 Français | 🇬🇧 Anglais | 🇪🇸 Espagnol | 🇮🇹 Italien | 🇵🇹 Portugais | 🇷🇺 Russe | 🇩🇪 Allemand | 🇹🇷 Turc
+<div align="center">
 
 # 🏥 DoctisAImo (v16.2-Optimized)
 
@@ -26,8 +22,6 @@ Projet d'IA Générative pour Doctis.
 **Construit avec les outils et technologies :**
 
 ![Python](https://img.shields.io/badge/-Python-0080ff?style=flat)
-
-<div align="center">
 
 [**🇫🇷 Français**](#-français) | [**🇬🇧 Anglais**](#-anglais) | [**🇪🇸 Espagnol**](#-espagnol) | [**🇮🇹 Italien**](#-italien) | [**🇵🇹 Portugais**](#-portugais) | [**🇷🇺 Russe**](#-russe) | [**🇩🇪 Allemand**](#-allemand) | [**🇹🇷 Turc**](#-turc)
 
@@ -78,18 +72,22 @@ Conçue pour assister les professionnels de santé et les services d'urgence, ce
 ```mermaid
 graph TD
     User([👤 Patient/Medecin]) -->|Symptômes| UI[💻 Interface Web];
-    UI -->|Envoi| Agent{🤖 Agent IA};
+    UI -->|Routeur| Agent{🤖 Cœur IA};
     
-    subgraph Core [🧠 Moteur DoctisAImo]
-        Agent <-->|Raisonnement| Gemini[☁️ Google Gemini 2.0];
-        Agent <-->|Recherche de Preuves| RAG[(📚 Base Médicale Kaggle)];
-        Agent -.->|Fallback| GPT[🛡️ OpenAI GPT-4o];
+    subgraph Modules [📦 Fonctionnalités]
+        Agent --> Triage[🚑 Triage Intelligent];
+        Agent --> SecondOp[🧠 Seconde Opinion];
+        Agent --> Plan[🛡️ Plan d'Action];
+    end
+
+    subgraph Backend [⚙️ Infrastructure]
+        Agent <-->|LLM Principal| Gemini[☁️ Google Gemini 2.0];
+        Agent -.->|LLM Secours| GPT[🛡️ OpenAI GPT-4o];
+        Agent <-->|RAG| DB[(📚 Base Kaggle)];
+        Agent -->|Logs| Mongo[(🍃 MongoDB)];
     end
     
-    Agent -->|Diagnostic & Conseils| UI;
-    
-    style Core fill:#e3f2fd,stroke:#2196f3,stroke-width:2px
-    style Agent fill:#ffecb3,stroke:#ffca28,stroke-width:2px
+    Triage & SecondOp & Plan --> UI;
 ```
 
 <a name="démarrage"></a>
@@ -188,19 +186,23 @@ python src/agent.py
 
 ```mermaid
 graph TD
-    User([👤 Patient/Doctor]) -->|Symptoms| UI[💻 Web Interface];
-    UI -->|Submit| Agent{🤖 AI Agent};
+    User([👤 Patient/Doctor]) -->|Input| UI[💻 Web App];
+    UI -->|Router| Agent{🤖 AI Core};
     
-    subgraph Core [🧠 DoctisAImo Engine]
-        Agent <-->|Reasoning| Gemini[☁️ Google Gemini 2.0];
-        Agent <-->|Evidence Search| RAG[(📚 Kaggle Medical DB)];
-        Agent -.->|Fallback| GPT[🛡️ OpenAI GPT-4o];
+    subgraph Modules [📦 Functionalities]
+        Agent --> Triage[🚑 Intelligent Triage];
+        Agent --> SecondOp[🧠 Second Opinion];
+        Agent --> Plan[🛡️ Action Plan];
+    end
+
+    subgraph Backend [⚙️ Infrastructure]
+        Agent <-->|LLM Primary| Gemini[☁️ Google Gemini 2.0];
+        Agent -.->|LLM Fallback| GPT[🛡️ OpenAI GPT-4o];
+        Agent <-->|RAG| DB[(📚 Vector DB / Kaggle)];
+        Agent -->|Logs| Mongo[(🍃 MongoDB)];
     end
     
-    Agent -->|Diagnosis & Advice| UI;
-    
-    style Core fill:#e3f2fd,stroke:#2196f3,stroke-width:2px
-    style Agent fill:#ffecb3,stroke:#ffca28,stroke-width:2px
+    Triage & SecondOp & Plan --> UI;
 ```
 
 ### Installation
@@ -240,19 +242,23 @@ streamlit run app.py
 
 ```mermaid
 graph TD
-    User([👤 Paciente/Doctor]) -->|Síntomas| UI[💻 Interfaz Web];
-    UI -->|Enviar| Agent{🤖 Agente IA};
+    User([👤 Paciente/Doctor]) -->|Entrada| UI[💻 App Web];
+    UI -->|Enrutador| Agent{🤖 Núcleo IA};
     
-    subgraph Core [🧠 Motor DoctisAImo]
-        Agent <-->|Razonamiento| Gemini[☁️ Google Gemini 2.0];
-        Agent <-->|Búsqueda de Evidencia| RAG[(📚 Base Médica Kaggle)];
-        Agent -.->|Respaldo| GPT[🛡️ OpenAI GPT-4o];
+    subgraph Modules [📦 Funcionalidades]
+        Agent --> Triage[🚑 Triaje Inteligente];
+        Agent --> SecondOp[🧠 Segunda Opinión];
+        Agent --> Plan[🛡️ Plan de Acción];
+    end
+
+    subgraph Backend [⚙️ Infraestructura]
+        Agent <-->|LLM Principal| Gemini[☁️ Google Gemini 2.0];
+        Agent -.->|LLM Respaldo| GPT[🛡️ OpenAI GPT-4o];
+        Agent <-->|RAG| DB[(📚 Base Vectorial)];
+        Agent -->|Registros| Mongo[(🍃 MongoDB)];
     end
     
-    Agent -->|Diagnóstico y Consejos| UI;
-    
-    style Core fill:#e3f2fd,stroke:#2196f3,stroke-width:2px
-    style Agent fill:#ffecb3,stroke:#ffca28,stroke-width:2px
+    Triage & SecondOp & Plan --> UI;
 ```
 
 ### Instalación
@@ -292,19 +298,23 @@ streamlit run app.py
 
 ```mermaid
 graph TD
-    User([👤 Paziente/Dottore]) -->|Sintomi| UI[💻 Interfaccia Web];
-    UI -->|Invia| Agent{🤖 Agente IA};
+    User([👤 Paziente/Dottore]) -->|Input| UI[💻 Web App];
+    UI -->|Router| Agent{🤖 Core IA};
     
-    subgraph Core [🧠 Motore DoctisAImo]
-        Agent <-->|Ragionamento| Gemini[☁️ Google Gemini 2.0];
-        Agent <-->|Ricerca Evidenze| RAG[(📚 Database Medico Kaggle)];
-        Agent -.->|Fallback| GPT[🛡️ OpenAI GPT-4o];
+    subgraph Modules [📦 Funzionalità]
+        Agent --> Triage[🚑 Triage Intelligente];
+        Agent --> SecondOp[🧠 Seconda Opinione];
+        Agent --> Plan[🛡️ Piano d'Azione];
+    end
+
+    subgraph Backend [⚙️ Infrastruttura]
+        Agent <-->|LLM Primario| Gemini[☁️ Google Gemini 2.0];
+        Agent -.->|LLM Fallback| GPT[🛡️ OpenAI GPT-4o];
+        Agent <-->|RAG| DB[(📚 Database Vettoriale)];
+        Agent -->|Log| Mongo[(🍃 MongoDB)];
     end
     
-    Agent -->|Diagnosi & Consigli| UI;
-    
-    style Core fill:#e3f2fd,stroke:#2196f3,stroke-width:2px
-    style Agent fill:#ffecb3,stroke:#ffca28,stroke-width:2px
+    Triage & SecondOp & Plan --> UI;
 ```
 
 ### Installazione
@@ -344,19 +354,23 @@ streamlit run app.py
 
 ```mermaid
 graph TD
-    User([👤 Paciente/Médico]) -->|Sintomas| UI[💻 Interface Web];
-    UI -->|Enviar| Agent{🤖 Agente IA};
+    User([👤 Paciente/Médico]) -->|Entrada| UI[💻 App Web];
+    UI -->|Roteador| Agent{🤖 Núcleo IA};
     
-    subgraph Core [🧠 Motor DoctisAImo]
-        Agent <-->|Raciocínio| Gemini[☁️ Google Gemini 2.0];
-        Agent <-->|Busca de Evidências| RAG[(📚 Base Médica Kaggle)];
-        Agent -.->|Fallback| GPT[🛡️ OpenAI GPT-4o];
+    subgraph Modules [📦 Funcionalidades]
+        Agent --> Triage[🚑 Triagem Inteligente];
+        Agent --> SecondOp[🧠 Segunda Opinião];
+        Agent --> Plan[🛡️ Plano de Ação];
+    end
+
+    subgraph Backend [⚙️ Infraestrutura]
+        Agent <-->|LLM Primário| Gemini[☁️ Google Gemini 2.0];
+        Agent -.->|LLM Backup| GPT[🛡️ OpenAI GPT-4o];
+        Agent <-->|RAG| DB[(📚 Base Vetorial)];
+        Agent -->|Logs| Mongo[(🍃 MongoDB)];
     end
     
-    Agent -->|Diagnóstico & Conselhos| UI;
-    
-    style Core fill:#e3f2fd,stroke:#2196f3,stroke-width:2px
-    style Agent fill:#ffecb3,stroke:#ffca28,stroke-width:2px
+    Triage & SecondOp & Plan --> UI;
 ```
 
 ### Instalação
@@ -396,19 +410,23 @@ streamlit run app.py
 
 ```mermaid
 graph TD
-    User([👤 Пациент/Врач]) -->|Симптомы| UI[💻 Веб-интерфейс];
-    UI -->|Отправить| Agent{🤖 ИИ Агент};
+    User([👤 Пользователь]) -->|Ввод| UI[💻 Веб-интерфейс];
+    UI -->|Роутер| Agent{🤖 Ядро ИИ};
     
-    subgraph Core [🧠 Движок DoctisAImo]
-        Agent <-->|Рассуждение| Gemini[☁️ Google Gemini 2.0];
-        Agent <-->|Поиск Данных| RAG[(📚 Med-Base Kaggle)];
-        Agent -.->|Резерв| GPT[🛡️ OpenAI GPT-4o];
+    subgraph Modules [📦 Функции]
+        Agent --> Triage[🚑 Умный Триаж];
+        Agent --> SecondOp[🧠 Второе Мнение];
+        Agent --> Plan[🛡️ План Действий];
+    end
+
+    subgraph Backend [⚙️ Инфраструктура]
+        Agent <-->|Основной LLM| Gemini[☁️ Google Gemini 2.0];
+        Agent -.->|Резервный LLM| GPT[🛡️ OpenAI GPT-4o];
+        Agent <-->|RAG| DB[(📚 Векторная База)];
+        Agent -->|Логи| Mongo[(🍃 MongoDB)];
     end
     
-    Agent -->|Диагноз и Советы| UI;
-    
-    style Core fill:#e3f2fd,stroke:#2196f3,stroke-width:2px
-    style Agent fill:#ffecb3,stroke:#ffca28,stroke-width:2px
+    Triage & SecondOp & Plan --> UI;
 ```
 
 ### Установка
@@ -448,19 +466,23 @@ streamlit run app.py
 
 ```mermaid
 graph TD
-    User([👤 Patient/Arzt]) -->|Symptome| UI[💻 Web-Interface];
-    UI -->|Senden| Agent{🤖 KI-Agent};
+    User([👤 Patient/Arzt]) -->|Eingabe| UI[💻 Web-App];
+    UI -->|Router| Agent{🤖 KI-Kern};
     
-    subgraph Core [🧠 DoctisAImo Engine]
-        Agent <-->|Reasoning| Gemini[☁️ Google Gemini 2.0];
-        Agent <-->|Evidenzsuche| RAG[(📚 Kaggle Med-DB)];
-        Agent -.->|Fallback| GPT[🛡️ OpenAI GPT-4o];
+    subgraph Modules [📦 Funktionen]
+        Agent --> Triage[🚑 Intelligente Triage];
+        Agent --> SecondOp[🧠 Zweitmeinung];
+        Agent --> Plan[🛡️ Aktionsplan];
+    end
+
+    subgraph Backend [⚙️ Infrastruktur]
+        Agent <-->|Primär-LLM| Gemini[☁️ Google Gemini 2.0];
+        Agent -.->|Fallback-LLM| GPT[🛡️ OpenAI GPT-4o];
+        Agent <-->|RAG| DB[(📚 Vektor-DB)];
+        Agent -->|Logs| Mongo[(🍃 MongoDB)];
     end
     
-    Agent -->|Diagnose & Rat| UI;
-    
-    style Core fill:#e3f2fd,stroke:#2196f3,stroke-width:2px
-    style Agent fill:#ffecb3,stroke:#ffca28,stroke-width:2px
+    Triage & SecondOp & Plan --> UI;
 ```
 
 ### Installation
@@ -500,19 +522,23 @@ streamlit run app.py
 
 ```mermaid
 graph TD
-    User([👤 Hasta/Doktor]) -->|Semptomlar| UI[💻 Web Arayüzü];
-    UI -->|Gönder| Agent{🤖 YZ Ajanı};
+    User([👤 Kullanıcı]) -->|Giriş| UI[💻 Web Uygulaması];
+    UI -->|Yönlendirici| Agent{🤖 YZ Çekirdeği};
     
-    subgraph Core [🧠 DoctisAImo Motoru]
-        Agent <-->|Akıl Yürütme| Gemini[☁️ Google Gemini 2.0];
-        Agent <-->|Kanıt Arama| RAG[(📚 Kaggle Tıbbi Veri)];
-        Agent -.->|Yedek| GPT[🛡️ OpenAI GPT-4o];
+    subgraph Modules [📦 İşlevler]
+        Agent --> Triage[🚑 Akıllı Triyaj];
+        Agent --> SecondOp[🧠 İkinci Görüş];
+        Agent --> Plan[🛡️ Eylem Planı];
+    end
+
+    subgraph Backend [⚙️ Altyapı]
+        Agent <-->|Birincil LLM| Gemini[☁️ Google Gemini 2.0];
+        Agent -.->|Yedek LLM| GPT[🛡️ OpenAI GPT-4o];
+        Agent <-->|RAG| DB[(📚 Vektör Veritabanı)];
+        Agent -->|Günlükler| Mongo[(🍃 MongoDB)];
     end
     
-    Agent -->|Teşhis & Tavsiye| UI;
-    
-    style Core fill:#e3f2fd,stroke:#2196f3,stroke-width:2px
-    style Agent fill:#ffecb3,stroke:#ffca28,stroke-width:2px
+    Triage & SecondOp & Plan --> UI;
 ```
 
 ### Kurulum
