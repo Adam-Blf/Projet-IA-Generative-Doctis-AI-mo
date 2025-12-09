@@ -56,34 +56,34 @@ Conçue pour assister les professionnels de santé et les services d'urgence, ce
 - **Précision** : Analyse croisée entre symptômes déclarés et statistiques cliniques réelles.
 - **Sécurité** : Détection proactive des signaux faibles ("Red Flags") et protocoles d'urgence.
 
-#### Fonctionnalités Principales
+#### Fonctionnalités Principales (V12.0)
 
 1. **🚑 Triage Automatisé** : Classification immédiate de l'urgence.
 2. **🧠 Seconde Opinion IA** : Analyse différentielle pour réduire le risque d'erreur.
-3. **📚 RAG (Retrieval-Augmented Generation)** : L'IA ne "hallucine" pas, elle consulte une base de connaissances médicale (Kaggle) en temps réel.
-4. **💾 Rapports Exportables** : Génération de comptes-rendus PDF/JSON pour le dossier patient.
-5. **🖥️ Dashboard Professionnel** : Interface ergonomique (Streamlit) adaptée à un usage clinique.
+3. **📚 RAG avancé (5 sources)** : Fusion de datasets Kaggle (Symptômes, Précautions, Sévérité, etc.) pour des preuves factuelles.
+4. **💾 Interface Premium** : Dashboard moderne avec onglets (Diagnostic, Soins, Sources).
+5. **🛡️ Monitoring** : Système "Keep-Alive" autonome.
 
-### 📐 Architecture & Workflow
+### 📐 Architecture & Workflow (V12.0)
 
 ```mermaid
 graph LR
-    subgraph Client [💻 Interface Médecin]
-        A[🧑‍⚕️ Praticien/Patient] -->|Symptômes| B(📝 Formulaire Web);
-        E[📊 Dashboard V5] -->|Visualisation| A;
-        E -->|📥 Export| F[📄 Rapport Médical];
+    subgraph Data [💾 Hub de Données]
+        D1[dataset.csv] & D2[symptom_Description.csv] & D3[symptom_precaution.csv] --> ETL(⚙️ ETL Fusion);
+        D4[Symptom-severity.csv] & D5[Symptom2Disease.csv] --> ETL;
+        ETL --> KB[(📚 Base Optimisée)];
+    end
+
+    subgraph App [💻 DoctisApp V12]
+        UI[🖥️ Premium UI] <-->|Chat & Tabs| A{🤖 Agent};
+        A <-->|Raisonnement| G[☁️ Gemini 2.0];
+        A <-->|RAG Query| KB;
+        M[⏱️ Monitor] -.->|Ping| UI;
+        M -.->|Logs| DB[(🍃 MongoDB)];
     end
     
-    subgraph Core [🧠 Moteur Intelligence]
-        B -->|Requête| C{🤖 Agent Doctis};
-        C <-->|Raisonnement| D[☁️ Google Gemini 2.0];
-        C <-->|Recherche de Preuves| K[(📚 Base Kaggle)];
-        K -->|Contexte RAG| C;
-        C -->|Diagnostic Assisté| E;
-    end
-    
-    style Client fill:#01579b,stroke:#81d4fa,stroke-width:2px,color:#fff
-    style Core fill:#ff6f00,stroke:#ffca28,stroke-width:2px,color:#fff
+    style Data fill:#2e7d32,stroke:#4caf50,stroke-width:2px,color:#fff
+    style App fill:#1565c0,stroke:#42a5f5,stroke-width:2px,color:#fff
 ```
 
 <a name="démarrage"></a>
