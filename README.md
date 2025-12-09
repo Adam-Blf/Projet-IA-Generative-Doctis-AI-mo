@@ -59,9 +59,6 @@ graph LR
         C <-->|API| D[☁️ Gemini];
         C -->|Analyse| E;
     end
-    
-    style Client fill:#e1f5fe,stroke:#01579b,stroke-width:2px
-    style Core fill:#fff9c4,stroke:#fbc02d,stroke-width:2px
 ```
 
 <a name="démarrage"></a>
@@ -146,9 +143,6 @@ graph LR
         C <-->|API| D[☁️ Gemini];
         C -->|Analysis| E;
     end
-    
-    style Client fill:#e1f5fe,stroke:#01579b,stroke-width:2px
-    style Core fill:#fff9c4,stroke:#fbc02d,stroke-width:2px
 ```
 
 ### Installation
