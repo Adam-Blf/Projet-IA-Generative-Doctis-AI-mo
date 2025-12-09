@@ -1,3 +1,11 @@
+Dernier commit: 09/12/2025 | Langage principal: Python | Nombre de langages: 1
+
+Construit avec les outils et technologies : 
+Python
+
+🇫🇷 Français | 🇬🇧 Anglais | 🇪🇸 Espagnol | 🇮🇹 Italien | 🇵🇹 Portugais | 🇷🇺 Russe | 🇩🇪 Allemand | 🇹🇷 Turc
+
+
 # 🏥 DoctisAImo (v5.0-RAG)
 
 > **Assistant de Triage IA Avancé | Advanced AI Triage Assistant**
