@@ -67,7 +67,14 @@ Conçue pour assister les professionnels de santé et les services d'urgence, ce
 ### 📐 Architecture & Workflow (V15.0)
 
 ```mermaid
-graph LR
+graph TD
+    subgraph DevOps [⚙️ CI/CD Pipeline]
+        GIT[Developer Push] -->|Trigger| ACT[🤖 GitHub Actions];
+        ACT -->|1. Run Tests| TEST{🧪 Pytest};
+        TEST -->|Pass| BUMP[🚀 Smart Auto-Bump];
+        BUMP -->|Commit Tag| GIT;
+    end
+
     subgraph Data [💾 Hub de Données]
         D1[dataset.csv] & D2[symptom_Description.csv] & D3[symptom_precaution.csv] --> ETL(⚙️ ETL Fusion);
         D4[Symptom-severity.csv] & D5[Symptom2Disease.csv] --> ETL;
@@ -82,8 +89,11 @@ graph LR
         M -.->|Logs| DB[(🍃 MongoDB)];
     end
     
+    DevOps -.->|Deploy| App
+    
     style Data fill:#2e7d32,stroke:#4caf50,stroke-width:2px,color:#fff
     style App fill:#1565c0,stroke:#42a5f5,stroke-width:2px,color:#fff
+    style DevOps fill:#6a1b9a,stroke:#8e24aa,stroke-width:2px,color:#fff
 ```
 
 <a name="démarrage"></a>
