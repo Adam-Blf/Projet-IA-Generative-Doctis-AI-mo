@@ -21,20 +21,41 @@
 
 ## 🇫🇷 Français
 
-### Vue d'ensemble
+- [**Présentation**](#présentation)
+- [**Démarrage**](#démarrage)
+  - [Prérequis](#prérequis)
+  - [Installation](#installation)
+- [**Utilisation**](#utilisation)
+- [**Tests**](#tests)
 
-**DoctisAImo** est un assistant IA de pointe conçu pour le triage médical d'urgence. La version 3.0 utilise une **logique orientée données** (inspirée des datasets médicaux Kaggle) pour interpréter les symptômes avec une rigueur statistique. Il fournit des évaluations de sécurité, des secondes opinions et des plans d'action d'urgence.
+---
 
-### Fonctionnalités
+<a name="présentation"></a>
+
+### 📝 Présentation
+
+**DoctisAImo** est un assistant IA de pointe conçu pour le triage médical d'urgence. La version 3.0 utilise une **logique orientée données** (inspirée des datasets médicaux Kaggle) pour interpréter les symptômes avec une rigueur statistique.
+
+#### Fonctionnalités
 
 1. **🏥 Triage Intelligent (Urgences)** : Analyse basée sur les données pour déterminer les codes Vert, Orange ou Rouge.
 2. **🧠 Seconde Opinion** : Évaluation détaillée des risques et identification des signaux d'alarme ("Red Flags").
 3. **🛡️ Plan d'Action** : Checklist d'urgence immédiate sans jargon médical.
 4. **🔗 Enrichissement d'Entrée** : Génération de mots-clés structurés pour la recherche vectorielle.
 
-### Installation
+<a name="démarrage"></a>
 
-**Prérequis** : Python 3.8+, Clé API Gemini.
+### 🚀 Démarrage
+
+<a name="prérequis"></a>
+
+#### 📋 Prérequis
+
+Python 3.8+, Clé API Gemini.
+
+<a name="installation"></a>
+
+#### 💾 Installation
 
 ```bash
 git clone https://github.com/Adam-Blf/Projet-IA-Generative-Doctis-AI-mo.git
@@ -42,7 +63,17 @@ cd Projet-IA-Generative-Doctis-AI-mo
 pip install -r requirements.txt
 ```
 
-### Vérification
+<a name="utilisation"></a>
+
+### 🎮 Utilisation
+
+Le cerveau de DoctisAImo réside dans `config/prompts.json`. Vous pouvez personnaliser les invites système (System Prompts) et les métadonnées de l'agent pour adapter son comportement.
+
+<a name="tests"></a>
+
+### 🧪 Tests
+
+Pour vérifier que l'agent est correctement configuré et opérationnel :
 
 ```bash
 python src/agent.py
