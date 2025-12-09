@@ -8,6 +8,14 @@ All notable changes to the **DoctisAImo** project will be documented in this fil
 - **Data**: Integrated 3 new datasets (Symptom2Disease, DiseaseAndSymptoms, Disease precaution).
 - **RAG**: Enhanced "Evidence" tab showing exact matches from Kaggle DB.
 
+## [V15.0] - 2025-12-09
+
+### Automatisations
+
+- **Auto-Versioning**: Implémentation du script `scripts/bump_version.py`.
+- **GitOps**: Le pipeline CI/CD incrémente désormais automatiquement la version du projet (Code & Docs) après chaque push réussi sur `main`.
+- **Zero-Touch**: Plus besoin de modifier manuellement les numéros de version dans `README` ou `app.py`.
+
 ## [V14.0] - 2025-12-09
 
 ### Workflow & DevOps
