@@ -159,7 +159,7 @@ Pour vérifier que l'environnement est correctement configuré (API connectées,
 python src/agent.py
 ```
 
-*Si tout fonctionne, vous verrez : `✅ Agent Chargé : DoctisAImo v13.0-Optimized`.*
+*Si tout fonctionne, vous verrez : `✅ Agent Chargé : DoctisAImo v13.1-Optimized`.*
 
 ---
 
