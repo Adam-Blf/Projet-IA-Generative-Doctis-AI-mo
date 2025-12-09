@@ -11,7 +11,7 @@
 
 <div align="center">
 
-[**🇫🇷 Français**](#-français) | [**🇬🇧 English**](#-english) | [**🇪🇸 Español**](#-español) | [**🇮🇹 Italiano**](#-italiano) | [**🇵🇹 Português**](#-português) | [**🇷🇺 Русский**](#-русский) | [**🇩🇪 Deutsch**](#-deutsch) | [**🇹🇷 Türkçe**](#-türkçe)
+[**🇫🇷 Français**](#-français) | [**🇬🇧 Anglais**](#-anglais) | [**🇪🇸 Espagnol**](#-espagnol) | [**🇮🇹 Italien**](#-italien) | [**🇵🇹 Portugais**](#-portugais) | [**🇷🇺 Russe**](#-russe) | [**🇩🇪 Allemand**](#-allemand) | [**🇹🇷 Turc**](#-turc)
 
 </div>
 
@@ -76,14 +76,14 @@ Le cerveau de DoctisAImo réside dans `config/prompts.json`. Vous pouvez personn
 Pour vérifier que l'agent est correctement configuré et opérationnel :
 
 ```bash
-python src/agent.py
+streamlit run app.py
 ```
 
 ---
 
-<a name="-english"></a>
+<a name="-anglais"></a>
 
-## 🇬🇧 English
+## 🇬🇧 Anglais
 
 ### Overview
 
@@ -109,14 +109,14 @@ pip install -r requirements.txt
 ### Verification
 
 ```bash
-python src/agent.py
+streamlit run app.py
 ```
 
 ---
 
-<a name="-español"></a>
+<a name="-espagnol"></a>
 
-## 🇪🇸 Español
+## 🇪🇸 Espagnol
 
 ### Resumen
 
@@ -142,14 +142,14 @@ pip install -r requirements.txt
 ### Verificación
 
 ```bash
-python src/agent.py
+streamlit run app.py
 ```
 
 ---
 
-<a name="-italiano"></a>
+<a name="-italien"></a>
 
-## 🇮🇹 Italiano
+## 🇮🇹 Italien
 
 ### Panoramica
 
@@ -175,14 +175,14 @@ pip install -r requirements.txt
 ### Verifica
 
 ```bash
-python src/agent.py
+streamlit run app.py
 ```
 
 ---
 
-<a name="-português"></a>
+<a name="-portugais"></a>
 
-## 🇵🇹 Português
+## 🇵🇹 Portugais
 
 ### Visão Geral
 
@@ -200,7 +200,7 @@ python src/agent.py
 **Pré-requisitos**: Python 3.8+, Chave API Gemini.
 
 ```bash
-git clone https://github.com/Adam-Blf/Projet-IA-Generative-Doctis-AI-mo.git
+git clone https://github.B-Blf/Projet-IA-Generative-Doctis-AI-mo.git
 cd Projet-IA-Generative-Doctis-AI-mo
 pip install -r requirements.txt
 ```
@@ -208,14 +208,14 @@ pip install -r requirements.txt
 ### Verificação
 
 ```bash
-python src/agent.py
+streamlit run app.py
 ```
 
 ---
 
-<a name="-русский"></a>
+<a name="-russe"></a>
 
-## 🇷🇺 Русский
+## 🇷🇺 Russe
 
 ### Обзор
 
@@ -241,14 +241,14 @@ pip install -r requirements.txt
 ### Проверка
 
 ```bash
-python src/agent.py
+streamlit run app.py
 ```
 
 ---
 
 <a name="-deutsch"></a>
 
-## 🇩🇪 Deutsch
+## 🇩🇪 Allemand
 
 ### Überblick
 
@@ -274,14 +274,14 @@ pip install -r requirements.txt
 ### Überprüfung
 
 ```bash
-python src/agent.py
+streamlit run app.py
 ```
 
 ---
 
 <a name="-türkçe"></a>
 
-## 🇹🇷 Türkçe
+## 🇹🇷 Turc
 
 ### Genel Bakış
 
@@ -307,7 +307,7 @@ pip install -r requirements.txt
 ### Doğrulama
 
 ```bash
-python src/agent.py
+streamlit run app.py
 ```
 
 ---
