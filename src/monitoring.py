@@ -1,6 +1,6 @@
 # ==============================================================================
 # DOCTIS-AI-MO: MONITORING & KEEP-ALIVE
-# Version: v16.5-Optimized
+# Version: v16.6-Optimized
 # Auteurs: Adam Beloucif & Amina Medjdoub
 # ==============================================================================
 
