@@ -5,19 +5,12 @@
 # ==============================================================================
 
 import os
-import json
 import pandas as pd
 import numpy as np
 import streamlit as st
-from kaggle.api.kaggle_api_extended import KaggleApi
-from dotenv import load_dotenv
 from typing import Tuple, Optional, Any
 
-# Charge les variables d'environnement locales (.env)
-load_dotenv()
-
 # Constants
-DATASET_SLUG = "itachi9604/disease-symptom-description-dataset"
 DATA_DIR = "data/"
 OPTIMIZED_DB_PATH = os.path.join(DATA_DIR, "medical_knowledge_base.csv")
 
@@ -29,73 +22,6 @@ FILENAMES = {
     "s2d_extra": "Symptom2Disease.csv",
     "das_extra": "DiseaseAndSymptoms.csv"
 }
-
-def authenticate_kaggle() -> Tuple[bool, Any]:
-    """
-    Authentification robuste (Secrets > .env > JSON Token).
-    
-    Returns:
-        Tuple[bool, Any]: (Succès, Objet API ou Message d'erreur)
-    """
-    try:
-        # 1. Secrets / Env Vars handling (Flexible)
-        username = os.environ.get('KAGGLE_USERNAME')
-        key = os.environ.get('KAGGLE_KEY')
-
-        if not username or not key:
-            try:
-                username = st.secrets.get("KAGGLE_USERNAME")
-                key = st.secrets.get("KAGGLE_KEY")
-            except:
-                pass
-        
-        if username: os.environ['KAGGLE_USERNAME'] = username
-        if key: os.environ['KAGGLE_KEY'] = key
-        
-        # 2. Token Fallback
-        token_str = os.environ.get("KAGGLE_API_TOKEN")
-        if token_str and not os.environ['KAGGLE_USERNAME']:
-            try:
-                creds = json.loads(token_str)
-                os.environ['KAGGLE_USERNAME'] = creds.get('username', '')
-                os.environ['KAGGLE_KEY'] = creds.get('key', '')
-            except:
-                pass
-                
-        if not os.environ['KAGGLE_USERNAME'] or not os.environ['KAGGLE_KEY']:
-            return False, "Identifiants manquants."
-            
-        api = KaggleApi()
-        api.authenticate()
-        return True, api
-    except Exception as e:
-        return False, str(e)
-
-def download_medical_dataset() -> Tuple[bool, str]:
-    """
-    Télécharge programmatiquement les datasets requis via l'API Kaggle.
-    Vérifie l'existence locale avant de lancer le téléchargement.
-    """
-    if not os.path.exists(DATA_DIR):
-        os.makedirs(DATA_DIR)
-        
-    # Check for raw files presence
-    missing = [f for f in FILENAMES.values() if not os.path.exists(os.path.join(DATA_DIR, f)) and f not in ["Symptom2Disease.csv", "DiseaseAndSymptoms.csv"]]
-    
-    if not missing:
-        return True, "Fichiers bruts déjà présents."
-        
-    success, result = authenticate_kaggle()
-    if not success:
-        return False, f"Erreur Auth: {result}"
-        
-    try:
-        api = result # type: ignore
-        print("⬇️ Téléchargement des données Kaggle...")
-        api.dataset_download_files(DATASET_SLUG, path=DATA_DIR, unzip=True)
-        return True, "Données téléchargées."
-    except Exception as e:
-        return False, f"Erreur Download: {e}"
 
 def _safe_read(fname: str) -> pd.DataFrame:
     """Helper pour lire un CSV sans crasher."""
@@ -163,12 +89,12 @@ def _enrich_metadata(df_master: pd.DataFrame, df_desc: pd.DataFrame, df_prec: pd
 def process_and_optimize_data() -> Tuple[bool, str]:
     """
     Pipeline ETL (Extract, Transform, Load) Principal :
-    1. EXTRACT : Lecture des fichiers CSV bruts sources.
+    1. EXTRACT : Lecture des fichiers CSV bruts sources (Locaux).
     2. TRANSFORM : Nettoyage, normalisation et fusion des données (Join).
     3. LOAD : Sauvegarde d'un fichier CSV unique optimisé pour le RAG.
     """
     try:
-        print("⚙️ Démarrage de l'optimisation ETL (V13.0)...")
+        print("⚙️ Démarrage de l'optimisation ETL (V13.0 - Local)...")
         
         # 1. LOAD
         df_symp = _safe_read(FILENAMES["symptoms"])
@@ -176,6 +102,9 @@ def process_and_optimize_data() -> Tuple[bool, str]:
         df_prec = _safe_read(FILENAMES["precaution"])
         df_extra_s2d = _safe_read(FILENAMES["s2d_extra"])
         
+        if df_symp.empty and df_extra_s2d.empty:
+             return False, "Aucun fichier de données trouvé dans data/."
+
         # 2. CLEAN
         df_symp = _clean_columns(df_symp)
         df_desc = _clean_columns(df_desc)
@@ -201,24 +130,21 @@ def process_and_optimize_data() -> Tuple[bool, str]:
         return False, str(e)
 
 def load_knowledge_base() -> Optional[pd.DataFrame]:
-    """Interface principale pour le chargement des données."""
-    # 1. Try Load
+    """
+    Interface principale pour le chargement des données.
+    Charge la base optimisée ou tente de la reconstruire depuis les CSV locaux.
+    """
+    # 1. Try Load Existing DB
     if os.path.exists(OPTIMIZED_DB_PATH):
         try:
             return pd.read_csv(OPTIMIZED_DB_PATH)
         except Exception:
             pass 
             
-    # 2. Download Raw
-    success, msg = download_medical_dataset()
-    if not success:
-        st.error(f"Erreur d'initialisation des données : {msg}")
-        return None
-        
-    # 3. Run ETL
+    # 2. Run ETL (Local Files Only)
     ok, etl_msg = process_and_optimize_data()
     if ok:
         return pd.read_csv(OPTIMIZED_DB_PATH)
     else:
-        st.error(f"Echec de l'optimisation BDD : {etl_msg}")
+        st.warning(f"⚠️ Base de connaissances indisponible : {etl_msg}. L'appli fonctionnera en mode IA seule.")
         return None

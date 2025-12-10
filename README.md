@@ -136,15 +136,15 @@ Suivez ces étapes pour déployer l'assistant de triage sur votre poste local.
     pip install -r requirements.txt
     ```
 
-3. **Configuration (Variables d'environnement)**
-    Créez un fichier `.env` à la racine et ajoutez vos clés :
+### 🗝️ Configuration des Clés API
 
-    ```ini
-    GOOGLE_API_KEY="votre_clé_gemini_ici"
-    KAGGLE_USERNAME="votre_user_kaggle"
-    KAGGLE_KEY="votre_clé_kaggle"
-    OPENAI_API_KEY="votre_clé_openai_optionnelle"
-    ```
+Créez un fichier `.env` à la racine :
+
+```ini
+GOOGLE_API_KEY="votre_cle_gemini"
+OPENAI_API_KEY="votre_cle_openai" # Optionnel (Fallback)
+MONGO_URI="votre_uri_mongodb"     # Optionnel (Monitoring)
+```
 
 <a name="utilisation"></a>
 
