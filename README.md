@@ -129,6 +129,7 @@ Suivez ces étapes pour déployer l'assistant de triage sur votre poste local.
     GOOGLE_API_KEY="votre_clé_gemini_ici"
     KAGGLE_USERNAME="votre_user_kaggle"
     KAGGLE_KEY="votre_clé_kaggle"
+    OPENAI_API_KEY="votre_clé_openai_optionnelle"
     ```
 
 <a name="utilisation"></a>
