@@ -15,6 +15,7 @@ from pymongo.errors import ConnectionFailure
 from typing import Optional, Tuple
 
 class HealthMonitor:
+    """
     Système de monitoring et "Keep-Alive" pour conteneurs serverless.
     
     Objectif : Prévenir le "Cold Start" (mise en veille) des plateformes comme Render.
