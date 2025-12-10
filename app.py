@@ -20,6 +20,7 @@ from src.monitoring import init_monitor
 
 def _inject_custom_css() -> None:
     """Injecte le CSS personnalisé pour l'interface Premium."""
+    st.markdown("""
     <style>
         /* --- DARK MODE THEME --- */
         
