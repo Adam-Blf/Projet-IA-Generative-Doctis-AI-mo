@@ -19,7 +19,7 @@ class HealthMonitor:
     Système de monitoring et "Keep-Alive" pour conteneurs serverless.
     
     Objectif : Prévenir le "Cold Start" (mise en veille) des plateformes comme Render.
-    Mécanisme : Envoie une requête HTTP (ping) locale périodique (toutes les 14min).
+    Mécanisme : Envoie une requête HTTP (ping) locale périodique (toutes les 5min).
     """
 
     def __init__(self, app_url: str, mongo_uri: Optional[str] = None) -> None:
@@ -31,7 +31,7 @@ class HealthMonitor:
             mongo_uri (Optional[str]): Chaîne de connexion MongoDB.
         """
         self.app_url = app_url
-        self.interval_seconds = 14 * 60  # 14 minutes
+        self.interval_seconds = 5 * 60  # 5 minutes
         self.mongo_uri = mongo_uri
         self.db_client: Optional[MongoClient] = None
         self.collection = None
@@ -84,7 +84,7 @@ class HealthMonitor:
         """Lance la boucle infinie dans un thread séparé (Non-bloquant)."""
         thread = threading.Thread(target=self._loop, daemon=True)
         thread.start()
-        print("🚀 [MONITOR] Boucle de maintenance démarrée (14 min).")
+        print("🚀 [MONITOR] Boucle de maintenance démarrée (5 min).")
 
     def _loop(self) -> None:
         """La boucle interne qui tourne indéfiniment."""
