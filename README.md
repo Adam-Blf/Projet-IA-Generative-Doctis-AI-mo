@@ -95,13 +95,13 @@ graph TD
     
     Triage & SecondOp & Plan --> UI;
 
-    style User fill:#ffccbc,stroke:#bf360c,stroke-width:2px;
-    style UI fill:#b3e5fc,stroke:#01579b,stroke-width:2px;
-    style Agent fill:#fff9c4,stroke:#fbc02d,stroke-width:2px;
-    style Gemini fill:#e1bee7,stroke:#4a148c,stroke-width:2px;
-    style GPT fill:#c8e6c9,stroke:#1b5e20,stroke-width:2px;
-    style Mongo fill:#dcedc8,stroke:#33691e,stroke-width:2px;
-    style Data fill:#f5f5f5,stroke:#616161,stroke-width:2px,stroke-dasharray: 5 5;
+    style User fill:#ffccbc,stroke:#bf360c,stroke-width:2px,color:#000000;
+    style UI fill:#b3e5fc,stroke:#01579b,stroke-width:2px,color:#000000;
+    style Agent fill:#fff9c4,stroke:#fbc02d,stroke-width:2px,color:#000000;
+    style Gemini fill:#e1bee7,stroke:#4a148c,stroke-width:2px,color:#000000;
+    style GPT fill:#c8e6c9,stroke:#1b5e20,stroke-width:2px,color:#000000;
+    style Mongo fill:#dcedc8,stroke:#33691e,stroke-width:2px,color:#000000;
+    style Data fill:#f5f5f5,stroke:#616161,stroke-width:2px,stroke-dasharray: 5 5,color:#000000;
 ```
 
 <a name="démarrage"></a>
@@ -229,13 +229,13 @@ graph TD
     
     Triage & SecondOp & Plan --> UI;
     
-    style User fill:#ffccbc,stroke:#bf360c,stroke-width:2px;
-    style UI fill:#b3e5fc,stroke:#01579b,stroke-width:2px;
-    style Agent fill:#fff9c4,stroke:#fbc02d,stroke-width:2px;
-    style Gemini fill:#e1bee7,stroke:#4a148c,stroke-width:2px;
-    style GPT fill:#c8e6c9,stroke:#1b5e20,stroke-width:2px;
-    style Mongo fill:#dcedc8,stroke:#33691e,stroke-width:2px;
-    style Data fill:#f5f5f5,stroke:#616161,stroke-width:2px,stroke-dasharray: 5 5;
+    style User fill:#ffccbc,stroke:#bf360c,stroke-width:2px,color:#000000;
+    style UI fill:#b3e5fc,stroke:#01579b,stroke-width:2px,color:#000000;
+    style Agent fill:#fff9c4,stroke:#fbc02d,stroke-width:2px,color:#000000;
+    style Gemini fill:#e1bee7,stroke:#4a148c,stroke-width:2px,color:#000000;
+    style GPT fill:#c8e6c9,stroke:#1b5e20,stroke-width:2px,color:#000000;
+    style Mongo fill:#dcedc8,stroke:#33691e,stroke-width:2px,color:#000000;
+    style Data fill:#f5f5f5,stroke:#616161,stroke-width:2px,stroke-dasharray: 5 5,color:#000000;
 ```
 
 ### Installation
@@ -303,13 +303,13 @@ graph TD
     
     Triage & SecondOp & Plan --> UI;
     
-    style User fill:#ffccbc,stroke:#bf360c,stroke-width:2px;
-    style UI fill:#b3e5fc,stroke:#01579b,stroke-width:2px;
-    style Agent fill:#fff9c4,stroke:#fbc02d,stroke-width:2px;
-    style Gemini fill:#e1bee7,stroke:#4a148c,stroke-width:2px;
-    style GPT fill:#c8e6c9,stroke:#1b5e20,stroke-width:2px;
-    style Mongo fill:#dcedc8,stroke:#33691e,stroke-width:2px;
-    style Data fill:#f5f5f5,stroke:#616161,stroke-width:2px,stroke-dasharray: 5 5;
+    style User fill:#ffccbc,stroke:#bf360c,stroke-width:2px,color:#000000;
+    style UI fill:#b3e5fc,stroke:#01579b,stroke-width:2px,color:#000000;
+    style Agent fill:#fff9c4,stroke:#fbc02d,stroke-width:2px,color:#000000;
+    style Gemini fill:#e1bee7,stroke:#4a148c,stroke-width:2px,color:#000000;
+    style GPT fill:#c8e6c9,stroke:#1b5e20,stroke-width:2px,color:#000000;
+    style Mongo fill:#dcedc8,stroke:#33691e,stroke-width:2px,color:#000000;
+    style Data fill:#f5f5f5,stroke:#616161,stroke-width:2px,stroke-dasharray: 5 5,color:#000000;
 ```
 
 ### Instalación
@@ -377,13 +377,13 @@ graph TD
     
     Triage & SecondOp & Plan --> UI;
     
-    style User fill:#ffccbc,stroke:#bf360c,stroke-width:2px;
-    style UI fill:#b3e5fc,stroke:#01579b,stroke-width:2px;
-    style Agent fill:#fff9c4,stroke:#fbc02d,stroke-width:2px;
-    style Gemini fill:#e1bee7,stroke:#4a148c,stroke-width:2px;
-    style GPT fill:#c8e6c9,stroke:#1b5e20,stroke-width:2px;
-    style Mongo fill:#dcedc8,stroke:#33691e,stroke-width:2px;
-    style Data fill:#f5f5f5,stroke:#616161,stroke-width:2px,stroke-dasharray: 5 5;
+    style User fill:#ffccbc,stroke:#bf360c,stroke-width:2px,color:#000000;
+    style UI fill:#b3e5fc,stroke:#01579b,stroke-width:2px,color:#000000;
+    style Agent fill:#fff9c4,stroke:#fbc02d,stroke-width:2px,color:#000000;
+    style Gemini fill:#e1bee7,stroke:#4a148c,stroke-width:2px,color:#000000;
+    style GPT fill:#c8e6c9,stroke:#1b5e20,stroke-width:2px,color:#000000;
+    style Mongo fill:#dcedc8,stroke:#33691e,stroke-width:2px,color:#000000;
+    style Data fill:#f5f5f5,stroke:#616161,stroke-width:2px,stroke-dasharray: 5 5,color:#000000;
 ```
 
 ### Installazione
@@ -451,13 +451,13 @@ graph TD
     
     Triage & SecondOp & Plan --> UI;
     
-    style User fill:#ffccbc,stroke:#bf360c,stroke-width:2px;
-    style UI fill:#b3e5fc,stroke:#01579b,stroke-width:2px;
-    style Agent fill:#fff9c4,stroke:#fbc02d,stroke-width:2px;
-    style Gemini fill:#e1bee7,stroke:#4a148c,stroke-width:2px;
-    style GPT fill:#c8e6c9,stroke:#1b5e20,stroke-width:2px;
-    style Mongo fill:#dcedc8,stroke:#33691e,stroke-width:2px;
-    style Data fill:#f5f5f5,stroke:#616161,stroke-width:2px,stroke-dasharray: 5 5;
+    style User fill:#ffccbc,stroke:#bf360c,stroke-width:2px,color:#000000;
+    style UI fill:#b3e5fc,stroke:#01579b,stroke-width:2px,color:#000000;
+    style Agent fill:#fff9c4,stroke:#fbc02d,stroke-width:2px,color:#000000;
+    style Gemini fill:#e1bee7,stroke:#4a148c,stroke-width:2px,color:#000000;
+    style GPT fill:#c8e6c9,stroke:#1b5e20,stroke-width:2px,color:#000000;
+    style Mongo fill:#dcedc8,stroke:#33691e,stroke-width:2px,color:#000000;
+    style Data fill:#f5f5f5,stroke:#616161,stroke-width:2px,stroke-dasharray: 5 5,color:#000000;
 ```
 
 ### Instalação
@@ -525,13 +525,13 @@ graph TD
     
     Triage & SecondOp & Plan --> UI;
     
-    style User fill:#ffccbc,stroke:#bf360c,stroke-width:2px;
-    style UI fill:#b3e5fc,stroke:#01579b,stroke-width:2px;
-    style Agent fill:#fff9c4,stroke:#fbc02d,stroke-width:2px;
-    style Gemini fill:#e1bee7,stroke:#4a148c,stroke-width:2px;
-    style GPT fill:#c8e6c9,stroke:#1b5e20,stroke-width:2px;
-    style Mongo fill:#dcedc8,stroke:#33691e,stroke-width:2px;
-    style Data fill:#f5f5f5,stroke:#616161,stroke-width:2px,stroke-dasharray: 5 5;
+    style User fill:#ffccbc,stroke:#bf360c,stroke-width:2px,color:#000000;
+    style UI fill:#b3e5fc,stroke:#01579b,stroke-width:2px,color:#000000;
+    style Agent fill:#fff9c4,stroke:#fbc02d,stroke-width:2px,color:#000000;
+    style Gemini fill:#e1bee7,stroke:#4a148c,stroke-width:2px,color:#000000;
+    style GPT fill:#c8e6c9,stroke:#1b5e20,stroke-width:2px,color:#000000;
+    style Mongo fill:#dcedc8,stroke:#33691e,stroke-width:2px,color:#000000;
+    style Data fill:#f5f5f5,stroke:#616161,stroke-width:2px,stroke-dasharray: 5 5,color:#000000;
 ```
 
 ### Установка
@@ -599,13 +599,13 @@ graph TD
     
     Triage & SecondOp & Plan --> UI;
     
-    style User fill:#ffccbc,stroke:#bf360c,stroke-width:2px;
-    style UI fill:#b3e5fc,stroke:#01579b,stroke-width:2px;
-    style Agent fill:#fff9c4,stroke:#fbc02d,stroke-width:2px;
-    style Gemini fill:#e1bee7,stroke:#4a148c,stroke-width:2px;
-    style GPT fill:#c8e6c9,stroke:#1b5e20,stroke-width:2px;
-    style Mongo fill:#dcedc8,stroke:#33691e,stroke-width:2px;
-    style Data fill:#f5f5f5,stroke:#616161,stroke-width:2px,stroke-dasharray: 5 5;
+    style User fill:#ffccbc,stroke:#bf360c,stroke-width:2px,color:#000000;
+    style UI fill:#b3e5fc,stroke:#01579b,stroke-width:2px,color:#000000;
+    style Agent fill:#fff9c4,stroke:#fbc02d,stroke-width:2px,color:#000000;
+    style Gemini fill:#e1bee7,stroke:#4a148c,stroke-width:2px,color:#000000;
+    style GPT fill:#c8e6c9,stroke:#1b5e20,stroke-width:2px,color:#000000;
+    style Mongo fill:#dcedc8,stroke:#33691e,stroke-width:2px,color:#000000;
+    style Data fill:#f5f5f5,stroke:#616161,stroke-width:2px,stroke-dasharray: 5 5,color:#000000;
 ```
 
 ### Installation
@@ -673,13 +673,13 @@ graph TD
     
     Triage & SecondOp & Plan --> UI;
 
-    style User fill:#ffccbc,stroke:#bf360c,stroke-width:2px;
-    style UI fill:#b3e5fc,stroke:#01579b,stroke-width:2px;
-    style Agent fill:#fff9c4,stroke:#fbc02d,stroke-width:2px;
-    style Gemini fill:#e1bee7,stroke:#4a148c,stroke-width:2px;
-    style GPT fill:#c8e6c9,stroke:#1b5e20,stroke-width:2px;
-    style Mongo fill:#dcedc8,stroke:#33691e,stroke-width:2px;
-    style Data fill:#f5f5f5,stroke:#616161,stroke-width:2px,stroke-dasharray: 5 5;
+    style User fill:#ffccbc,stroke:#bf360c,stroke-width:2px,color:#000000;
+    style UI fill:#b3e5fc,stroke:#01579b,stroke-width:2px,color:#000000;
+    style Agent fill:#fff9c4,stroke:#fbc02d,stroke-width:2px,color:#000000;
+    style Gemini fill:#e1bee7,stroke:#4a148c,stroke-width:2px,color:#000000;
+    style GPT fill:#c8e6c9,stroke:#1b5e20,stroke-width:2px,color:#000000;
+    style Mongo fill:#dcedc8,stroke:#33691e,stroke-width:2px,color:#000000;
+    style Data fill:#f5f5f5,stroke:#616161,stroke-width:2px,stroke-dasharray: 5 5,color:#000000;
 ```
 
 ### Kurulum
