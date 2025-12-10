@@ -15,9 +15,10 @@ from pymongo.errors import ConnectionFailure
 from typing import Optional, Tuple
 
 class HealthMonitor:
-    """
-    Système de surveillance et de maintien en vie (Keep-Alive) pour l'application.
-    S'assure que le serveur Render ne s'endort pas et log les états dans MongoDB.
+    Système de surveillance et de maintien en vie ("Keep-Alive").
+    
+    Problème : Les serveurs gratuits (comme Render) s'endorment après 15min d'inactivité.
+    Solution : Ce script "pique" (ping) le serveur toutes les 14min pour qu'il reste réveillé.
     """
 
     def __init__(self, app_url: str, mongo_uri: Optional[str] = None) -> None:

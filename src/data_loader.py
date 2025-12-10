@@ -72,7 +72,10 @@ def authenticate_kaggle() -> Tuple[bool, Any]:
         return False, str(e)
 
 def download_medical_dataset() -> Tuple[bool, str]:
-    """Télécharge les fichiers bruts si nécessaire."""
+    """
+    Télécharge les fichiers bruts depuis Kaggle si nécessaire.
+    C'est comme aller à la bibliothèque chercher les livres.
+    """
     if not os.path.exists(DATA_DIR):
         os.makedirs(DATA_DIR)
         
@@ -159,7 +162,10 @@ def _enrich_metadata(df_master: pd.DataFrame, df_desc: pd.DataFrame, df_prec: pd
 
 def process_and_optimize_data() -> Tuple[bool, str]:
     """
-    ETL Main Pipeline: Fusionne les CSVs bruts en une BDD optimisée.
+    ETL Main Pipeline : Cette fonction fait tout le travail de données.
+    1. EXTRAC (Load) : On lit les fichiers CSV bruts.
+    2. TRANSFORM (Clean/Construct) : On nettoie et on fusionne les infos.
+    3. LOAD (Save) : On sauvegarde le résultat final propre dans un seul fichier.
     """
     try:
         print("⚙️ Démarrage de l'optimisation ETL (V13.0)...")

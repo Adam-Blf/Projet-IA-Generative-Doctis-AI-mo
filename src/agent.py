@@ -20,7 +20,8 @@ from typing import Optional, Dict, Any
 class DoctisAgent:
     """
     Classe principale représentant l'agent IA médical.
-    Elle charge les instructions de tâches (Prompts) au démarrage.
+    Imaginez cette classe comme le 'cerveau' qui sait quelles instructions 
+    donner à l'IA en fonction de ce qu'on lui demande (Triage ou Avis).
     """
     
     def __init__(self, config_path: Optional[str] = None) -> None:
@@ -49,13 +50,8 @@ class DoctisAgent:
 
     def get_system_prompt(self, task_name: str) -> Optional[str]:
         """
-        Récupère l'instruction système (System Prompt) pour une tâche donnée.
-        
-        Args:
-            task_name (str): Le nom de la tâche (ex: 'triage_urgency').
-            
-        Returns:
-            Optional[str]: Le prompt textuel ou None si la tâche n'existe pas.
+        Récupère le "Prompt Système" (La personnalité de l'IA).
+        Exemple : "Tu es un médecin urgentiste..."
         """
         tasks = self.config.get('tasks', {})
         task = tasks.get(task_name)

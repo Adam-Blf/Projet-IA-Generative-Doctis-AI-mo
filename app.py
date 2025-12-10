@@ -4,11 +4,11 @@
 # Auteurs: Adam Beloucif & Amina Medjdoub
 # ==============================================================================
 
-import streamlit as st
-import google.generativeai as genai
-import json
-import os
-import pandas as pd
+import streamlit as st  # Framework pour créer l'interface web
+import google.generativeai as genai  # Client pour l'IA Gemini
+import json  # Pour gérer les réponses formatées en JSON
+import os  # Pour accéder aux variables système (clés API)
+import pandas as pd  # Pour manipuler les tableaux de données (Excel-like)
 from typing import Optional, Dict, Any, List
 from src.agent import DoctisAgent
 from src.data_loader import load_knowledge_base
@@ -17,6 +17,7 @@ from src.monitoring import init_monitor
 # ==============================================================================
 # 0. CONFIGURATION & STYLES
 # ==============================================================================
+# Cette section gère l'apparence visuelle de l'application (Couleurs, Polices, etc.)
 
 def _inject_custom_css() -> None:
     """Injecte le CSS personnalisé pour l'interface Premium."""
@@ -127,7 +128,10 @@ init_monitor()
 # 1. LOGIC HELPERS
 # ------------------------------------------------------------------------------
 def configure_gemini() -> None:
-    """Configure l'API Google Gemini avec gestion d'erreurs."""
+    """
+    Connecte l'application à l'intelligence artificielle de Google (Gemini).
+    C'est comme donner la clé de la maison pour entrer.
+    """
     try:
         api_key = os.environ.get("GOOGLE_API_KEY")
         if not api_key:
@@ -154,10 +158,11 @@ def get_kaggle_data() -> Optional[pd.DataFrame]:
         return load_knowledge_base()
 
 # Init Resources
-configure_gemini()
-agent = load_agent()
-df_medical = get_kaggle_data()
-metadata = agent.get_agent_metadata()
+# On charge les outils nécessaires au démarrage de l'application
+configure_gemini()  # Connexion à l'IA
+agent = load_agent()  # Chargement du cerveau de l'agent
+df_medical = get_kaggle_data()  # Chargement de la base de données médicale
+metadata = agent.get_agent_metadata()  # Infos sur l'agent (Nom, Version)
 
 # ------------------------------------------------------------------------------
 # 2. SIDEBAR NAVIGATION
@@ -235,7 +240,8 @@ else:
     # 2. ANALYSIS RESULTS
     with col_right:
         if submitted and symptoms:
-            # --- RAG SEARCH LOGIC ---
+            # --- ÉTAPE 1 : RECHERCHE DE PREUVES (RAG) ---
+            # On cherche d'abord dans nos livres (CSV) avant de demander à l'IA.
             kaggle_context = ""
             matches_found: List[str] = []
             
@@ -282,7 +288,7 @@ else:
             
             with st.spinner("🤖 Le Dr. IA analyse le cas (Tentative Gemini)..."):
                 try:
-                    # 1. Tentative Gemini
+                    # 1. On essaie d'abord avec Gemini (Google)
                     model = genai.GenerativeModel(
                         metadata.get('default_model', 'gemini-2.0-flash'),
                         system_instruction=task_config['system_prompt']
@@ -290,7 +296,7 @@ else:
                     response = model.generate_content(prompt)
                     ai_text = response.text
                 except Exception as e_gemini:
-                    # 2. Fallback OpenAI
+                    # 2. Si Gemini échoue (panne, quota...), on bascule sur OpenAI (Plan B)
                     print(f"⚠️ Gemini Error: {e_gemini}. Switching to OpenAI...")
                     openai_key = os.environ.get("OPENAI_API_KEY") 
                     if not openai_key:
