@@ -129,8 +129,8 @@ init_monitor()
 # ------------------------------------------------------------------------------
 def configure_gemini() -> None:
     """
-    Connecte l'application à l'intelligence artificielle de Google (Gemini).
-    C'est comme donner la clé de la maison pour entrer.
+    Configure l'authentification à l'API Google Gemini.
+    Gère la récupération sécurisée de la clé API via les variables d'environnement.
     """
     try:
         api_key = os.environ.get("GOOGLE_API_KEY")
@@ -240,8 +240,8 @@ else:
     # 2. ANALYSIS RESULTS
     with col_right:
         if submitted and symptoms:
-            # --- ÉTAPE 1 : RECHERCHE DE PREUVES (RAG) ---
-            # On cherche d'abord dans nos livres (CSV) avant de demander à l'IA.
+            # --- ÉTAPE 1 : RAG (Retrieval Augmented Generation) ---
+            # Recherche de contexte pertinent dans le dataset local avant l'appel API.
             kaggle_context = ""
             matches_found: List[str] = []
             
@@ -288,7 +288,7 @@ else:
             
             with st.spinner("🤖 Le Dr. IA analyse le cas (Tentative Gemini)..."):
                 try:
-                    # 1. On essaie d'abord avec Gemini (Google)
+                    # 1. Appel principal : Modèle Gemini (Google)
                     model = genai.GenerativeModel(
                         metadata.get('default_model', 'gemini-2.0-flash'),
                         system_instruction=task_config['system_prompt']
@@ -296,7 +296,7 @@ else:
                     response = model.generate_content(prompt)
                     ai_text = response.text
                 except Exception as e_gemini:
-                    # 2. Si Gemini échoue (panne, quota...), on bascule sur OpenAI (Plan B)
+                    # 2. Fallback : Bascule automatique sur OpenAI (GPT-4o) en cas d'erreur
                     print(f"⚠️ Gemini Error: {e_gemini}. Switching to OpenAI...")
                     openai_key = os.environ.get("OPENAI_API_KEY") 
                     if not openai_key:

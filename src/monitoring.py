@@ -15,10 +15,10 @@ from pymongo.errors import ConnectionFailure
 from typing import Optional, Tuple
 
 class HealthMonitor:
-    Système de surveillance et de maintien en vie ("Keep-Alive").
+    Système de monitoring et "Keep-Alive" pour conteneurs serverless.
     
-    Problème : Les serveurs gratuits (comme Render) s'endorment après 15min d'inactivité.
-    Solution : Ce script "pique" (ping) le serveur toutes les 14min pour qu'il reste réveillé.
+    Objectif : Prévenir le "Cold Start" (mise en veille) des plateformes comme Render.
+    Mécanisme : Envoie une requête HTTP (ping) locale périodique (toutes les 14min).
     """
 
     def __init__(self, app_url: str, mongo_uri: Optional[str] = None) -> None:
