@@ -80,14 +80,28 @@ graph TD
         Agent --> Plan[🛡️ Plan d'Action];
     end
 
+    subgraph Data [📚 Datasets Kaggle]
+        D1[(📄 Symptômes)];
+        D2[(⚠️ Précautions)];
+        D3[(📉 Sévérité)];
+    end
+
     subgraph Backend [⚙️ Infrastructure]
         Agent <-->|LLM Principal| Gemini[☁️ Google Gemini 2.0];
         Agent -.->|LLM Secours| GPT[🛡️ OpenAI GPT-4o];
-        Agent <-->|RAG| DB[(📚 Base Kaggle)];
+        Agent <-->|RAG| Data;
         Agent -->|Logs| Mongo[(🍃 MongoDB)];
     end
     
     Triage & SecondOp & Plan --> UI;
+
+    style User fill:#ffccbc,stroke:#bf360c,stroke-width:2px;
+    style UI fill:#b3e5fc,stroke:#01579b,stroke-width:2px;
+    style Agent fill:#fff9c4,stroke:#fbc02d,stroke-width:2px;
+    style Gemini fill:#e1bee7,stroke:#4a148c,stroke-width:2px;
+    style GPT fill:#c8e6c9,stroke:#1b5e20,stroke-width:2px;
+    style Mongo fill:#dcedc8,stroke:#33691e,stroke-width:2px;
+    style Data fill:#f5f5f5,stroke:#616161,stroke-width:2px,stroke-dasharray: 5 5;
 ```
 
 <a name="démarrage"></a>
@@ -200,14 +214,28 @@ graph TD
         Agent --> Plan[🛡️ Action Plan];
     end
 
+    subgraph Data [📚 Kaggle Datasets]
+        D1[(📄 Symptoms)];
+        D2[(⚠️ Precautions)];
+        D3[(📉 Severity)];
+    end
+
     subgraph Backend [⚙️ Infrastructure]
         Agent <-->|LLM Primary| Gemini[☁️ Google Gemini 2.0];
         Agent -.->|LLM Fallback| GPT[🛡️ OpenAI GPT-4o];
-        Agent <-->|RAG| DB[(📚 Vector DB / Kaggle)];
+        Agent <-->|RAG| Data;
         Agent -->|Logs| Mongo[(🍃 MongoDB)];
     end
     
     Triage & SecondOp & Plan --> UI;
+    
+    style User fill:#ffccbc,stroke:#bf360c,stroke-width:2px;
+    style UI fill:#b3e5fc,stroke:#01579b,stroke-width:2px;
+    style Agent fill:#fff9c4,stroke:#fbc02d,stroke-width:2px;
+    style Gemini fill:#e1bee7,stroke:#4a148c,stroke-width:2px;
+    style GPT fill:#c8e6c9,stroke:#1b5e20,stroke-width:2px;
+    style Mongo fill:#dcedc8,stroke:#33691e,stroke-width:2px;
+    style Data fill:#f5f5f5,stroke:#616161,stroke-width:2px,stroke-dasharray: 5 5;
 ```
 
 ### Installation
@@ -260,14 +288,28 @@ graph TD
         Agent --> Plan[🛡️ Plan de Acción];
     end
 
+    subgraph Data [📚 Datasets Kaggle]
+        D1[(📄 Síntomas)];
+        D2[(⚠️ Precauciones)];
+        D3[(📉 Gravedad)];
+    end
+
     subgraph Backend [⚙️ Infraestructura]
         Agent <-->|LLM Principal| Gemini[☁️ Google Gemini 2.0];
         Agent -.->|LLM Respaldo| GPT[🛡️ OpenAI GPT-4o];
-        Agent <-->|RAG| DB[(📚 Base Vectorial)];
+        Agent <-->|RAG| Data;
         Agent -->|Registros| Mongo[(🍃 MongoDB)];
     end
     
     Triage & SecondOp & Plan --> UI;
+    
+    style User fill:#ffccbc,stroke:#bf360c,stroke-width:2px;
+    style UI fill:#b3e5fc,stroke:#01579b,stroke-width:2px;
+    style Agent fill:#fff9c4,stroke:#fbc02d,stroke-width:2px;
+    style Gemini fill:#e1bee7,stroke:#4a148c,stroke-width:2px;
+    style GPT fill:#c8e6c9,stroke:#1b5e20,stroke-width:2px;
+    style Mongo fill:#dcedc8,stroke:#33691e,stroke-width:2px;
+    style Data fill:#f5f5f5,stroke:#616161,stroke-width:2px,stroke-dasharray: 5 5;
 ```
 
 ### Instalación
@@ -320,14 +362,28 @@ graph TD
         Agent --> Plan[🛡️ Piano d'Azione];
     end
 
+    subgraph Data [📚 Datasets Kaggle]
+        D1[(📄 Sintomi)];
+        D2[(⚠️ Precauzioni)];
+        D3[(📉 Gravità)];
+    end
+
     subgraph Backend [⚙️ Infrastruttura]
         Agent <-->|LLM Primario| Gemini[☁️ Google Gemini 2.0];
         Agent -.->|LLM Fallback| GPT[🛡️ OpenAI GPT-4o];
-        Agent <-->|RAG| DB[(📚 Database Vettoriale)];
+        Agent <-->|RAG| Data;
         Agent -->|Log| Mongo[(🍃 MongoDB)];
     end
     
     Triage & SecondOp & Plan --> UI;
+    
+    style User fill:#ffccbc,stroke:#bf360c,stroke-width:2px;
+    style UI fill:#b3e5fc,stroke:#01579b,stroke-width:2px;
+    style Agent fill:#fff9c4,stroke:#fbc02d,stroke-width:2px;
+    style Gemini fill:#e1bee7,stroke:#4a148c,stroke-width:2px;
+    style GPT fill:#c8e6c9,stroke:#1b5e20,stroke-width:2px;
+    style Mongo fill:#dcedc8,stroke:#33691e,stroke-width:2px;
+    style Data fill:#f5f5f5,stroke:#616161,stroke-width:2px,stroke-dasharray: 5 5;
 ```
 
 ### Installazione
@@ -380,14 +436,28 @@ graph TD
         Agent --> Plan[🛡️ Plano de Ação];
     end
 
+    subgraph Data [📚 Datasets Kaggle]
+        D1[(📄 Sintomas)];
+        D2[(⚠️ Precauções)];
+        D3[(📉 Gravidade)];
+    end
+
     subgraph Backend [⚙️ Infraestrutura]
         Agent <-->|LLM Primário| Gemini[☁️ Google Gemini 2.0];
         Agent -.->|LLM Backup| GPT[🛡️ OpenAI GPT-4o];
-        Agent <-->|RAG| DB[(📚 Base Vetorial)];
+        Agent <-->|RAG| Data;
         Agent -->|Logs| Mongo[(🍃 MongoDB)];
     end
     
     Triage & SecondOp & Plan --> UI;
+    
+    style User fill:#ffccbc,stroke:#bf360c,stroke-width:2px;
+    style UI fill:#b3e5fc,stroke:#01579b,stroke-width:2px;
+    style Agent fill:#fff9c4,stroke:#fbc02d,stroke-width:2px;
+    style Gemini fill:#e1bee7,stroke:#4a148c,stroke-width:2px;
+    style GPT fill:#c8e6c9,stroke:#1b5e20,stroke-width:2px;
+    style Mongo fill:#dcedc8,stroke:#33691e,stroke-width:2px;
+    style Data fill:#f5f5f5,stroke:#616161,stroke-width:2px,stroke-dasharray: 5 5;
 ```
 
 ### Instalação
@@ -440,14 +510,28 @@ graph TD
         Agent --> Plan[🛡️ План Действий];
     end
 
+    subgraph Data [📚 Датасеты Kaggle]
+        D1[(📄 Симптомы)];
+        D2[(⚠️ Меры)];
+        D3[(📉 Тяжесть)];
+    end
+
     subgraph Backend [⚙️ Инфраструктура]
         Agent <-->|Основной LLM| Gemini[☁️ Google Gemini 2.0];
         Agent -.->|Резервный LLM| GPT[🛡️ OpenAI GPT-4o];
-        Agent <-->|RAG| DB[(📚 Векторная База)];
+        Agent <-->|RAG| Data;
         Agent -->|Логи| Mongo[(🍃 MongoDB)];
     end
     
     Triage & SecondOp & Plan --> UI;
+    
+    style User fill:#ffccbc,stroke:#bf360c,stroke-width:2px;
+    style UI fill:#b3e5fc,stroke:#01579b,stroke-width:2px;
+    style Agent fill:#fff9c4,stroke:#fbc02d,stroke-width:2px;
+    style Gemini fill:#e1bee7,stroke:#4a148c,stroke-width:2px;
+    style GPT fill:#c8e6c9,stroke:#1b5e20,stroke-width:2px;
+    style Mongo fill:#dcedc8,stroke:#33691e,stroke-width:2px;
+    style Data fill:#f5f5f5,stroke:#616161,stroke-width:2px,stroke-dasharray: 5 5;
 ```
 
 ### Установка
@@ -500,14 +584,28 @@ graph TD
         Agent --> Plan[🛡️ Aktionsplan];
     end
 
+    subgraph Data [📚 Kaggle Datensätze]
+        D1[(📄 Symptome)];
+        D2[(⚠️ Vorsichtsmaßnahmen)];
+        D3[(📉 Schweregrad)];
+    end
+
     subgraph Backend [⚙️ Infrastruktur]
         Agent <-->|Primär-LLM| Gemini[☁️ Google Gemini 2.0];
         Agent -.->|Fallback-LLM| GPT[🛡️ OpenAI GPT-4o];
-        Agent <-->|RAG| DB[(📚 Vektor-DB)];
+        Agent <-->|RAG| Data;
         Agent -->|Logs| Mongo[(🍃 MongoDB)];
     end
     
     Triage & SecondOp & Plan --> UI;
+    
+    style User fill:#ffccbc,stroke:#bf360c,stroke-width:2px;
+    style UI fill:#b3e5fc,stroke:#01579b,stroke-width:2px;
+    style Agent fill:#fff9c4,stroke:#fbc02d,stroke-width:2px;
+    style Gemini fill:#e1bee7,stroke:#4a148c,stroke-width:2px;
+    style GPT fill:#c8e6c9,stroke:#1b5e20,stroke-width:2px;
+    style Mongo fill:#dcedc8,stroke:#33691e,stroke-width:2px;
+    style Data fill:#f5f5f5,stroke:#616161,stroke-width:2px,stroke-dasharray: 5 5;
 ```
 
 ### Installation
@@ -560,14 +658,28 @@ graph TD
         Agent --> Plan[🛡️ Eylem Planı];
     end
 
+    subgraph Data [📚 Kaggle Veri Setleri]
+        D1[(📄 Semptomlar)];
+        D2[(⚠️ Önlemler)];
+        D3[(📉 Ciddiyet)];
+    end
+
     subgraph Backend [⚙️ Altyapı]
         Agent <-->|Birincil LLM| Gemini[☁️ Google Gemini 2.0];
         Agent -.->|Yedek LLM| GPT[🛡️ OpenAI GPT-4o];
-        Agent <-->|RAG| DB[(📚 Vektör Veritabanı)];
+        Agent <-->|RAG| Data;
         Agent -->|Günlükler| Mongo[(🍃 MongoDB)];
     end
     
     Triage & SecondOp & Plan --> UI;
+
+    style User fill:#ffccbc,stroke:#bf360c,stroke-width:2px;
+    style UI fill:#b3e5fc,stroke:#01579b,stroke-width:2px;
+    style Agent fill:#fff9c4,stroke:#fbc02d,stroke-width:2px;
+    style Gemini fill:#e1bee7,stroke:#4a148c,stroke-width:2px;
+    style GPT fill:#c8e6c9,stroke:#1b5e20,stroke-width:2px;
+    style Mongo fill:#dcedc8,stroke:#33691e,stroke-width:2px;
+    style Data fill:#f5f5f5,stroke:#616161,stroke-width:2px,stroke-dasharray: 5 5;
 ```
 
 ### Kurulum
