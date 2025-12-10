@@ -101,7 +101,7 @@ graph TD
     style Gemini fill:#e1bee7,stroke:#4a148c,stroke-width:2px,color:#000000;
     style GPT fill:#c8e6c9,stroke:#1b5e20,stroke-width:2px,color:#000000;
     style Mongo fill:#dcedc8,stroke:#33691e,stroke-width:2px,color:#000000;
-    style Data fill:#f5f5f5,stroke:#616161,stroke-width:2px,stroke-dasharray: 5 5,color:#000000;
+    style Data fill:#f5f5f5,stroke:#616161,stroke-width:2px,stroke-dasharray: 5 5;
 ```
 
 <a name="démarrage"></a>
@@ -235,7 +235,7 @@ graph TD
     style Gemini fill:#e1bee7,stroke:#4a148c,stroke-width:2px,color:#000000;
     style GPT fill:#c8e6c9,stroke:#1b5e20,stroke-width:2px,color:#000000;
     style Mongo fill:#dcedc8,stroke:#33691e,stroke-width:2px,color:#000000;
-    style Data fill:#f5f5f5,stroke:#616161,stroke-width:2px,stroke-dasharray: 5 5,color:#000000;
+    style Data fill:#f5f5f5,stroke:#616161,stroke-width:2px,stroke-dasharray: 5 5;
 ```
 
 ### Installation
@@ -309,7 +309,7 @@ graph TD
     style Gemini fill:#e1bee7,stroke:#4a148c,stroke-width:2px,color:#000000;
     style GPT fill:#c8e6c9,stroke:#1b5e20,stroke-width:2px,color:#000000;
     style Mongo fill:#dcedc8,stroke:#33691e,stroke-width:2px,color:#000000;
-    style Data fill:#f5f5f5,stroke:#616161,stroke-width:2px,stroke-dasharray: 5 5,color:#000000;
+    style Data fill:#f5f5f5,stroke:#616161,stroke-width:2px,stroke-dasharray: 5 5;
 ```
 
 ### Instalación
@@ -383,7 +383,7 @@ graph TD
     style Gemini fill:#e1bee7,stroke:#4a148c,stroke-width:2px,color:#000000;
     style GPT fill:#c8e6c9,stroke:#1b5e20,stroke-width:2px,color:#000000;
     style Mongo fill:#dcedc8,stroke:#33691e,stroke-width:2px,color:#000000;
-    style Data fill:#f5f5f5,stroke:#616161,stroke-width:2px,stroke-dasharray: 5 5,color:#000000;
+    style Data fill:#f5f5f5,stroke:#616161,stroke-width:2px,stroke-dasharray: 5 5;
 ```
 
 ### Installazione
@@ -457,7 +457,7 @@ graph TD
     style Gemini fill:#e1bee7,stroke:#4a148c,stroke-width:2px,color:#000000;
     style GPT fill:#c8e6c9,stroke:#1b5e20,stroke-width:2px,color:#000000;
     style Mongo fill:#dcedc8,stroke:#33691e,stroke-width:2px,color:#000000;
-    style Data fill:#f5f5f5,stroke:#616161,stroke-width:2px,stroke-dasharray: 5 5,color:#000000;
+    style Data fill:#f5f5f5,stroke:#616161,stroke-width:2px,stroke-dasharray: 5 5;
 ```
 
 ### Instalação
@@ -531,7 +531,7 @@ graph TD
     style Gemini fill:#e1bee7,stroke:#4a148c,stroke-width:2px,color:#000000;
     style GPT fill:#c8e6c9,stroke:#1b5e20,stroke-width:2px,color:#000000;
     style Mongo fill:#dcedc8,stroke:#33691e,stroke-width:2px,color:#000000;
-    style Data fill:#f5f5f5,stroke:#616161,stroke-width:2px,stroke-dasharray: 5 5,color:#000000;
+    style Data fill:#f5f5f5,stroke:#616161,stroke-width:2px,stroke-dasharray: 5 5;
 ```
 
 ### Установка
@@ -605,7 +605,7 @@ graph TD
     style Gemini fill:#e1bee7,stroke:#4a148c,stroke-width:2px,color:#000000;
     style GPT fill:#c8e6c9,stroke:#1b5e20,stroke-width:2px,color:#000000;
     style Mongo fill:#dcedc8,stroke:#33691e,stroke-width:2px,color:#000000;
-    style Data fill:#f5f5f5,stroke:#616161,stroke-width:2px,stroke-dasharray: 5 5,color:#000000;
+    style Data fill:#f5f5f5,stroke:#616161,stroke-width:2px,stroke-dasharray: 5 5;
 ```
 
 ### Installation
@@ -679,7 +679,7 @@ graph TD
     style Gemini fill:#e1bee7,stroke:#4a148c,stroke-width:2px,color:#000000;
     style GPT fill:#c8e6c9,stroke:#1b5e20,stroke-width:2px,color:#000000;
     style Mongo fill:#dcedc8,stroke:#33691e,stroke-width:2px,color:#000000;
-    style Data fill:#f5f5f5,stroke:#616161,stroke-width:2px,stroke-dasharray: 5 5,color:#000000;
+    style Data fill:#f5f5f5,stroke:#616161,stroke-width:2px,stroke-dasharray: 5 5;
 ```
 
 ### Kurulum
