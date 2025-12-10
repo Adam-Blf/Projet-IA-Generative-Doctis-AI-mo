@@ -165,6 +165,10 @@ python src/agent.py
 
 *Si tout fonctionne, vous verrez : `✅ Agent Chargé : DoctisAImo v16.5-Optimized`.*
 
+### ⚠️ Avertissement
+
+**DoctisAImo est un projet de recherche en IA.** Ce n'est pas un professionnel de santé agréé. Appelez toujours les urgences (**112** ou **15**) en cas de danger vital.
+
 ---
 
 <a name="-anglais"></a>
@@ -220,6 +224,10 @@ pip install -r requirements.txt
 ```bash
 streamlit run app.py
 ```
+
+### ⚠️ Disclaimer
+
+**DoctisAImo is an AI research project.** It is not a licensed medical professional. Always call emergency services (**112** or **911**) in life-threatening situations.
 
 ---
 
@@ -277,6 +285,10 @@ pip install -r requirements.txt
 streamlit run app.py
 ```
 
+### ⚠️ Aviso Legal
+
+**DoctisAImo es un proyecto de investigación de IA.** No es un profesional médico con licencia. Llame siempre a los servicios de emergencia (**112**) en situaciones de riesgo vital.
+
 ---
 
 <a name="-italien"></a>
@@ -332,6 +344,10 @@ pip install -r requirements.txt
 ```bash
 streamlit run app.py
 ```
+
+### ⚠️ Avvertenza
+
+**DoctisAImo è un progetto di ricerca IA.** Non è un professionista medico autorizzato. Chiamare sempre i servizi di emergenza (**112**) in situazioni di pericolo di vita.
 
 ---
 
@@ -389,6 +405,10 @@ pip install -r requirements.txt
 streamlit run app.py
 ```
 
+### ⚠️ Aviso Legal
+
+**DoctisAImo é um projeto de pesquisa em IA.** Não é um profissional médico licenciado. Ligue sempre para os serviços de emergência (**112** ou **192**) em situações de risco de vida.
+
 ---
 
 <a name="-russe"></a>
@@ -444,6 +464,10 @@ pip install -r requirements.txt
 ```bash
 streamlit run app.py
 ```
+
+### ⚠️ Предупреждение
+
+**DoctisAImo — это исследовательский проект ИИ.** Это не лицензированный медицинский специалист. В случае угрозы жизни всегда звоните в экстренные службы (**112** или **103**).
 
 ---
 
@@ -501,6 +525,10 @@ pip install -r requirements.txt
 streamlit run app.py
 ```
 
+### ⚠️ Haftungsausschluss
+
+**DoctisAImo ist ein KI-Forschungsprojekt.** Es handelt sich nicht um einen lizenzierten Mediziner. Rufen Sie in lebensbedrohlichen Situationen immer den Notdienst (**112**) an.
+
 ---
 
 <a name="-turc"></a>
@@ -557,10 +585,6 @@ pip install -r requirements.txt
 streamlit run app.py
 ```
 
----
+### ⚠️ Yasal Uyarı
 
-### ⚠️ Disclaimer / Avertissement
-
-**DoctisAImo is an AI research project.** It is not a licensed medical professional. Always call emergency services (112/911) in life-threatening situations.
-
-*DoctisAImo est un projet de recherche en IA. Ce n'est pas un professionnel de santé agréé. Appelez toujours les urgences en cas de danger vital.*
+**DoctisAImo bir YZ araştırma projesidir.** Lisanslı bir tıp uzmanı değildir. Hayati tehlike arz eden durumlarda her zaman acil servisi (**112**) arayın.
