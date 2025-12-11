@@ -11,7 +11,7 @@ from src.core.rag_engine import RAGEngine
 from src.services.llm_service import ModelManager
 
 # --- APP INIT ---
-app = FastAPI(title="DoctisAImo v2.0", description="Advanced Medical Triage AI")
+app = FastAPI(title="DoctisAImo v16.8-Optimized", description="Advanced Medical Triage AI")
 
 # CORS (Allow all for development)
 app.add_middleware(
