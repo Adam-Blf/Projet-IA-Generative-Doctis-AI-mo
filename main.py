@@ -16,8 +16,8 @@ app = FastAPI(title="DoctisAImo v16.8-Optimized", description="Advanced Medical 
 # CORS (Allow all for development)
 app.add_middleware(
     CORSMiddleware,
-    allow_origin_regex=".*", # Allow ALL origins (Vercel, Localhost, etc) via Regex
-    allow_credentials=True,
+    allow_origins=["*"], # Public API: Allow all origins
+    allow_credentials=False, # No cookies/auth headers needed -> simplifies CORS significantly
     allow_methods=["*"],
     allow_headers=["*"],
 )
