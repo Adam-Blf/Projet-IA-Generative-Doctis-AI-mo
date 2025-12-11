@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DoctisAImo v2.0 | Intelligent Triage</title>
+
+    <!-- Fonts (Google Fonts Inter) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+
+    <!-- Markdown Renderer -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+
+<body>
+
+    <div class="app-container">
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+            <div class="logo">
+                <span class="icon">🏥</span>
+                <h1>DoctisAImo</h1>
+                <span class="version">v2.0 Beta</span>
+            </div>
+
+            <nav>
+                <button class="nav-item active" onclick="switchTab('triage')">
+                    <span class="nav-icon">🚑</span> Triage Urgence
+                </button>
+                <button class="nav-item" onclick="switchTab('second')">
+                    <span class="nav-icon">🧠</span> Seconde Opinion
+                </button>
+            </nav>
+
+            <div class="status-panel">
+                <h3>System Status</h3>
+                <div class="status-item"><span class="dot green"></span> Gemini v2.0</div>
+                <div class="status-item"><span class="dot green"></span> Neural Search</div>
+            </div>
+        </aside>
+
+        <!-- MAIN CONTENT -->
+        <main class="main-content">
+            <header>
+                <h2>Dossier Patient Intelligent</h2>
+                <div class="header-controls">
+                    <button class="theme-toggle" id="themeToggle" title="Basculer Mode Sombre/Clair">
+                        🌙
+                    </button>
+                    <div class="user-profile">Dr. IA (Admin)</div>
+                </div>
+            </header>
+
+            <div class="split-view">
+                <!-- LEFT: INPUT FORM -->
+                <section class="input-section glass-panel">
+                    <h3>📝 Saisie Clinique</h3>
+
+                    <form id="triageForm">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Âge</label>
+                                <input type="number" id="age" value="35" min="0" max="120">
+                            </div>
+                            <div class="form-group">
+                                <label>Genre</label>
+                                <select id="gender">
+                                    <option value="Homme">Homme</option>
+                                    <option value="Femme">Femme</option>
+                                    <option value="Autre">Autre</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Symptômes & Histoire</label>
+                            <textarea id="symptoms"
+                                placeholder="Décrivez les symptômes en détail (ex: Douleur thoracique irradiant...)"
+                                rows="6"></textarea>
+                        </div>
+
+                        <button type="submit" class="btn-primary" id="analyzeBtn">
+                            <span class="btn-text">Lancer l'Analyse</span>
+                            <div class="spinner hidden"></div>
+                        </button>
+                    </form>
+                </section>
+
+                <!-- RIGHT: RESULTS -->
+                <section class="results-section">
+                    <!-- Placeholder State -->
+                    <div id="emptyState" class="empty-state">
+                        <div class="illustration">👋</div>
+                        <h3>En attente de données</h3>
+                        <p>Remplissez le formulaire pour démarrer l'analyse différentielle IA.</p>
+                    </div>
+
+                    <!-- Analysis Content (Hidden by default) -->
+                    <div id="analysisResult" class="analysis-content hidden">
+                        <div class="glass-panel result-card">
+                            <div class="result-header">
+                                <h3>📊 Rapport d'Analyse</h3>
+                                <span class="badge" id="urgencyBadge">Calcul...</span>
+                            </div>
+                            <div id="markdownOutput" class="markdown-body"></div>
+                        </div>
+
+                        <!-- RAG Sources -->
+                        <div class="glass-panel sources-card">
+                            <h4>📚 Sources Médicales (RAG)</h4>
+                            <div id="sourcesList" class="sources-list"></div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <div id="toastContainer" class="toast-container"></div>
+    <!-- JS -->
+    <script src="/static/js/script.js"></script>
+</body>
+
+</html>

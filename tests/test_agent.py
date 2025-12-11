@@ -20,8 +20,9 @@ def test_triage_prompt_exists():
     """Vérifie que le prompt de triage est bien chargé."""
     agent = DoctisAgent()
     prompt = agent.get_system_prompt('triage_urgency')
+    MIN_PROMPT_LENGTH = 50
     assert prompt is not None
-    assert len(prompt) > 50 # Le prompt doit avoir du contenu substantiel
+    assert len(prompt) > MIN_PROMPT_LENGTH # Le prompt doit avoir du contenu substantiel
 
 def test_metadata_integrity():
     """Vérifie les métadonnées de l'agent."""

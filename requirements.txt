@@ -1,9 +1,13 @@
+fastapi
+uvicorn
+jinja2
+python-multipart
 google-generativeai
 python-dotenv
-streamlit
-
 pandas
 pymongo
 requests
 pytest
 openai
+sentence-transformers
+scikit-learn

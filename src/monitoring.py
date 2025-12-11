@@ -17,25 +17,41 @@ from typing import Optional, Tuple
 class HealthMonitor:
     """
     Système de monitoring et "Keep-Alive" pour conteneurs serverless.
-    
+
     Objectif : Prévenir le "Cold Start" (mise en veille) des plateformes comme Render.
     Mécanisme : Envoie une requête HTTP (ping) locale périodique (toutes les 5min).
     """
 
+    DEFAULT_TIMEOUT = 10
+    PING_INTERVAL = 300  # 5 minutes
+
     def __init__(self, app_url: str, mongo_uri: Optional[str] = None) -> None:
         """
         Initialise le moniteur.
-        
+
         Args:
             app_url (str): L'URL publique de l'application (pour le ping).
             mongo_uri (Optional[str]): Chaîne de connexion MongoDB.
         """
         self.app_url = app_url
-        self.interval_seconds = 5 * 60  # 5 minutes
+        self.interval_seconds = self.PING_INTERVAL
         self.mongo_uri = mongo_uri
         self.db_client: Optional[MongoClient] = None
         self.collection = None
         self._setup_db()
+# ... (middle lines omitted for brevity if unchanged, but for safety I will include relevant parts)
+
+    def check_health(self) -> Tuple[bool, str]:
+        """Effectue une requête GET sur l'application elle-même."""
+        try:
+            print(f"Ping {self.app_url} ...")
+            response = requests.get(self.app_url, timeout=self.DEFAULT_TIMEOUT)
+            if response.status_code == 200:
+                return True, f"Status Code: {response.status_code}"
+            else:
+                return False, f"Error Code: {response.status_code}"
+        except Exception as e:
+            return False, str(e)
 
     def _setup_db(self) -> None:
         """Configure la connexion MongoDB si une URI est fournie."""
