@@ -16,7 +16,7 @@ app = FastAPI(title="DoctisAImo v16.8-Optimized", description="Advanced Medical 
 # CORS (Allow all for development)
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=["*", "https://doctis-ai-mo.vercel.app"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

@@ -73,6 +73,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         try {
+            console.log("Calling API at:", `${API_BASE_URL}/api/analyze`); // DEBUG
             // 3. API Call
             const response = await fetch(`${API_BASE_URL}/api/analyze`, {
                 method: 'POST',
@@ -80,7 +81,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 body: JSON.stringify(payload)
             });
 
-            if (!response.ok) throw new Error('Erreur serveur');
+            if (!response.ok) {
+                const errorText = await response.text();
+                throw new Error(`Erreur serveur (${response.status}): ${errorText}`);
+            }
             const responseData = await response.json();
 
             // 4. Render Results
