@@ -113,14 +113,7 @@
                         <details class="optional-section">
                             <summary>➕ Données Complémentaires (Optionnel)</summary>
                             <div class="optional-content">
-                                <div class="form-section-title">Configuration Avancée</div>
-                                <div class="form-group">
-                                    <label for="user_api_key">🔑 Votre Clé API Gemini (Optionnel)</label>
-                                    <input type="password" id="user_api_key"
-                                        placeholder="AIzaSy... (Laissez vide pour utiliser la clé par défaut du serveur)">
-                                    <small style="color: var(--text-tertiary); font-size: 0.75rem;">Utilisez votre
-                                        propre clé pour éviter les limites de quota publiques.</small>
-                                </div>
+
 
                                 <div class="form-group">
                                     <label>Antécédents / Histoire</label>
@@ -137,6 +130,17 @@
                                 </div>
                             </div>
                         </details>
+
+                        <div class="glass-panel"
+                            style="margin-top: 1rem; background: rgba(59, 130, 246, 0.05); border: 1px dashed var(--primary-400);">
+                            <div class="form-group" style="margin-bottom: 0;">
+                                <label for="user_api_key" style="color: var(--primary-600); font-weight: 700;">🔑 Votre
+                                    Clé API Gemini (Optionnel)</label>
+                                <input type="password" id="user_api_key" placeholder="Collez votre clé ici (AIzaSy...)">
+                                <small style="color: var(--text-secondary);">Si l'API publique est saturée (Erreur ou
+                                    failed to fetch), mettez votre clé ici.</small>
+                            </div>
+                        </div>
 
                         <button type="submit" class="btn-primary" id="analyzeBtn">
                             <span class="btn-text">Lancer l'Analyse</span>
