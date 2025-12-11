@@ -72,12 +72,19 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
+        const userApiKey = document.getElementById('user_api_key').value.trim();
+
         try {
             console.log("Calling API at:", `${API_BASE_URL}/api/analyze`); // DEBUG
             // 3. API Call
+            const headers = { 'Content-Type': 'application/json' };
+            if (userApiKey) {
+                headers['x-gemini-api-key'] = userApiKey;
+            }
+
             const response = await fetch(`${API_BASE_URL}/api/analyze`, {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
+                headers: headers,
                 body: JSON.stringify(payload)
             });
 

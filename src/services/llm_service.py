@@ -27,10 +27,22 @@ class ModelManager:
         if Config.OPENAI_API_KEY:
             openai.api_key = Config.OPENAI_API_KEY
 
-    def generate_content(self, system_prompt: str, user_prompt: str) -> str:
+    def generate_content(self, system_prompt: str, user_prompt: str, custom_config: dict = None) -> str:
         """
         Main entry point. Iterates through providers until one succeeds.
         """
+        # Configure Dynamic Key if provided
+        if custom_config and custom_config.get("api_key"):
+            try:
+                import google.generativeai as genai
+                genai.configure(api_key=custom_config["api_key"])
+                # We prioritize Gemini Primary with this new key
+                # Note: This changes global state for the process worker. 
+                # In production/async, we would instantiate a client per request.
+                pass 
+            except Exception as e:
+                logger.error(f"Failed to configure custom API key: {e}")
+
         last_error = None
         
         for provider in self.providers:

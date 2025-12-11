@@ -1,4 +1,34 @@
-from fastapi import FastAPI, Request
+from fastapi import FastAPI, Request, Header, Header
+
+# ... (Previous imports remain)
+
+# ... inside @app.post("/api/analyze")
+
+@app.post("/api/analyze")
+async def analyze_symptoms(
+    data: TriageRequest,
+    x_gemini_api_key: Optional[str] = Header(None)
+):
+    """
+    Main Logic Pipeline:
+    ...
+    """
+    # ... (BMI Logic remains same)
+
+    # ... (RAG Logic remains same)
+    
+    # ... Prompt construction ...
+    
+    # 3. Generate (Smart Switch)
+    # Configure custom context if key is provided
+    custom_config = {"api_key": x_gemini_api_key} if x_gemini_api_key else None
+    
+    ai_response = llm.generate_content(system_prompt, user_prompt, custom_config=custom_config)
+    
+    return {
+        "analysis": ai_response,
+        "sources": rag_results
+    }
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 from fastapi.middleware.cors import CORSMiddleware
@@ -66,7 +96,10 @@ async def read_root(request: Request):
     return templates.TemplateResponse("index.html", {"request": request})
 
 @app.post("/api/analyze")
-async def analyze_symptoms(data: TriageRequest):
+async def analyze_symptoms(
+    data: TriageRequest,
+    x_gemini_api_key: Optional[str] = Header(None)
+):
     """
     Main Logic Pipeline:
     1. Calculate BMI
@@ -128,7 +161,8 @@ async def analyze_symptoms(data: TriageRequest):
     """
     
     # 3. Generate (Smart Switch)
-    ai_response = llm.generate_content(system_prompt, user_prompt)
+    custom_config = {"api_key": x_gemini_api_key} if x_gemini_api_key else None
+    ai_response = llm.generate_content(system_prompt, user_prompt, custom_config=custom_config)
     
     return {
         "analysis": ai_response,
