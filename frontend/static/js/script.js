@@ -18,8 +18,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Simple Heuristic:
     const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
-    // REPLACE 'https://doctis-backend.onrender.com' with your actual Render URL after deployment
-    const API_BASE_URL = isLocal ? 'http://localhost:8000' : 'https://doctis-backend.onrender.com';
+    // CORRECT BACKEND URL from User
+    const API_BASE_URL = isLocal ? 'http://localhost:8000' : 'https://doctis-aimo.onrender.com';
 
     // --- THEME MANAGEMENT ---
     const savedTheme = localStorage.getItem('theme') || 'dark'; // Default to dark
