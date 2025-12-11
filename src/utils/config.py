@@ -8,6 +8,7 @@ class Config:
     """Central configuration for DoctisAImo."""
     
     # API Keys
+    # API Keys
     GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY")
     OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
     MONGO_URI = os.getenv("MONGO_URI")

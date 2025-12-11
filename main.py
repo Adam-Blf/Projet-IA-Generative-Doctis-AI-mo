@@ -23,8 +23,8 @@ app.add_middleware(
 )
 
 # Static & Templates
-app.mount("/static", StaticFiles(directory="static"), name="static")
-templates = Jinja2Templates(directory="templates")
+app.mount("/static", StaticFiles(directory="frontend/static"), name="static")
+templates = Jinja2Templates(directory="frontend")
 
 # --- CORE LOADING ---
 # Lazy load core components to ensure startup speed
@@ -37,10 +37,26 @@ rag = RAGEngine(kb)
 llm = ModelManager()
 
 # --- DATA MODELS ---
+from typing import Optional
+
 class TriageRequest(BaseModel):
+    # Identity (Required)
+    first_name: str
+    last_name: str
     age: int
     gender: str
+    
+    # Biometrics (Required for BMI)
+    height: int # cm
+    weight: int # kg
+    
+    # Clinical (Required)
     symptoms: str
+    
+    # Optional Context
+    history: Optional[str] = None
+    vitals: Optional[str] = None
+    medications: Optional[str] = None
 
 # --- ROUTES ---
 
@@ -53,10 +69,23 @@ async def read_root(request: Request):
 async def analyze_symptoms(data: TriageRequest):
     """
     Main Logic Pipeline:
-    1. Semantic Search (RAG)
-    2. Context Construction
-    3. LLM Generation (with Auto-Switch)
+    1. Calculate BMI
+    2. Semantic Search (RAG)
+    3. Context Construction (Full Report)
+    4. LLM Generation
     """
+    # 0. Calc BMI
+    bmi = 0.0
+    bmi_category = "N/A"
+    if data.height > 0:
+        height_m = data.height / 100
+        bmi = data.weight / (height_m * height_m)
+        
+        if bmi < 18.5: bmi_category = "Maigreur"
+        elif 18.5 <= bmi < 25: bmi_category = "Normal"
+        elif 25 <= bmi < 30: bmi_category = "Surpoids"
+        else: bmi_category = "Obésité"
+
     # 1. RAG Retrieve
     rag_results = rag.search(data.symptoms, top_k=3)
     
@@ -70,20 +99,32 @@ async def analyze_symptoms(data: TriageRequest):
     system_prompt = "Tu es DoctisAImo, une IA experte en triage médical d'urgence. Réponds en Markdown structuré."
     
     user_prompt = f"""
-    ANALYSE CE CAS MÉDICAL :
+    ANALYSE CE DOSSIER PATIENT COMPLET :
     
-    PATIENT: {data.age} ans, {data.gender}.
-    SYMPTÔMES: "{data.symptoms}"
+    ==== 1. IDENTITÉ & BIOMÉTRIE ====
+    Nom: {data.last_name.upper()}, {data.first_name}
+    Age: {data.age} ans | Sexe: {data.gender}
+    Taille: {data.height} cm | Poids: {data.weight} kg
+    IMC: {bmi:.1f} ({bmi_category})
     
-    CONTEXTE MÉDICAL DE RÉFÉRENCE (RAG):
+    ==== 2. CLINIQUE (MOTIF) ====
+    "{data.symptoms}"
+    
+    ==== 3. CONTEXTE ADDITIONNEL (SI DISPO) ====
+    Antécédents / Histoire: {data.history or "Non renseigné"}
+    Constantes (Vitals): {data.vitals or "Non renseigné"}
+    Traitements: {data.medications or "Non renseigné"}
+    
+    ==== 4. BASE DE CONNAISSANCE (RAG) ====
     {rag_context}
     
-    INSTRUCTIONS:
-    1. Détermine le niveau d'urgence (Code Vert/Orange/Rouge).
-    2. Fournis une analyse clinique.
-    3. Liste des recommandations immédiates.
+    INSTRUCTIONS DE RAPPORT:
+    1. Résumé Clinique (incluant l'interprétation de l'IMC si pertinent).
+    2. Analyse Différentielle (Basée sur RAG + Symptômes).
+    3. Niveau d'Urgence Estimé (Code Couleur).
+    4. Recommandations & Prochaines étapes.
     
-    Réponds en Français. Sois concis et professionnel.
+    Réponds en Français. Sois professionnel, empathique, et précis.
     """
     
     # 3. Generate (Smart Switch)
@@ -95,4 +136,6 @@ async def analyze_symptoms(data: TriageRequest):
     }
 
 if __name__ == "__main__":
-    uvicorn.run("main:app", host="0.0.0.0", port=8000, reload=True)
+    DEFAULT_HOST = "0.0.0.0" # Bind to all interfaces (Docker/Render)
+    DEFAULT_PORT = 8000
+    uvicorn.run("main:app", host=DEFAULT_HOST, port=DEFAULT_PORT, reload=True)

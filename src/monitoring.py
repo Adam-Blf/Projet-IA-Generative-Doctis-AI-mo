@@ -84,17 +84,6 @@ class HealthMonitor:
             except Exception as e:
                 print(f"⚠️ [MONITOR] Impossible de logger dans Mongo: {e}")
 
-    def check_health(self) -> Tuple[bool, str]:
-        """Effectue une requête GET sur l'application elle-même."""
-        try:
-            print(f"Ping {self.app_url} ...")
-            response = requests.get(self.app_url, timeout=10)
-            if response.status_code == 200:
-                return True, f"Status Code: {response.status_code}"
-            else:
-                return False, f"Error Code: {response.status_code}"
-        except Exception as e:
-            return False, str(e)
 
     def start_background_loop(self) -> None:
         """Lance la boucle infinie dans un thread séparé (Non-bloquant)."""

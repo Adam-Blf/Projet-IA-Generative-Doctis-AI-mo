@@ -106,7 +106,8 @@ class ModelManager:
                 ],
                 "stream": False
             }
-            response = requests.post(f"{Config.LOCAL_LLM_URL}/chat/completions", json=payload, timeout=30)
+            LOCAL_TIMEOUT = 30
+            response = requests.post(f"{Config.LOCAL_LLM_URL}/chat/completions", json=payload, timeout=LOCAL_TIMEOUT)
             if response.status_code == 200:
                 return response.json()['choices'][0]['message']['content']
             else:

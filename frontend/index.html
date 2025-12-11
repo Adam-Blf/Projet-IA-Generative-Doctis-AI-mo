@@ -46,31 +46,40 @@
         </aside>
 
         <!-- MAIN CONTENT -->
-        <main class="main-content">
-            <header>
-                <h2>Dossier Patient Intelligent</h2>
-                <div class="header-controls">
-                    <button class="theme-toggle" id="themeToggle" title="Basculer Mode Sombre/Clair">
-                        🌙
-                    </button>
-                    <div class="user-profile">Dr. IA (Admin)</div>
+        <div class="main-content">
+            <div class="header-bar animate-entrance delay-100">
+                <h2>Interface de Triage</h2>
+                <div class="actions">
+                    <button id="themeToggle" class="btn-icon">☀️</button>
                 </div>
-            </header>
+            </div>
 
             <div class="split-view">
-                <!-- LEFT: INPUT FORM -->
-                <section class="input-section glass-panel">
+                <!-- INPUT FORM -->
+                <div class="input-section glass-panel animate-entrance delay-200">
                     <h3>📝 Saisie Clinique</h3>
 
                     <form id="triageForm">
+                        <!-- 1. IDENTITÉ (Requis) -->
+                        <h4 class="form-section-title">👤 Identité</h4>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Nom</label>
+                                <input type="text" id="lastName" placeholder="Nom" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Prénom</label>
+                                <input type="text" id="firstName" placeholder="Prénom" required>
+                            </div>
+                        </div>
                         <div class="form-row">
                             <div class="form-group">
                                 <label>Âge</label>
-                                <input type="number" id="age" value="35" min="0" max="120">
+                                <input type="number" id="age" value="35" min="0" max="120" required>
                             </div>
                             <div class="form-group">
                                 <label>Genre</label>
-                                <select id="gender">
+                                <select id="gender" required>
                                     <option value="Homme">Homme</option>
                                     <option value="Femme">Femme</option>
                                     <option value="Autre">Autre</option>
@@ -78,30 +87,53 @@
                             </div>
                         </div>
 
+                        <!-- 2. BIOMÉTRIE (Requis) -->
+                        <h4 class="form-section-title">📏 Biométrie</h4>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Taille (cm)</label>
+                                <input type="number" id="height" placeholder="175" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Poids (kg)</label>
+                                <input type="number" id="weight" placeholder="70" required>
+                            </div>
+                        </div>
+
+                        <!-- 3. CLINIQUE (Requis) -->
+                        <h4 class="form-section-title">📝 Motif de Consultation</h4>
                         <div class="form-group">
-                            <label>Symptômes & Histoire</label>
+                            <label>Symptômes Principaux</label>
                             <textarea id="symptoms"
                                 placeholder="Décrivez les symptômes en détail (ex: Douleur thoracique irradiant...)"
-                                rows="6"></textarea>
+                                rows="4" required></textarea>
                         </div>
+
+                        <!-- 4. COMPLÉMENTS (Optionnel) -->
+                        <details class="optional-section">
+                            <summary>➕ Données Complémentaires (Optionnel)</summary>
+                            <div class="optional-content">
+                                <div class="form-group">
+                                    <label>Antécédents / Histoire</label>
+                                    <textarea id="history" rows="2"
+                                        placeholder="Diabète, Hypertension, Chirurgie..."></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label>Constantes (Tension, Pouls...)</label>
+                                    <input type="text" id="vitals" placeholder="TA: 12/8, FC: 80bpm, SpO2: 98%">
+                                </div>
+                                <div class="form-group">
+                                    <label>Traitements en cours</label>
+                                    <input type="text" id="medications" placeholder="Lister les médicaments...">
+                                </div>
+                            </div>
+                        </details>
 
                         <button type="submit" class="btn-primary" id="analyzeBtn">
                             <span class="btn-text">Lancer l'Analyse</span>
                             <div class="spinner hidden"></div>
                         </button>
                     </form>
-                </section>
-
-                <!-- RIGHT: RESULTS -->
-                <section class="results-section">
-                    <!-- Placeholder State -->
-                    <div id="emptyState" class="empty-state">
-                        <div class="illustration">👋</div>
-                        <h3>En attente de données</h3>
-                        <p>Remplissez le formulaire pour démarrer l'analyse différentielle IA.</p>
-                    </div>
-
-                    <!-- Analysis Content (Hidden by default) -->
                     <div id="analysisResult" class="analysis-content hidden">
                         <div class="glass-panel result-card">
                             <div class="result-header">
@@ -117,14 +149,14 @@
                             <div id="sourcesList" class="sources-list"></div>
                         </div>
                     </div>
-                </section>
+                    </section>
+                </div>
+                </main>
             </div>
-        </main>
-    </div>
 
-    <div id="toastContainer" class="toast-container"></div>
-    <!-- JS -->
-    <script src="/static/js/script.js"></script>
+            <div id="toastContainer" class="toast-container"></div>
+            <!-- JS -->
+            <script src="/static/js/script.js"></script>
 </body>
 
 </html>

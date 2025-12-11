@@ -7,6 +7,20 @@ document.addEventListener('DOMContentLoaded', () => {
     const sourcesList = document.getElementById('sourcesList');
     const themeToggle = document.getElementById('themeToggle');
 
+    // Constants
+    const ANIMATION_DURATION = 300;
+    const TOAST_DURATION = 3000;
+
+    // API Configuration
+    // If we are on localhost, assume backend is on port 8000.
+    // If on Vercel (Prod), use the environment variable or a hardcoded fallback until configured.
+    // Ideally, Vercel injects this, but since we are static HTML, we might need a config.js or simple detection.
+
+    // Simple Heuristic:
+    const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+    // REPLACE 'https://doctis-backend.onrender.com' with your actual Render URL after deployment
+    const API_BASE_URL = isLocal ? 'http://localhost:8000' : 'https://doctis-backend.onrender.com';
+
     // --- THEME MANAGEMENT ---
     const savedTheme = localStorage.getItem('theme') || 'dark'; // Default to dark
     document.documentElement.setAttribute('data-theme', savedTheme);
@@ -33,41 +47,55 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // 2. Gather Data
         const payload = {
+            first_name: document.getElementById('firstName').value,
+            last_name: document.getElementById('lastName').value,
             age: parseInt(document.getElementById('age').value),
             gender: document.getElementById('gender').value,
-            symptoms: document.getElementById('symptoms').value
+            height: parseInt(document.getElementById('height').value),
+            weight: parseInt(document.getElementById('weight').value),
+            symptoms: document.getElementById('symptoms').value,
+            // Optional fields
+            history: document.getElementById('history').value || null,
+            vitals: document.getElementById('vitals').value || null,
+            medications: document.getElementById('medications').value || null
         };
 
+        if (!payload.first_name || !payload.last_name || !payload.height || !payload.weight) {
+            showToast('Veuillez remplir les champs obligatoires (Identité & Biométrie).', 'error');
+            setLoading(false);
+            return;
+        }
+
         if (!payload.symptoms) {
-            showToast("Veuillez décrire les symptômes.", "error");
+            showToast('Veuillez décrire les symptômes.', 'error');
             setLoading(false);
             return;
         }
 
         try {
             // 3. API Call
-            const response = await fetch('/api/analyze', {
+            const response = await fetch(`${API_BASE_URL}/api/analyze`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(payload)
             });
 
-            if (!response.ok) throw new Error("Erreur serveur");
-            const data = await response.json();
+            if (!response.ok) throw new Error('Erreur serveur');
+            const responseData = await response.json();
 
             // 4. Render Results
-            renderMarkdown(data.analysis);
-            renderSources(data.sources);
+            renderMarkdown(responseData.analysis);
+            renderSources(responseData.sources);
 
             // 5. Switch Views
             emptyState.classList.add('hidden');
             resultDiv.classList.remove('hidden');
 
-            showToast("Analyse terminée avec succès !", "success");
+            showToast('Analyse terminée avec succès !', 'success');
 
         } catch (error) {
             console.error(error);
-            showToast("Erreur API : " + error.message, "error");
+            showToast('Erreur API : ' + error.message, 'error');
         } finally {
             setLoading(false);
         }
@@ -83,15 +111,23 @@ document.addEventListener('DOMContentLoaded', () => {
         if (type === 'error') icon = '❌';
         if (type === 'success') icon = '✅';
 
-        toast.innerHTML = `<span>${icon}</span> <div>${message}</div>`;
+        // Secure XSS: Use textContent for message, innerHTML only for trusted icon structure
+        const iconSpan = document.createElement('span');
+        iconSpan.textContent = icon;
+
+        const messageDiv = document.createElement('div');
+        messageDiv.textContent = message;
+
+        toast.appendChild(iconSpan);
+        toast.appendChild(messageDiv);
 
         container.appendChild(toast);
 
-        // Remove after 3s
+        // Remove after delay
         setTimeout(() => {
             toast.style.opacity = '0';
-            setTimeout(() => toast.remove(), 300);
-        }, 3000);
+            setTimeout(() => toast.remove(), ANIMATION_DURATION);
+        }, TOAST_DURATION);
     }
 
     function setLoading(isLoading) {
@@ -100,7 +136,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (isLoading) {
             spinner.classList.remove('hidden');
-            text.textContent = "Analyse en cours...";
+            text.textContent = 'Analyse en cours...';
             analyzeBtn.disabled = true;
         } else {
             spinner.classList.add('hidden');
@@ -112,16 +148,22 @@ document.addEventListener('DOMContentLoaded', () => {
     function renderMarkdown(text) {
         // Simple Markdown cleaning (remove JSON artifacts if any)
         const cleanText = text.replace(/```json/g, '').replace(/```/g, '');
+        // Note: marked.parse returns HTML. In a prod env, use DOMPurify to sanitize cleanText/generated HTML.
         output.innerHTML = marked.parse(cleanText);
     }
 
     function renderSources(sources) {
-        sourcesList.innerHTML = sources.map(s => `
+        // Using map with template literals is cleaner, but potential XSS if source content is user-generated.
+        // Assuming RAG sources are trusted (internal CSV). 
+        sourcesList.innerHTML = sources.map(s => {
+            // Escape simplistic approach if needed, or rely on trusted source.
+            return `
             <div class="source-item">
                 <strong>${s.disease}</strong> <small>(Sim: ${(s.score * 100).toFixed(0)}%)</small><br>
                 ${s.description}
             </div>
-        `).join('');
+            `;
+        }).join('');
     }
 });
 

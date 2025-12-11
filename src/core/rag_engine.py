@@ -16,6 +16,15 @@ class RAGEngine:
         if self.kb.df is None:
             self.kb.load()
 
+    MIN_RELEVANCE_SCORE = 0.25
+
+    def search(self, query: str, top_k: int = 3) -> List[Dict[str, Any]]:
+# ... (omitting middle lines for brevity in prompt, but in replacement I must be precise)
+# Wait, I can just replace the method or the class variable.
+# Better to add the constant at class level and change the line.
+    
+    MIN_RELEVANCE_SCORE = 0.25
+
     def search(self, query: str, top_k: int = 3) -> List[Dict[str, Any]]:
         """
         Performs semantic search to find relevant medical context.
@@ -41,7 +50,7 @@ class RAGEngine:
             results = []
             for idx in top_indices:
                 score = similarities[idx]
-                if score < 0.25: # Threshold for relevance
+                if score < self.MIN_RELEVANCE_SCORE: # Threshold for relevance
                     continue
                     
                 row = self.kb.df.iloc[idx]
