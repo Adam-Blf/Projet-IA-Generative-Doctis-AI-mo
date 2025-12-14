@@ -12,11 +12,11 @@
 
 ```mermaid
 graph TD
-    User((Utilisateur)) -->|1. URL Vercel| Client[Frontend (Client/)]
-    Client -->|2. POST /api/triage| Server{Backend Flask (Server/)}
+    User((Utilisateur)) -->|1. URL Vercel| Client["Frontend (Client/)"]
+    Client -->|2. POST /api/triage| Server{"Backend Flask (Server/)"}
     
     subgraph Render Cloud
-        Server -->|3. Load Data| Data[(Remote JSON)]
+        Server -->|3. Load Data| Data[("Remote JSON")]
         Server -->|4. SBERT| Engine[Semantic Engine]
     end
     
