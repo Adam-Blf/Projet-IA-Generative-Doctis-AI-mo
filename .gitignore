@@ -1,0 +1,14 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+.env
+
+# Vercel
+.vercel
+node_modules/
+
+# OS
+.DS_Store
+Thumbs.db
