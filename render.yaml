@@ -3,7 +3,7 @@ services:
     name: med-rag-backend
     runtime: python
     buildCommand: pip install -r server/requirements.txt
-    startCommand: cd server && gunicorn app:app
+    startCommand: cd server && gunicorn -c gunicorn_config.py app:app
     envVars:
       - key: PYTHON_VERSION
         value: 3.9.0
