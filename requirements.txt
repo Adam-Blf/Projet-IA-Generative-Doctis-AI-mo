@@ -1,13 +1,7 @@
-fastapi
-uvicorn
-jinja2
-python-multipart
+flask
+sentence-transformers
+numpy
 google-generativeai
 python-dotenv
-pandas
-pymongo
 requests
-pytest
-openai
-sentence-transformers
-scikit-learn
+tf-keras
