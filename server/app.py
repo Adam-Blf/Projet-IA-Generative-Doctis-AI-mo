@@ -17,6 +17,19 @@ app = Flask(__name__)
 # Enable CORS for all routes (Allow Vercel frontend to access)
 CORS(app) 
 
+# --- Security Headers ---
+@app.after_request
+def add_security_headers(response):
+    response.headers['X-Content-Type-Options'] = 'nosniff'
+    response.headers['X-Frame-Options'] = 'DENY'
+    response.headers['X-XSS-Protection'] = '1; mode=block'
+    return response
+
+# --- Health Check ---
+@app.route('/health')
+def health_check():
+    return jsonify({"status": "healthy", "service": "doctis-ai-mo"}), 200
+
 # --- Configuration Gemini ---
 GENAI_API_KEY = os.getenv("GOOGLE_API_KEY")
 if GENAI_API_KEY:
