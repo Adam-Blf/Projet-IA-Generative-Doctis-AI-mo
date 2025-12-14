@@ -1,0 +1,9 @@
+flask
+sentence-transformers
+numpy
+google-generativeai
+python-dotenv
+requests
+tf-keras
+flask-cors
+gunicorn

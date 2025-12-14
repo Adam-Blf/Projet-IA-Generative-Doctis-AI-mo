@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doctis-AI-mo (Med-RAG)</title>
+    <!-- Relative paths for Vercel Static deployment -->
+    <link rel="stylesheet" href="static/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+    <header class="main-header">
+        <div class="container">
+            <h1>Doctis-AI-mo <span class="subtitle">AI Triage Assistant</span></h1>
+            <div class="lang-switch">
+                <button onclick="setLanguage('fr')" class="lang-btn active" data-lang="fr">🇫🇷 FR</button>
+                <button onclick="setLanguage('en')" class="lang-btn" data-lang="en">🇬🇧 EN</button>
+                <button onclick="setLanguage('es')" class="lang-btn" data-lang="es">🇪🇸 ES</button>
+                <button onclick="setLanguage('it')" class="lang-btn" data-lang="it">🇮🇹 IT</button>
+                <button onclick="setLanguage('pt')" class="lang-btn" data-lang="pt">🇵🇹 PT</button>
+                <button onclick="setLanguage('ru')" class="lang-btn" data-lang="ru">🇷🇺 RU</button>
+                <button onclick="setLanguage('de')" class="lang-btn" data-lang="de">🇩🇪 DE</button>
+                <button onclick="setLanguage('tr')" class="lang-btn" data-lang="tr">🇹🇷 TR</button>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+
+        <!-- Input Section -->
+        <section class="card input-section">
+            <h2 id="lbl_symptom_header">Describe your symptoms</h2>
+
+            <div class="form-group">
+                <label for="severity" id="lbl_severity">Pain Severity (1-10)</label>
+                <div class="slider-container">
+                    <input type="range" id="severity" name="severity" min="1" max="10" value="5"
+                        oninput="updateSeverityVal(this.value)">
+                    <span id="severity-val">5</span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="description" id="lbl_desc">Details</label>
+                <textarea id="description" rows="5"
+                    placeholder="E.g., I have a throbbing headache on the left side..."></textarea>
+                <div class="char-count"><span id="char-count">0</span> / 1000</div>
+            </div>
+
+            <button id="analyze-btn" onclick="analyzeSymptoms()">Analyze Symptoms</button>
+        </section>
+
+        <!-- Results Section (Hidden by default) -->
+        <section id="results-area" class="card results-section hidden">
+            <h2 id="lbl_results">Analysis Results</h2>
+
+            <div id="loading-spinner" class="hidden">
+                <div class="spinner"></div>
+                <p>Analyzing semantic matches...</p>
+            </div>
+
+            <div id="analysis-content" class="hidden">
+                <div class="ai-summary">
+                    <h3>AI Summary</h3>
+                    <p id="rag-advice" class="typing-effect"></p>
+                </div>
+
+                <div class="top-matches">
+                    <h3>Probable Pathology Matches</h3>
+                    <ul id="matches-list">
+                        <!-- Items injected by JS -->
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="main-footer">
+        <p>Dpcoctis-AI-mo MVP &copy; 2025. This is a demo. Call 112/911 for emergencies.</p>
+    </footer>
+
+    <!-- Relative JS paths -->
+    <script src="static/js/translations.js"></script>
+    <script src="static/js/config.js"></script>
+    <script src="static/js/app.js"></script>
+</body>
+
+</html>
