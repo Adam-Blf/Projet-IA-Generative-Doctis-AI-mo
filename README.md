@@ -1,4 +1,4 @@
-# Doctis-AI-mo
+# Doctis-AI-mo (v1.0 Ready)
 
 ![Visitor Badge](https://visitor-badge.laobi.icu/badge?page_id=Adam-Blf.Projet-IA-Generative-Doctis-AI-mo)
 ![Last Commit](https://img.shields.io/github/last-commit/Adam-Blf/Projet-IA-Generative-Doctis-AI-mo)
