@@ -1,11 +1,12 @@
-type: web
-name: med-rag-backend
-plan: free
-runtime: python
-buildCommand: pip install -r server/requirements.txt
-startCommand: cd server && gunicorn -c gunicorn_config.py app:app
-envVars:
-  - key: PYTHON_VERSION
-    value: 3.9.0
-  - key: GOOGLE_API_KEY
-    sync: false
+services:
+  - type: web
+    name: med-rag-backend
+    plan: free
+    runtime: python
+    buildCommand: pip install -r server/requirements.txt
+    startCommand: cd server && gunicorn -c gunicorn_config.py app:app
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.9.0
+      - key: GOOGLE_API_KEY
+        sync: false
