@@ -1,9 +1,11 @@
 flask
 sentence-transformers
-numpy
+flask-cors
+gunicorn
 google-generativeai
 python-dotenv
 requests
-tf-keras
+transformers>=4.39.0
+huggingface-hub>=0.20.0
 flask-cors
 gunicorn
