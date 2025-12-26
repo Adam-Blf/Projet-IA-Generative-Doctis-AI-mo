@@ -1,12 +1,22 @@
+# =============================================================================
+# Projet: Doctis AI
+# Auteurs: Adam Beloucif & Amina Medjdoub
+# Configuration de déploiement Render
+# =============================================================================
+
 services:
   - type: web
-    name: med-rag-backend
+    name: doctis-ai-backend
+    env: python
+    region: frankfurt
     plan: free
-    runtime: python
-    buildCommand: pip install -r server/requirements.txt
-    startCommand: cd server && gunicorn -c gunicorn_config.py app:app
+    buildCommand: |
+      cd backend && pip install -r requirements.txt
+    startCommand: |
+      cd backend && uvicorn main:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /health
     envVars:
       - key: PYTHON_VERSION
-        value: 3.9.0
-      - key: GOOGLE_API_KEY
-        sync: false
+        value: 3.11.0
+      - key: SIMILARITY_THRESHOLD
+        value: "0.4"

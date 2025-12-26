@@ -1,0 +1,41 @@
+{
+  "_metadata": {
+    "project": "Doctis AI",
+    "authors": ["Adam Beloucif", "Amina Medjdoub"],
+    "version": "1.0.0",
+    "description": "Base de données de pathologies pour le système RAG de pré-diagnostic"
+  },
+  "pathologies": [
+    {
+      "id": "appendicitis",
+      "name": "Appendicite",
+      "symptoms_description": "Douleur abdominale intense localisée en bas à droite du ventre, dans la fosse iliaque droite. La douleur commence souvent autour du nombril puis migre vers le côté droit. Accompagnée de nausées, vomissements, perte d'appétit, fièvre légère entre 37.5 et 38.5 degrés. Douleur qui s'aggrave à la marche, à la toux ou aux mouvements brusques. Ventre dur et sensible au toucher. Constipation ou parfois diarrhée légère.",
+      "severity_level": 5,
+      "urgency": "URGENCE MÉDICALE",
+      "advice": "Consultez immédiatement les urgences. Ne mangez pas, ne buvez pas et ne prenez aucun médicament avant l'avis médical. L'appendicite non traitée peut évoluer en péritonite, une complication grave.",
+      "specialist": "Chirurgien digestif / Urgentiste",
+      "typical_age_range": "10-30 ans (mais possible à tout âge)"
+    },
+    {
+      "id": "gastroenteritis",
+      "name": "Gastro-entérite",
+      "symptoms_description": "Diarrhée aqueuse fréquente, plusieurs selles liquides par jour. Nausées et vomissements répétés. Douleurs abdominales diffuses, crampes intestinales, mal au ventre généralisé. Fièvre modérée possible. Fatigue intense, sensation de faiblesse. Perte d'appétit, déshydratation possible avec soif intense, bouche sèche. Maux de tête, courbatures légères comme état grippal.",
+      "severity_level": 2,
+      "urgency": "Consultation recommandée sous 24-48h",
+      "advice": "Hydratez-vous abondamment avec de l'eau, des bouillons et des solutions de réhydratation. Privilégiez une alimentation légère : riz, carottes cuites, bananes. Reposez-vous. Consultez si les symptômes persistent plus de 3 jours, si vous avez du sang dans les selles, ou en cas de déshydratation sévère.",
+      "specialist": "Médecin généraliste",
+      "typical_age_range": "Tous âges"
+    },
+    {
+      "id": "migraine",
+      "name": "Migraine",
+      "symptoms_description": "Mal de tête intense et pulsatile, souvent d'un seul côté de la tête. Douleur lancinante qui bat au rythme du coeur. Sensibilité extrême à la lumière (photophobie), au bruit (phonophobie) et parfois aux odeurs. Nausées, vomissements possibles. Troubles visuels avant la crise : points lumineux, lignes en zigzag, taches aveugles (aura). Fatigue intense, besoin de s'isoler dans le noir. Durée de quelques heures à plusieurs jours.",
+      "severity_level": 3,
+      "urgency": "Consultation programmée recommandée",
+      "advice": "Installez-vous dans un endroit calme et sombre. Appliquez une compresse froide sur le front. Prenez un antalgique adapté si vous en avez l'habitude. Hydratez-vous. Consultez un médecin si les crises sont fréquentes (plus de 4 par mois) pour un traitement de fond, ou en urgence si c'est votre première migraine intense ou si elle s'accompagne de symptômes neurologiques inhabituels.",
+      "specialist": "Neurologue / Médecin généraliste",
+      "typical_age_range": "20-50 ans principalement"
+    }
+  ],
+  "disclaimer": "Ces informations sont fournies à titre indicatif uniquement et ne remplacent en aucun cas une consultation médicale professionnelle. En cas de doute ou de symptômes graves, consultez immédiatement un médecin ou appelez les services d'urgence."
+}

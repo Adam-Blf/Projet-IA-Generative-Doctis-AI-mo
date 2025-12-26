@@ -1,0 +1,33 @@
+# =============================================================================
+# Projet: Doctis AI
+# Auteurs: Adam Beloucif & Amina Medjdoub
+# Description: Dépendances du backend FastAPI pour le pré-diagnostic médical
+# =============================================================================
+
+# Framework API
+fastapi==0.109.2
+uvicorn[standard]==0.27.1
+python-multipart==0.0.9
+
+# Validation des données
+pydantic==2.6.1
+pydantic-settings==2.1.0
+
+# Modèle d'embeddings pour le matching sémantique (RAG)
+sentence-transformers==2.3.1
+torch==2.2.0
+transformers==4.37.2
+
+# LLM local quantizé (GGUF) - CPU only
+llama-cpp-python==0.2.55
+
+# Calculs numériques
+numpy==1.26.4
+scikit-learn==1.4.0
+
+# Utilitaires
+python-dotenv==1.0.1
+httpx==0.26.0
+
+# CORS pour le frontend
+starlette==0.36.3
