@@ -1,0 +1,32 @@
+{
+  "recommended_models": [
+    {
+      "name": "mistral-7b-instruct-v0.3.Q4_K_M.gguf",
+      "description": "Meilleur equilibre performance/taille",
+      "size": "4.4GB",
+      "url": "https://huggingface.co/TheBloke/Mistral-7B-Instruct-v0.3-GGUF"
+    },
+    {
+      "name": "Meta-Llama-3.1-8B-Instruct-Q4_K_M.gguf",
+      "description": "Derniere version Llama, excellent pour le medical",
+      "size": "4.9GB",
+      "url": "https://huggingface.co/bartowski/Meta-Llama-3.1-8B-Instruct-GGUF"
+    },
+    {
+      "name": "phi-3-mini-4k-instruct-q4.gguf",
+      "description": "Tres leger, bon pour GPU < 6GB",
+      "size": "2.4GB",
+      "url": "https://huggingface.co/microsoft/Phi-3-mini-4k-instruct-gguf"
+    }
+  ],
+  "embedding_models": [
+    {
+      "name": "all-mpnet-base-v2",
+      "description": "Meilleure qualite d'embeddings"
+    },
+    {
+      "name": "all-MiniLM-L6-v2",
+      "description": "Plus rapide, bonne qualite"
+    }
+  ]
+}
