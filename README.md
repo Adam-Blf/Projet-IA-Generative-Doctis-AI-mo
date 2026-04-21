@@ -1,9 +1,12 @@
 # 🏥 Doctis AI - Assistant de Pré-diagnostic Médical
 
-[![Python](https://img.shields.io/badge/Python-3.11+-blue.svg)](https://python.org)
-[![FastAPI](https://img.shields.io/badge/FastAPI-0.109-green.svg)](https://fastapi.tiangolo.com)
-[![Next.js](https://img.shields.io/badge/Next.js-14-black.svg)](https://nextjs.org)
-[![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+![Status](https://img.shields.io/badge/status-academic-blue)
+[![Python](https://img.shields.io/badge/Python-3776AB?logo=python&logoColor=white)](https://python.org)
+[![FastAPI](https://img.shields.io/badge/FastAPI-009688?logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com)
+[![Next.js](https://img.shields.io/badge/Next.js-000000?logo=nextdotjs&logoColor=white)](https://nextjs.org)
+![GenAI](https://img.shields.io/badge/GenAI-RAG-6366F1)
+![EFREI](https://img.shields.io/badge/EFREI-Paris-000091)
+[![License](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
 
 > **Projet de validation - Module IA Générative & Data Engineering**
 >
