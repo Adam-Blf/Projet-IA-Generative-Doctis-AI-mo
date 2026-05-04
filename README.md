@@ -1,5 +1,10 @@
 # 🏥 Doctis AI - Assistant de Pré-diagnostic Médical
 
+<!-- adam-badges:start -->
+[![commits](https://img.shields.io/github/commit-activity/t/Adam-Blf/Projet-IA-Generative-Doctis-AI-mo?color=001329&label=commits&style=flat-square)](https://github.com/Adam-Blf/Projet-IA-Generative-Doctis-AI-mo/commits) [![visites](https://hits.sh/github.com/Adam-Blf/Projet-IA-Generative-Doctis-AI-mo.svg?style=flat-square&label=visites&color=001329)](https://hits.sh/github.com/Adam-Blf/Projet-IA-Generative-Doctis-AI-mo/) [![last commit](https://img.shields.io/github/last-commit/Adam-Blf/Projet-IA-Generative-Doctis-AI-mo?color=D4A437&style=flat-square&label=dernier%20push)](https://github.com/Adam-Blf/Projet-IA-Generative-Doctis-AI-mo/commits) [![top language](https://img.shields.io/github/languages/top/Adam-Blf/Projet-IA-Generative-Doctis-AI-mo?style=flat-square)](https://github.com/Adam-Blf/Projet-IA-Generative-Doctis-AI-mo) [![license](https://img.shields.io/github/license/Adam-Blf/Projet-IA-Generative-Doctis-AI-mo?style=flat-square&color=D4A437)](LICENSE)
+<!-- adam-badges:end -->
+
+
 ![Status](https://img.shields.io/badge/status-academic-blue)
 [![Python](https://img.shields.io/badge/Python-3776AB?logo=python&logoColor=white)](https://python.org)
 [![FastAPI](https://img.shields.io/badge/FastAPI-009688?logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com)
