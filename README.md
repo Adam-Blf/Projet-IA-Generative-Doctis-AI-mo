@@ -53,13 +53,13 @@ une attention médicale urgente. Consultez immédiatement les urgences..."
 ```mermaid
 flowchart TB
     USER["Utilisateur<br/>saisie des symptômes"]
-    FRONT["Frontend Next.js<br/>React · Tailwind · Vercel"]
-    API["Backend FastAPI<br/>main.py · Render · /diagnose"]
+    FRONT["Frontend Next.js<br/>React - Tailwind - Vercel"]
+    API["Backend FastAPI<br/>main.py - Render - /diagnose"]
     SBERT["SBERT all-MiniLM-L6-v2<br/>embeddings des symptômes"]
     MATCH["Similarité cosinus<br/>matching vs pathologies"]
-    DB["pathologies.json<br/>référentiel maladies · symptômes"]
-    LLM["LLM quantizé GGUF<br/>réponse empathique · mode dégradé si absent"]
-    RESULT["Pré-diagnostic<br/>pathologie · jauge de confiance"]
+    DB["pathologies.json<br/>référentiel maladies - symptômes"]
+    LLM["LLM quantizé GGUF<br/>réponse empathique - mode dégradé si absent"]
+    RESULT["Pré-diagnostic<br/>pathologie - jauge de confiance"]
 
     USER --> FRONT
     FRONT --> API
@@ -303,7 +303,7 @@ EFREI Paris - 2025
 ---
 
 <p align="center">
-  <sub>Par <a href="https://adam.beloucif.com">Adam Beloucif</a> · Data Engineer & Fullstack Developer · <a href="https://github.com/Adam-Blf">GitHub</a> · <a href="https://www.linkedin.com/in/adambeloucif/">LinkedIn</a></sub>
+  <sub>Par <a href="https://adam.beloucif.com">Adam Beloucif</a> - Data Engineer & Fullstack Developer - <a href="https://github.com/Adam-Blf">GitHub</a> - <a href="https://www.linkedin.com/in/adambeloucif/">LinkedIn</a></sub>
 </p>
 
 
